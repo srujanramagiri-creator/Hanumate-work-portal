@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hanumate Team Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--sf:#fffdf8;--ink:#1b1612;--mut:#6d6358;--line:#e2d9c8;--acc:#d9480f;--acc2:#f2a33a;--ok:#2f7d4f;--r:14px;
+--d:'Fraunces',Georgia,serif;--b:'Instrument Sans',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110e;--sf:#1d1914;--ink:#f3ece0;--mut:#a39787;--line:#302a22;--acc:#ff7a3d;--ok:#5fc08a}}
+:root[data-theme="dark"]{--bg:#14110e;--sf:#1d1914;--ink:#f3ece0;--mut:#a39787;--line:#302a22;--acc:#ff7a3d;--ok:#5fc08a}
+*,*::before,*::after{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--b);-webkit-font-smoothing:antialiased}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.mut{color:var(--mut)}.eyebrow{font:600 12px/1 var(--b);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+h1,h2,h3{font-family:var(--d);font-weight:400;line-height:1.02;letter-spacing:-.02em;margin:0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:99px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;cursor:pointer;font-weight:500;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s}
+.btn:hover{transform:translateY(-2px);background:var(--acc);border-color:var(--acc);color:#fff}.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--ink)}.btn.sm{padding:7px 14px;font-size:14px}
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{font:600 20px var(--d);text-decoration:none;display:flex;gap:10px;align-items:center}
+.sun{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--acc2),var(--acc))}
+nav.top .links{display:flex;gap:6px;align-items:center}nav.top a.l{padding:8px 12px;text-decoration:none;color:var(--mut);border-radius:99px}nav.top a.l:hover{color:var(--ink)}
+.hero{position:relative;padding:clamp(48px,10vw,120px) 0 clamp(40px,8vw,90px);overflow:hidden}
+.hero h1{font-size:clamp(46px,10.5vw,138px);margin:22px 0 28px}.hero h1 em{color:var(--acc);font-style:italic}
+.hero .orb{position:absolute;right:-6vw;top:8vw;width:clamp(180px,34vw,440px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--acc2),var(--acc) 60%,transparent 72%);opacity:.9;filter:blur(2px);animation:rise 1.6s cubic-bezier(.2,.8,.2,1) both;z-index:-1}
+.hero p{max-width:46ch;font-size:19px}
+.sec{padding:clamp(48px,8vw,96px) 0;border-top:1px solid var(--line)}
+.sec h2{font-size:clamp(34px,5.5vw,64px);margin:14px 0 36px}
+.row{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);transition:padding .35s cubic-bezier(.2,.8,.2,1)}
+.row:hover{padding-left:12px}.row .n{font:400 14px var(--d);color:var(--mut)}.row .nm{font:400 clamp(24px,3.4vw,38px) var(--d);letter-spacing:-.01em}
+.row .tag{font-size:14px;color:var(--mut);text-align:right}
+details{border-bottom:1px solid var(--line);padding:20px 0}summary{cursor:pointer;display:flex;justify-content:space-between;gap:16px;list-style:none;font:400 clamp(22px,3vw,32px) var(--d)}
+summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--acc);transition:transform .3s}details[open] summary::after{transform:rotate(45deg)}
+details .body{padding:14px 0 6px;max-width:60ch;color:var(--mut)}details .body .btn{margin-top:14px}
+footer{padding:40px 0;color:var(--mut);font-size:14px;border-top:1px solid var(--line)}
+/* portal */
+.shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{border-right:1px solid var(--line);padding:24px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px}
+aside .logo{margin-bottom:22px}
+.tab{display:flex;gap:10px;align-items:center;padding:10px 14px;border:0;background:none;border-radius:10px;text-align:left;cursor:pointer;color:var(--mut);transition:background .2s,color .2s}
+.tab:hover{background:var(--line);color:var(--ink)}.tab[aria-current="page"]{background:var(--ink);color:var(--bg)}
+main{padding:clamp(20px,4vw,48px);min-width:0}main h1{font-size:clamp(34px,5vw,58px);margin:8px 0 6px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.big{font:400 44px/1 var(--d);margin:10px 0 4px}
+.kan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.col h3{font:600 13px var(--b);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.task{background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;animation:rise .5s both}
+.task small{color:var(--mut)}.task .acts{display:flex;gap:6px;margin-top:10px}
+.ic{border:1px solid var(--line);background:none;border-radius:8px;padding:3px 10px;cursor:pointer}.ic:hover{border-color:var(--acc);color:var(--acc)}
+form.f{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end;margin-top:14px}
+label{display:grid;gap:4px;font-size:13px;color:var(--mut)}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}input:focus,select:focus,textarea:focus{border-color:var(--acc);outline:none}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;background:var(--line)}.pill.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
+.scroll{overflow-x:auto}.who{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.av{overflow:hidden;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),var(--acc));display:grid;place-items:center;color:#fff;font:600 15px var(--b);flex:none}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}.login .card{max-width:440px;width:100%;padding:32px}
+.note{font-size:13px;color:var(--mut);margin-top:12px}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(max-width:820px){.shell{grid-template-columns:1fr}aside{position:fixed;inset:auto 0 0 0;top:auto;height:auto;flex-direction:row;overflow-x:auto;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--sf);border:0;border-top:1px solid var(--line);z-index:9}
+aside .logo,aside .me{display:none}.tab{flex:none;padding:10px 12px;font-size:14px}main{padding-bottom:100px}.kan{grid-template-columns:1fr}.row{grid-template-columns:36px 1fr}.row .tag{grid-column:2;text-align:left}.hero .orb{opacity:.45}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.toast{display:none;position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:30;font-size:14px;max-width:90vw;text-align:center}
+dialog{background:var(--sf);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:24px;max-width:92vw}dialog::backdrop{background:rgba(0,0,0,.45)}
+.av[data-view]{cursor:zoom-in;transition:transform .2s}.av[data-view]:hover{transform:scale(1.06)}
+dialog.lbx{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(12,9,6,.94);color:#fff}
+dialog.lbx[open]{display:grid;place-items:center}dialog.lbx::backdrop{background:transparent}
+.lbx .lbh{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 14px;font:500 18px var(--b)}
+.lbx .lbc{background:none;border:0;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:10px 14px;border-radius:99px}.lbx .lbc:hover{background:rgba(255,255,255,.16)}
+.lbx img{width:min(88vw,76vh);height:min(88vw,76vh);object-fit:contain;border-radius:12px;animation:pop .28s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+#crv:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* Public anon key: safe in the browser because every table is protected by Row Level Security (see supabase-setup.sql). NEVER put the service_role key here. */
+const SB_URL='https://qnlkajhybcbxkqczvzqr.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFubGthamh5YmNieGtxY3p2enFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwMTQ1NDYsImV4cCI6MjEwNjU5MDU0Nn0.ZecQZ55dDUjX6oAMLn8agBk5bXdcKarSdFlqj8Ue4-g';
+const LEAVE={Casual:12,Sick:8,Earned:15};
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const TOK_KEY='hm_tok';let TOK=null;try{TOK=localStorage.getItem(TOK_KEY)}catch(e){}
+async function rpc(fn,args={}){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(args)});
+ const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&j.message)||'Request failed');return j}
+const call=(fn,a)=>rpc(fn,Object.assign({p_token:TOK},a));
+const FR={insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
+const friendly=m=>FR[m]||m||'Something went wrong.';
+function signedOut(msg){TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
+let S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]},view='home';
+const me=()=>S.team.find(t=>t.id===S.user),nameOf=id=>S.team.find(t=>t.id===id)?.name||'—';
+const ini=n=>(n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const av=(t,z)=>`<span class="av"${t.avatar?` data-view="${esc(t.id)}" role="button" tabindex="0" aria-label="View photo of ${esc(t.name)}"`:''}${z?` style="width:${z}px;height:${z}px;font-size:${Math.round(z/3)}px"`:''}>${t.avatar?`<img src="${esc(t.avatar)}" alt="${esc(t.name)}">`:ini(t.name)}</span>`;
+const today=()=>new Date().toLocaleDateString('en-CA'),tm=i=>new Date(i).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+let tt;function toast(m){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';e.className='toast';e.setAttribute('role','status');document.body.appendChild(e)}e.textContent=m;e.style.display='block';clearTimeout(tt);tt=setTimeout(()=>e.style.display='none',3800)}
+async function pull(){const d=await call('portal_data');S.user=d.me;
+ S.team=d.team.map(x=>({id:x.id,name:x.name,role:x.role,email:x.email,admin:x.is_admin,avatar:x.avatar}));
+ S.tasks=d.tasks.map(x=>({id:x.id,t:x.title,p:x.project,s:x.status,who:x.assignee}));S.att=d.attendance;S.leaves=d.leaves;S.news=d.news}
+async function act(fn){try{await fn();await pull();portal()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.');else toast(friendly(e.message))}}
+const shrink=f=>new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{const n=320,c=document.createElement('canvas');c.width=c.height=n;const m=Math.min(i.width,i.height);c.getContext('2d').drawImage(i,(i.width-m)/2,(i.height-m)/2,m,m,0,0,n,n);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.8))};i.onerror=()=>{URL.revokeObjectURL(u);no()};i.src=u});
+
+function login(msg){
+ $('#app').innerHTML=`<div class="login"><div class="card"><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a><h1 style="font-size:40px;margin:22px 0 6px">Team sign in</h1>
+ <p class="mut">Type your profile name and password to continue.</p><form id="lf" style="display:grid;gap:14px;margin-top:16px" novalidate>
+ <label>Profile name<input id="em" type="text" autocomplete="username" autocapitalize="words" spellcheck="false" placeholder="Type your name" required></label>
+ <label>Password<span style="position:relative;display:block"><input id="pw" type="password" autocomplete="current-password" required style="padding-right:78px"><button type="button" id="sp" class="ic" aria-pressed="false" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:13px">Show</button></span></label>
+ <p class="note" id="er" role="alert" style="color:var(--acc);margin:0;min-height:1.4em">${esc(msg||'')}</p><button class="btn" type="submit" id="go">Enter portal →</button></form></div></div>`;
+ $('#sp').onclick=()=>{const i=$('#pw'),h=i.type==='password';i.type=h?'text':'password';$('#sp').textContent=h?'Hide':'Show';$('#sp').setAttribute('aria-pressed',h)};
+ $('#lf').onsubmit=async e=>{e.preventDefault();const er=$('#er'),go=$('#go'),nm=$('#em').value.trim(),pw=$('#pw').value;
+  if(!nm||!pw){er.textContent='Enter your profile name and password.';return}
+  go.disabled=true;er.textContent='';
+  try{const t=await rpc('login',{p_name:nm,p_password:pw});
+   if(t==='LOCKED'){er.textContent='Too many wrong attempts. Try again in 10 minutes.';go.disabled=false;return}
+   if(!t){er.textContent='Incorrect profile name or password.';go.disabled=false;$('#pw').select();return}
+   TOK=t;try{localStorage.setItem(TOK_KEY,t)}catch(x){}
+   await pull();view='home';portal()}
+  catch(x){er.textContent=/fetch|network/i.test(x.message)?'Could not reach Supabase. Check your internet connection.':'Sign-in failed: '+x.message;go.disabled=false}};
+}
+const TABS=[['home','Home'],['work','Work'],['time','Time & Leave'],['docs','Payslips & Docs'],['dir','Directory'],['profile','Profile']];
+function portal(){
+ const u=me();if(!u)return login();
+ $('#app').innerHTML=`<div class="shell"><aside><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a>${(u.admin?TABS.concat([['team','Team']]):TABS).map(([k,l])=>`<button class="tab" data-v="${k}" ${k===view?'aria-current="page"':''}>${l}</button>`).join('')}
+ <div class="me" style="margin-top:auto;font-size:14px"><div style="display:flex;gap:10px;align-items:center">${av(u,32)}<span class="mut">${esc(u.name)}</span></div><button class="ic" id="out" style="margin-top:8px">Sign out</button></div></aside><main id="m"></main></div>`;
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{view=b.dataset.v;portal()});
+ $('#out').onclick=async()=>{try{await call('logout')}catch(e){}signedOut()};
+ ({home,work,time,docs,dir,profile,team})[view]();
+}
+function home(){const u=me(),t=today(),a=S.att.find(x=>x.staff_id===u.id&&x.day===t),mine=S.tasks.filter(x=>x.who===u.id&&x.s!=='done').length,h=new Date().getHours();
+ const used=S.leaves.filter(l=>l.staff_id===u.id&&l.type==='Casual'&&l.status!=='rejected').reduce((n,l)=>n+l.days,0);
+ $('#m').innerHTML=`<span class="eyebrow">${new Date().toDateString()}</span><h1>${h<12?'Good morning':h<17?'Good afternoon':'Good evening'}, ${esc(u.name.split(' ')[0])}.</h1>
+ <div class="grid"><div class="card"><span class="mut">Today</span><div class="big">${a?(a.check_out?'Done':'In '+tm(a.check_in)):'Not in'}</div><button class="btn sm" id="ck" ${a&&a.check_out?'disabled':''}>${a&&!a.check_out?'Check out':a?'Checked out':'Check in'}</button></div>
+ <div class="card"><span class="mut">Open tasks</span><div class="big">${mine}</div><button class="btn sm ghost" id="gw">View work</button></div>
+ <div class="card"><span class="mut">Casual leave left</span><div class="big">${LEAVE.Casual-used}</div></div></div>
+ <h2 style="font-size:30px;margin:36px 0 12px">Announcements</h2>${S.news.map(n=>`<div class="card" style="margin-bottom:10px"><span class="pill">${esc(n.created_at.slice(0,10))}</span><p style="margin:8px 0 0">${esc(n.body)}</p>${u.admin?`<button class="ic" data-del="${n.id}" style="margin-top:10px" aria-label="Delete announcement">Delete</button>`:''}</div>`).join('')||'<p class="mut">No announcements yet.</p>'}
+ ${u.admin?`<form class="f" id="nf"><label style="grid-column:1/-1">Post announcement<input id="nt" required maxlength="300"></label><button class="btn sm">Post</button></form>`:''}`;
+ $('#ck').onclick=()=>{if(a&&a.check_out)return;act(()=>call(a?'checkout':'checkin',{p_day:t}))};
+ $('#gw').onclick=()=>{view='work';portal()};
+ if(u.admin){$('#nf').onsubmit=e=>{e.preventDefault();act(()=>call('news_add',{p_body:$('#nt').value.trim()}))};
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>confirm('Delete this announcement?')&&act(()=>call('news_delete',{p_id:+b.dataset.del})))}}
+function work(){const u=me(),cols=[['todo','To do'],['doing','In progress'],['done','Done']],o=['todo','doing','done'];
+ $('#m').innerHTML=`<span class="eyebrow">Projects</span><h1>Work</h1><form class="f" id="tf"><label style="grid-column:span 2">Task<input id="tt" required maxlength="80"></label><label>Project<input id="tp" value="Studio" maxlength="30"></label><label>Assign<select id="tw">${S.team.map(t=>`<option value="${t.id}" ${t.id===u.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select></label><button class="btn sm">Add task</button></form>
+ <div class="kan">${cols.map(([k,l],ci)=>`<div class="col"><h3>${l} · ${S.tasks.filter(x=>x.s===k).length}</h3>${S.tasks.filter(x=>x.s===k).map(x=>`<div class="task"><div>${esc(x.t)}</div><small>${esc(x.p)} · ${esc(nameOf(x.who))}</small><div class="acts">${ci>0?`<button class="ic" aria-label="Move back" data-id="${x.id}" data-d="-1">←</button>`:''}${ci<2?`<button class="ic" aria-label="Move forward" data-id="${x.id}" data-d="1">→</button>`:''}<button class="ic" aria-label="Delete task" data-id="${x.id}" data-d="x">✕</button></div></div>`).join('')||'<small class="mut">Nothing here.</small>'}</div>`).join('')}</div>`;
+ $('#tf').onsubmit=e=>{e.preventDefault();act(()=>call('task_add',{p_title:$('#tt').value.trim(),p_project:$('#tp').value.trim(),p_assignee:$('#tw').value}))};
+ document.querySelectorAll('.ic[data-id]').forEach(b=>b.onclick=()=>{const x=S.tasks.find(t=>String(t.id)===b.dataset.id);if(!x)return;
+  if(b.dataset.d==='x'){if(confirm('Delete this task?'))act(()=>call('task_delete',{p_id:x.id}))}
+  else act(()=>call('task_move',{p_id:x.id,p_status:o[o.indexOf(x.s)+ +b.dataset.d]}))})}
+function time(){const u=me(),L=S.leaves.filter(l=>l.staff_id===u.id),A=S.att.filter(a=>a.staff_id===u.id).slice(0,7),t=today(),
+ used=k=>L.filter(l=>l.type===k&&l.status!=='rejected').reduce((n,l)=>n+l.days,0),P=u.admin?S.leaves.filter(l=>l.status==='pending'&&l.staff_id!==u.id):[];
+ const pill=s=>`<span class="pill ${s==='approved'?'ok':''}">${s[0].toUpperCase()+s.slice(1)}</span>`;
+ $('#m').innerHTML=`<span class="eyebrow">Attendance & leave</span><h1>Time & Leave</h1><div class="grid">${Object.entries(LEAVE).map(([k,v])=>`<div class="card"><span class="mut">${k} leave left</span><div class="big">${v-used(k)}<small class="mut" style="font:14px var(--b)"> / ${v}</small></div></div>`).join('')}</div>
+ ${P.length?`<h2 style="font-size:30px;margin:34px 0 8px">Pending approvals</h2><div class="scroll"><table><tr><th>Who</th><th>Type</th><th>Dates</th><th>Days</th><th></th></tr>${P.map(l=>`<tr><td>${esc(nameOf(l.staff_id))}</td><td>${l.type}</td><td>${l.from_date} → ${l.to_date}</td><td>${l.days}</td><td style="white-space:nowrap"><button class="ic" data-ls="approved" data-id="${l.id}">Approve</button> <button class="ic" data-ls="rejected" data-id="${l.id}">Reject</button></td></tr>`).join('')}</table></div>`:''}
+ <h2 style="font-size:30px;margin:34px 0 4px">Request leave</h2><form class="f" id="lf2"><label>Type<select id="lt">${Object.keys(LEAVE).map(k=>`<option>${k}</option>`).join('')}</select></label><label>From<input type="date" id="lfr" min="${t}" value="${t}" required></label><label>To<input type="date" id="lto" min="${t}" value="${t}" required></label><label style="grid-column:span 2">Reason<input id="lr" maxlength="120"></label><button class="btn sm">Submit</button></form><p class="note" id="le" role="alert"></p>
+ <h2 style="font-size:30px;margin:30px 0 8px">Your requests</h2><div class="scroll"><table><tr><th>Type</th><th>Dates</th><th>Days</th><th>Status</th></tr>${L.map(l=>`<tr><td>${l.type}</td><td>${l.from_date} → ${l.to_date}</td><td>${l.days}</td><td>${pill(l.status)}</td></tr>`).join('')||'<tr><td colspan="4" class="mut">No requests yet.</td></tr>'}</table></div>
+ <h2 style="font-size:30px;margin:30px 0 8px">Recent attendance</h2><div class="scroll"><table><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">Check in from Home.</td></tr>'}</table></div>`;
+ document.querySelectorAll('[data-ls]').forEach(b=>b.onclick=()=>act(()=>call('leave_set',{p_id:+b.dataset.id,p_status:b.dataset.ls})));
+ $('#lf2').onsubmit=e=>{e.preventDefault();const f=$('#lfr').value,to=$('#lto').value,ty=$('#lt').value,days=Math.round((new Date(to)-new Date(f))/864e5)+1;
+  if(!(days>=1)){$('#le').textContent='End date must be on or after start date.';return}
+  if(days>LEAVE[ty]-used(ty)){$('#le').textContent='Not enough '+ty+' leave balance.';return}
+  act(()=>call('leave_add',{p_type:ty,p_from:f,p_to:to,p_reason:$('#lr').value.trim()}))}}
+function docs(){$('#m').innerHTML=`<span class="eyebrow">Documents</span><h1>Payslips & Docs</h1>
+ <div class="card" style="margin-top:24px"><h3 style="font-size:26px">Payslips</h3><p class="mut">Payslips hold private salary data. They will live in a private Supabase Storage bucket with per-employee access rules, which is the next step to build.</p></div>
+ <h2 style="font-size:30px;margin:34px 0 4px">Handbook</h2>
+ ${[['Working hours','Core hours are agreed with your lead. Check in and out daily from Home.'],['Leave policy','Casual 12, Sick 8, Earned 15 days per year. Requests go through the Time & Leave page and are approved by the admin.'],['Client work','Share demo builds with the founder before sending to clients. Keep client data out of public tools.']].map(([a,b])=>`<details><summary style="font-size:22px">${a}</summary><div class="body">${b}</div></details>`).join('')}`}
+function dir(){$('#m').innerHTML=`<span class="eyebrow">People</span><h1>Directory</h1><label style="margin-top:18px;max-width:380px">Search<input id="q" placeholder="Name or role" autocomplete="off"></label><div id="dl"></div>`;
+ const r=()=>{const q=$('#q').value.toLowerCase();$('#dl').innerHTML=S.team.filter(t=>(t.name+t.role).toLowerCase().includes(q)).map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong><br><span class="mut">${esc(t.role)}</span></div>${t.email?`<a class="btn sm ghost" href="mailto:${esc(t.email)}">Email</a>`:''}</div>`).join('')||'<p class="mut">No matches.</p>'};$('#q').oninput=r;r()}
+function profile(){const u=me(),has=!!u.avatar;
+ $('#m').innerHTML=`<span class="eyebrow">Your profile</span><h1>Profile</h1>
+ <div class="card" style="margin-top:24px;display:flex;gap:22px;align-items:center;flex-wrap:wrap">${av(u,96)}<div style="flex:1;min-width:200px"><h3 style="font-size:32px">${esc(u.name)}</h3><div class="mut">${esc(u.role)}</div>${u.email?`<a href="mailto:${esc(u.email)}" class="mut">${esc(u.email)}</a>`:''}</div></div>
+ <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Profile photo</h3><p class="mut" style="margin:8px 0 16px">Pick a photo from your gallery, then drag and zoom to frame it. Anyone on your team can tap your photo to view it full size.</p>
+ <input type="file" id="pf" accept="image/*" hidden><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn sm" id="pb" type="button">${has?'Change photo':'Upload photo'}</button>${has?'<button class="btn sm ghost" id="pr" type="button">Remove photo</button>':''}</div><p class="note" id="pe" role="alert" style="color:var(--acc)"></p></div>
+ <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Change password</h3><form class="f" id="cp"><label>Current password<input id="co" type="password" autocomplete="current-password" required></label><label>New password (min 8)<input id="cn" type="password" autocomplete="new-password" minlength="8" required></label><button class="btn sm">Update</button></form><p class="note" id="cm" role="alert"></p></div>`;
+ $('#pb').onclick=()=>$('#pf').click();
+ $('#pf').onchange=async e=>{const f=e.target.files[0];if(!f)return;const er=$('#pe');
+  if(!/^image\//.test(f.type)){er.textContent='Please choose an image file.';return}
+  if(f.size>15*1024*1024){er.textContent='That image is too large (max 15 MB).';return}
+  e.target.value='';let b;try{b=await cropDialog(f)}catch(x){if(x&&x.message==='cancel')return;er.textContent='Could not read that image. Try a JPG or PNG.';return}
+  er.textContent='Uploading…';act(()=>call('set_avatar',{p_avatar:b}))};
+ if(has)$('#pr').onclick=()=>act(()=>call('set_avatar',{p_avatar:null}));
+ $('#cp').onsubmit=async e=>{e.preventDefault();const m=$('#cm');try{await call('change_password',{p_old:$('#co').value,p_new:$('#cn').value});$('#cp').reset();m.style.color='var(--ok)';m.textContent='Password updated.'}catch(x){m.style.color='var(--acc)';m.textContent=friendly(x.message)}}}
+function team(){const u=me();
+ $('#m').innerHTML=`<span class="eyebrow">Admin</span><h1>Team</h1>
+ <form class="f" id="tm" style="margin-top:20px"><label>Profile name<input id="tn" required maxlength="60"></label><label>Role<input id="tr" value="Team member" maxlength="60"></label><label>Password<input id="tpw" type="text" required minlength="8" autocomplete="off" placeholder="min 8 characters"></label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="ta" style="width:auto"> Admin</label><button class="btn sm">Add member</button></form>
+ <p class="note">Share the profile name and password privately. Members can change their password from Profile.</p>
+ <div style="margin-top:12px">${S.team.map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${t.admin?' <span class="pill">Admin</span>':''}<br><span class="mut">${esc(t.role)}</span></div><button class="ic" data-ed="${t.id}" style="margin-right:6px">Edit</button><button class="ic" data-rp="${t.id}">Change password</button>${t.id!==u.id?`<button class="ic" data-rm="${t.id}" style="margin-left:6px">Remove</button>`:''}</div>`).join('')}</div>`;
+ $('#tm').onsubmit=e=>{e.preventDefault();act(()=>call('admin_add_member',{p_name:$('#tn').value.trim(),p_role:$('#tr').value.trim(),p_password:$('#tpw').value,p_admin:$('#ta').checked}))};
+ document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const t=S.team.find(x=>x.id===b.dataset.rm);if(t&&confirm('Remove '+t.name+'? Their attendance and leave history is deleted too.'))act(()=>call('admin_remove_member',{p_id:t.id}))});
+ document.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>pwDialog(S.team.find(x=>x.id===b.dataset.rp)));
+ document.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editDialog(S.team.find(x=>x.id===b.dataset.ed)))}
+function editDialog(t){if(!t)return;const o=$('#edd');if(o)o.remove();const d=document.createElement('dialog');d.id='edd';
+ d.innerHTML=`<form id="edf" style="display:grid;gap:14px;width:min(360px,80vw)"><h3 style="font-size:26px">Edit profile</h3><p class="mut" style="margin:0">The profile name is what they type to sign in, so tell them if you change it.</p>
+ <label>Profile name<input id="en" required minlength="2" maxlength="60" value="${esc(t.name)}"></label>
+ <label>Role<input id="er2" maxlength="60" value="${esc(t.role)}"></label>
+ <p class="note" id="ee" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
+ <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="ec">Cancel</button><button class="btn sm" type="submit" id="es">Save</button></div></form>`;
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#en').focus();$('#en').select();
+ $('#ec').onclick=()=>d.close();
+ $('#edf').onsubmit=async e=>{e.preventDefault();const er=$('#ee'),n=$('#en').value.trim();
+  if(n.length<2){er.textContent='Name must be at least 2 characters.';return}
+  $('#es').disabled=true;
+  try{await call('admin_update_member',{p_id:t.id,p_name:n,p_role:$('#er2').value.trim()});await pull();d.close();portal();toast('Profile updated')}
+  catch(x){er.textContent=friendly(x.message);$('#es').disabled=false}}}
+function pwDialog(t){if(!t)return;const o=$('#pwd');if(o)o.remove();const d=document.createElement('dialog');d.id='pwd';
+ d.innerHTML=`<form id="pwf" style="display:grid;gap:14px;width:min(360px,80vw)"><h3 style="font-size:26px">Change password</h3><p class="mut" style="margin:0">for <strong>${esc(t.name)}</strong>. They will be signed out on their other devices.</p>
+ <label>New password<span style="position:relative;display:block"><input id="np1" type="password" minlength="8" autocomplete="new-password" required style="padding-right:78px"><button type="button" id="npv" class="ic" aria-pressed="false" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:13px">Show</button></span></label>
+ <label>Confirm password<input id="np2" type="password" minlength="8" autocomplete="new-password" required></label>
+ <p class="note" id="npe" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
+ <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="npc">Cancel</button><button class="btn sm" type="submit" id="nps">Save password</button></div></form>`;
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#np1').focus();
+ $('#npc').onclick=()=>d.close();
+ $('#npv').onclick=()=>{const h=$('#np1').type==='password';$('#np1').type=$('#np2').type=h?'text':'password';$('#npv').textContent=h?'Hide':'Show';$('#npv').setAttribute('aria-pressed',h)};
+ $('#pwf').onsubmit=async e=>{e.preventDefault();const er=$('#npe'),a=$('#np1').value;
+  if(a.length<8){er.textContent='Password must be at least 8 characters.';return}
+  if(a!==$('#np2').value){er.textContent='The two passwords do not match.';return}
+  $('#nps').disabled=true;
+  try{await call('admin_set_password',{p_id:t.id,p_password:a});d.close();toast('Password changed for '+t.name)}
+  catch(x){er.textContent=friendly(x.message);$('#nps').disabled=false}}}
+function cropDialog(file){return new Promise((res,rej)=>{
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('load'))};
+ img.onload=()=>{
+  const V=Math.min(280,Math.floor(innerWidth*.72)),w=img.naturalWidth,h=img.naturalHeight,s0=Math.max(V/w,V/h);let z=1,x=0,y=0,done=false;
+  const d=document.createElement('dialog');d.id='crd';
+  d.innerHTML=`<form id="crf" style="display:grid;gap:14px;justify-items:center;width:min(340px,82vw)"><h3 style="font-size:26px;justify-self:start">Adjust photo</h3>
+  <div id="crv" tabindex="0" aria-label="Photo preview. Drag or use arrow keys to reposition." style="position:relative;width:${V}px;height:${V}px;overflow:hidden;border-radius:12px;background:#000;touch-action:none;cursor:grab"><img id="cri" alt="" draggable="false" style="position:absolute;left:0;top:0;max-width:none;user-select:none;pointer-events:none"><div style="position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 999px rgba(0,0,0,.55);outline:2px solid rgba(255,255,255,.85);outline-offset:-2px;pointer-events:none"></div></div>
+  <label style="width:100%">Zoom<input id="crz" type="range" min="1" max="4" step="0.01" value="1"></label>
+  <p class="note" style="margin:0">Drag to reposition. Use the slider to zoom.</p>
+  <div style="display:flex;gap:10px;justify-self:end"><button type="button" class="btn sm ghost" id="crc">Cancel</button><button class="btn sm" type="submit">Save photo</button></div></form>`;
+  document.body.appendChild(d);
+  const I=d.querySelector('#cri'),box=d.querySelector('#crv'),Z=d.querySelector('#crz');I.src=url;
+  const draw=()=>{const mx=Math.max(0,(w*s0*z-V)/2),my=Math.max(0,(h*s0*z-V)/2);x=Math.min(mx,Math.max(-mx,x));y=Math.min(my,Math.max(-my,y));
+   const s=s0*z;I.style.width=w*s+'px';I.style.height=h*s+'px';I.style.transform=`translate(${V/2+x-w*s/2}px,${V/2+y-h*s/2}px)`};
+  const zoom=nz=>{nz=Math.min(4,Math.max(1,nz));x*=nz/z;y*=nz/z;z=nz;Z.value=z;draw()};
+  let px=null,py=null;
+  box.onpointerdown=e=>{px=e.clientX;py=e.clientY;box.setPointerCapture(e.pointerId);box.style.cursor='grabbing'};
+  box.onpointermove=e=>{if(px===null)return;x+=e.clientX-px;y+=e.clientY-py;px=e.clientX;py=e.clientY;draw()};
+  box.onpointerup=box.onpointercancel=()=>{px=null;box.style.cursor='grab'};
+  box.onwheel=e=>{e.preventDefault();zoom(z-e.deltaY*.002)};
+  box.onkeydown=e=>{const k={ArrowLeft:[-12,0],ArrowRight:[12,0],ArrowUp:[0,-12],ArrowDown:[0,12]}[e.key];if(k){e.preventDefault();x+=k[0];y+=k[1];draw()}};
+  Z.oninput=()=>zoom(+Z.value);
+  d.querySelector('#crc').onclick=()=>d.close();
+  d.querySelector('#crf').onsubmit=e=>{e.preventDefault();const OUT=480,k=OUT/V,s=s0*z,c=document.createElement('canvas');c.width=c.height=OUT;
+   const g=c.getContext('2d');g.fillStyle='#000';g.fillRect(0,0,OUT,OUT);g.drawImage(img,(V/2+x-w*s/2)*k,(V/2+y-h*s/2)*k,w*s*k,h*s*k);
+   let q=.85,u=c.toDataURL('image/jpeg',q);while(u.length>140000&&q>.4){q-=.1;u=c.toDataURL('image/jpeg',q)}
+   done=true;d.close();res(u)};
+  d.addEventListener('close',()=>{URL.revokeObjectURL(url);d.remove();if(!done)rej(new Error('cancel'))});
+  d.showModal();draw()};
+ img.src=url})}
+function openPhoto(id){const t=S.team.find(x=>x.id===id);if(!t||!t.avatar)return;const o=$('#lbx');if(o)o.remove();
+ const d=document.createElement('dialog');d.id='lbx';d.className='lbx';d.setAttribute('aria-label','Profile photo of '+t.name);
+ d.innerHTML=`<div class="lbh"><span>${esc(t.name)}</span><button type="button" class="lbc" aria-label="Close photo">✕</button></div><img src="${esc(t.avatar)}" alt="Profile photo of ${esc(t.name)}">`;
+ d.addEventListener('click',e=>{if(e.target===d||e.target.closest('.lbc'))d.close()});
+ d.addEventListener('close',()=>d.remove());document.body.appendChild(d);d.showModal()}
+document.addEventListener('click',e=>{const a=e.target.closest('.av[data-view]');if(a)openPhoto(a.dataset.view)});
+document.addEventListener('keydown',e=>{const a=e.target;if((e.key==='Enter'||e.key===' ')&&a.matches&&a.matches('.av[data-view]')){e.preventDefault();openPhoto(a.dataset.view)}});
+(async function boot(){
+ $('#app').innerHTML='<div class="login"><p class="mut">Loading…</p></div>';
+ if(TOK){try{await pull();if(me())return portal()}catch(e){TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(x){}}}
+ login()})();
+</script>
+</body>
+</html>
