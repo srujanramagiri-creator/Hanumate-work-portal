@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="google-site-verification" content="HyjHMMXwlycWkO3Ui2FqtNn3tmkYFpPVJjGpbqJeIg8" />
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14110e" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <title>Hanumate Team Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -69,7 +71,7 @@ table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:10px 8px;
 aside .logo,aside .me{display:none}.tab{flex:none;padding:10px 12px;font-size:14px}main{padding-bottom:100px}.kan{grid-template-columns:1fr}.row{grid-template-columns:36px 1fr}.row .tag{grid-column:2;text-align:left}.hero .orb{opacity:.45}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .toast{display:none;position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:30;font-size:14px;max-width:90vw;text-align:center}
-dialog{background:var(--sf);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:24px;max-width:92vw}dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog{background:var(--sf);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:24px;max-width:92vw;max-height:92vh;max-height:92dvh}dialog::backdrop{background:rgba(0,0,0,.45)}
 .av[data-view]{cursor:zoom-in;transition:transform .2s}.av[data-view]:hover{transform:scale(1.06)}
 dialog.lbx{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(12,9,6,.94);color:#fff}
 dialog.lbx[open]{display:grid;place-items:center}dialog.lbx::backdrop{background:transparent}
@@ -98,6 +100,62 @@ dialog.lbx[open]{display:grid;place-items:center}dialog.lbx::backdrop{background
 @media(max-width:820px){.chat{grid-template-columns:1fr;height:calc(100dvh - 170px)}.chat.open .cl,.chat:not(.open) .ct{display:none}.cback{display:inline-block}}
 .pbar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--line)}.pbar i{display:block;height:100%}.pbar .d{background:var(--ok)}.pbar .p{background:var(--acc)}
 .pcard p{margin:10px 0 0;font-size:14px}.sh{font:600 12px var(--b);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:18px 0 0}
+.pg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.sh2{font:600 13px var(--b);color:var(--ink);margin:12px 0 4px}.fl{list-style:none;margin:0;padding:0}.fi{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.callov{position:fixed;inset:0;z-index:60;background:#0e0b08;color:#fff;display:grid;place-items:center}
+.callov #rv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000}.callov.vid #rv{display:block}
+.callov .cinfo{position:relative;z-index:1;text-align:center;display:grid;gap:10px;justify-items:center}.callov.vid .cinfo{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));left:0;right:0;text-shadow:0 1px 8px #000}
+.callov h2{font:400 34px var(--d);color:#fff}
+.callov #lv{position:absolute;right:16px;bottom:120px;width:min(28vw,140px);aspect-ratio:3/4;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,.7);background:#000;display:none;z-index:2;transform:scaleX(-1)}.callov.lvon #lv{display:block}
+.callov .cbtns{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));left:0;right:0;display:flex;justify-content:center;gap:18px;z-index:3}
+.cb{width:62px;height:62px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:24px;cursor:pointer;transition:transform .2s}.cb:hover{transform:scale(1.07)}.cb[aria-pressed=true]{background:#fff;color:#111}
+.cb.end{background:#e5383b}.cb.end span{display:inline-block;transform:rotate(135deg)}.cb.acc{background:#2fb344}
+
+/* ===== Responsive pass: phones, tablets, laptops, large screens ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.grid.gl{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.t8{min-width:1080px}.t6{min-width:760px}table.rt td select{min-width:140px}
+@media(min-width:821px){aside{overflow-y:auto}}body{overflow-x:clip}
+:root{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+main{width:100%;max-width:1320px;margin-inline:auto}
+.who{flex-wrap:wrap;row-gap:8px}
+.tb{grid-template-columns:minmax(180px,1fr) 190px auto}
+.kan{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.tab{position:relative}.ti{width:22px;text-align:center;flex:none}
+aside{scrollbar-width:none}aside::-webkit-scrollbar{display:none}
+@supports(height:100dvh){.shell{min-height:100dvh}.login{min-height:100dvh}}
+@media(min-width:821px){@supports(height:100dvh){aside{height:100dvh}}}
+.chat{height:calc(var(--vvh,100dvh) - 2*clamp(20px,4vw,48px))}
+@media(min-width:1700px){body{font-size:17px}main{max-width:1440px}}
+@media(max-width:820px){
+ .tab{flex-direction:column;gap:2px;font-size:11.5px;padding:8px 10px;min-width:66px;justify-content:center;text-align:center;scroll-snap-align:center;border-radius:12px}
+ .ti{font-size:20px;width:auto;line-height:1.1}
+ .tab .bdg{position:absolute;top:2px;right:8px;margin:0}
+ aside{scroll-snap-type:x proximity;gap:2px}
+ main{padding-top:calc(18px + env(safe-area-inset-top,0px))}
+ .chat{height:calc(var(--vvh,100dvh) - 190px)}.bub{max-width:86%}
+ body.inthread aside{display:none}
+ body.inthread main{padding:0}
+ body.inthread .chat{height:calc(var(--vvh,100dvh) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));border:0;border-radius:0}
+ .login .card{padding:24px 20px}
+}
+@media(max-width:560px){
+ form.f:not(.tb){grid-template-columns:minmax(0,1fr)}form.f label[style*="span 2"]{grid-column:auto!important}
+ .tb{grid-template-columns:1fr 1fr}.tb button{grid-column:1/-1}
+ .grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.grid.gl{grid-template-columns:minmax(0,1fr)}.wide{grid-column:1/-1}
+ .card{padding:16px}.big{font-size:32px}
+ h1{letter-spacing:-.015em}
+}
+@media(max-width:700px){
+ .scroll{overflow:visible}.t8,.t6{min-width:0}table.rt td select{min-width:0}
+ table.rt,table.rt tbody{display:block}table.rt tr:first-child{display:none}
+ table.rt tr{display:block;border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:10px;background:var(--sf)}
+ table.rt td{display:flex;justify-content:space-between;align-items:center;gap:14px;border:0;padding:5px 0;text-align:right;overflow-wrap:anywhere}
+ table.rt td::before{content:attr(data-label);color:var(--mut);text-align:left;flex:none;font-size:13px}
+ table.rt td[colspan]{display:block;text-align:left}table.rt td[colspan]::before{content:none}
+ table.rt td select{width:auto;max-width:60%}
+}
+@media(pointer:coarse){.ic{padding:9px 14px;min-height:40px}.btn.sm{padding:11px 18px;min-height:42px}.btn{min-height:44px}input:not([type=checkbox]):not([type=range]),select,textarea{min-height:44px}input[type=checkbox]{width:22px!important;height:22px;min-height:0;padding:0}.cr{padding:14px}.mdel{padding:6px 0 6px 10px}}
 </style>
 </head>
 <body>
@@ -112,9 +170,9 @@ const TOK_KEY='hm_tok';let TOK=null;try{TOK=localStorage.getItem(TOK_KEY)}catch(
 async function rpc(fn,args={}){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(args)});
  const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&j.message)||'Request failed');return j}
 const call=(fn,a)=>rpc(fn,Object.assign({p_token:TOK},a));
-const FR={bad_status:'Pick a valid status.',bad_type:'Pick a leave type.',slow_down:'You are sending too fast. Wait a moment.',bad_text:'Message must be 1 to 1000 characters.',bad_peer:'You cannot message that person.',insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
+const FR={in_call:'You are already on a call.',gone:'That call is no longer available.',bad_offer:'Could not start the call.',too_big:'Too many features or follow-up notes. Remove some and try again.',bad_status:'Pick a valid status.',bad_type:'Pick a leave type.',slow_down:'You are sending too fast. Wait a moment.',bad_text:'Message must be 1 to 1000 characters.',bad_peer:'You cannot message that person.',insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
 const friendly=m=>FR[m]||m||'Something went wrong.';
-function signedOut(msg){clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
+function signedOut(msg){if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
 let S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]},view='home';
 const me=()=>S.team.find(t=>t.id===S.user),nameOf=id=>S.team.find(t=>t.id===id)?.name||'—';
 const ini=n=>(n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
@@ -122,12 +180,12 @@ const av=(t,z,n)=>`<span class="av"${t.avatar&&!n?` data-view="${esc(t.id)}" rol
 const today=()=>new Date().toLocaleDateString('en-CA'),tm=i=>new Date(i).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
 let tt;function toast(m){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';e.className='toast';e.setAttribute('role','status');document.body.appendChild(e)}e.textContent=m;e.style.display='block';clearTimeout(tt);tt=setTimeout(()=>e.style.display='none',3800)}
 async function pull(){const d=await call('portal_data');S.user=d.me;
- S.team=d.team.map(x=>({id:x.id,name:x.name,role:x.role,email:x.email,admin:x.is_admin,avatar:x.avatar,leads:x.leads}));S.leads=d.leads||[];
+ S.team=d.team.map(x=>({id:x.id,name:x.name,role:x.role,email:x.email,admin:x.is_admin,avatar:x.avatar,leads:x.leads,dev:x.dev}));S.leads=d.leads||[];S.projects=d.projects||[];
  S.tasks=d.tasks.map(x=>({id:x.id,t:x.title,p:x.project,s:x.status,who:x.assignee,d:x.done_at,c:x.created_at}));S.att=d.attendance;S.leaves=d.leaves;S.news=d.news}
 async function act(fn){try{await fn();await pull();portal()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.');else toast(friendly(e.message))}}
 const shrink=f=>new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{const n=320,c=document.createElement('canvas');c.width=c.height=n;const m=Math.min(i.width,i.height);c.getContext('2d').drawImage(i,(i.width-m)/2,(i.height-m)/2,m,m,0,0,n,n);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.8))};i.onerror=()=>{URL.revokeObjectURL(u);no()};i.src=u});
 
-function login(msg){
+function login(msg){document.body.classList.remove('inthread');
  $('#app').innerHTML=`<div class="login"><div class="card"><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a><h1 style="font-size:40px;margin:22px 0 6px">Team sign in</h1>
  <p class="mut">Type your profile name and password to continue.</p><form id="lf" style="display:grid;gap:14px;margin-top:16px" novalidate>
  <label>Profile name<input id="em" type="text" autocomplete="username" autocapitalize="words" spellcheck="false" placeholder="Type your name" required></label>
@@ -144,18 +202,19 @@ function login(msg){
    await pull();view='home';portal();startBadge()}
   catch(x){er.textContent=/fetch|network/i.test(x.message)?'Could not reach Supabase. Check your internet connection.':'Sign-in failed: '+x.message;go.disabled=false}};
 }
-const TABS=[['home','Home'],['work','Work'],['progress','Progress'],['leads','Leads'],['chat','Chat'],['time','Time & Leave'],['docs','Payslips & Docs'],['dir','Directory'],['profile','Profile']];
+const TI={home:'🏠',work:'✅',progress:'📊',leads:'🎯',followups:'🗓️',chat:'💬',time:'⏱️',docs:'📄',dir:'👥',profile:'👤',team:'⚙️'};
+const TABS=[['home','Home'],['work','Work'],['progress','Progress'],['leads','Leads'],['followups','Follow-ups'],['chat','Chat'],['time','Time & Leave'],['docs','Payslips & Docs'],['dir','Directory'],['profile','Profile']];
 function portal(){
- clearInterval(chatT);const u=me();if(!u)return login();if((view==='leads'&&!(u.admin||u.leads))||(view==='team'&&!u.admin)||(view==='docs'&&!u.admin)||(view==='progress'&&!u.admin))view='home';
- $('#app').innerHTML=`<div class="shell"><aside><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a>${TABS.filter(([k])=>(k!=='leads'||u.admin||u.leads)&&(k!=='docs'||u.admin)&&(k!=='progress'||u.admin)).concat(u.admin?[['team','Team']]:[]).map(([k,l])=>`<button class="tab" data-v="${k}" ${k===view?'aria-current="page"':''}>${k==='time'&&!u.admin?'Attendance':l}${k==='chat'?'<span id="cbadge" class="bdg" hidden></span>':''}</button>`).join('')}
+ clearInterval(chatT);document.body.classList.remove('inthread');const u=me();if(!u)return login();if((view==='leads'&&!(u.admin||u.leads))||(view==='team'&&!u.admin)||(view==='docs'&&!u.admin)||(view==='progress'&&!u.admin)||(view==='followups'&&!(u.admin||u.dev)))view='home';
+ $('#app').innerHTML=`<div class="shell"><aside><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a>${TABS.filter(([k])=>(k!=='leads'||u.admin||u.leads)&&(k!=='docs'||u.admin)&&(k!=='progress'||u.admin)&&(k!=='followups'||u.admin||u.dev)).concat(u.admin?[['team','Team']]:[]).map(([k,l])=>`<button class="tab" data-v="${k}" ${k===view?'aria-current="page"':''}>${TI[k]?'<span class="ti" aria-hidden="true">'+TI[k]+'</span>':''}<span class="tl">${k==='time'&&!u.admin?'Attendance':l}</span>${k==='chat'?'<span id="cbadge" class="bdg" hidden></span>':''}</button>`).join('')}
  <div class="me" style="margin-top:auto;font-size:14px"><div style="display:flex;gap:10px;align-items:center">${av(u,32)}<span class="mut">${esc(u.name)}</span></div><button class="ic" id="out" style="margin-top:8px">Sign out</button></div></aside><main id="m"></main></div>`;
  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{view=b.dataset.v;portal()});
- $('#out').onclick=async()=>{let m='';try{await call('logout');m='Checked out at '+tm(new Date().toISOString())+'. See you soon.'}catch(e){}signedOut(m)};
- ({home,work,time,docs,dir,profile,team,chat,leads,progress})[view]();setBadge();
+ $('#out').onclick=doSignOut;
+ ({home,work,time,docs,dir,profile,team,chat,leads,progress,followups})[view]();setBadge();{const c=document.querySelector('.tab[aria-current]');if(c&&c.scrollIntoView)c.scrollIntoView({inline:'center',block:'nearest'})}
 }
 function home(){const u=me(),t=today(),last=S.att.find(x=>x.staff_id===u.id),a=last&&(last.day===t||!last.check_out)?last:null,mine=S.tasks.filter(x=>x.who===u.id&&x.s!=='done').length,h=new Date().getHours();
  $('#m').innerHTML=`<span class="eyebrow">${new Date().toDateString()}</span><h1>${h<12?'Good morning':h<17?'Good afternoon':'Good evening'}, ${esc(u.name.split(' ')[0])}.</h1>
- <div class="grid"><div class="card"><span class="mut">Today</span><div class="big" style="font-size:34px;line-height:1.15">${a?'Checked in at '+tm(a.check_in):'Not checked in'}</div>${a&&a.check_out?`<p style="margin:10px 0 0">Checked out at <strong>${tm(a.check_out)}</strong></p>`:'<p class="mut" style="margin:10px 0 0;font-size:14px">Attendance is automatic: signing in checks you in, signing out checks you out.</p>'}</div>
+ <div class="grid"><div class="card wide"><span class="mut">Today</span><div class="big" style="font-size:34px;line-height:1.15">${a?'Checked in at '+tm(a.check_in):'Not checked in'}</div>${a&&a.check_out?`<p style="margin:10px 0 0">Checked out at <strong>${tm(a.check_out)}</strong></p>`:'<p class="mut" style="margin:10px 0 0;font-size:14px">Attendance is automatic: signing in checks you in, signing out checks you out.</p>'}</div>
  <div class="card"><span class="mut">Open tasks</span><div class="big">${mine}</div><button class="btn sm ghost" id="gw">View work</button></div></div>
  <h2 style="font-size:30px;margin:36px 0 12px">Announcements</h2>${S.news.map(n=>`<div class="card" style="margin-bottom:10px"><span class="pill">${esc(n.created_at.slice(0,10))}</span><p style="margin:8px 0 0">${esc(n.body)}</p>${u.admin?`<button class="ic" data-del="${n.id}" style="margin-top:10px" aria-label="Delete announcement">Delete</button>`:''}</div>`).join('')||'<p class="mut">No announcements yet.</p>'}
  ${u.admin?`<form class="f" id="nf"><label style="grid-column:1/-1">Post announcement<input id="nt" required maxlength="300"></label><button class="btn sm">Post</button></form>`:''}`;
@@ -170,7 +229,7 @@ function work(){const u=me(),cols=[['todo','To do'],['doing','In progress'],['do
   if(b.dataset.d==='x'){if(confirm('Delete this task?'))act(()=>call('task_delete',{p_id:x.id}))}
   else act(()=>call('task_move',{p_id:x.id,p_status:o[o.indexOf(x.s)+ +b.dataset.d]}))})}
 function time(){const u=me(),t=today(),yr=String(new Date().getFullYear()),A=S.att.filter(a=>a.staff_id===u.id).slice(0,7);
- const att=`<h2 style="font-size:30px;margin:30px 0 8px">Recent attendance</h2><div class="scroll"><table><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No attendance yet.</td></tr>'}</table></div>`;
+ const att=`<h2 style="font-size:30px;margin:30px 0 8px">Recent attendance</h2><div class="scroll"><table class="rt"><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No attendance yet.</td></tr>'}</table></div>`;
  if(!u.admin){$('#m').innerHTML=`<span class="eyebrow">Attendance</span><h1>Attendance</h1>`+att;return}
  const L=S.leaves,used=(id,k)=>L.filter(l=>l.staff_id===id&&l.type===k&&String(l.from_date).startsWith(yr)).reduce((n,l)=>n+l.days,0),
  cell=(id,k)=>{const n=used(id,k);return `<td${n>LEAVE[k]?' style="color:var(--acc);font-weight:600"':''}>${n} / ${LEAVE[k]}</td>`},
@@ -178,8 +237,8 @@ function time(){const u=me(),t=today(),yr=String(new Date().getFullYear()),A=S.a
  $('#m').innerHTML=`<span class="eyebrow">Attendance & leave</span><h1>Time & Leave</h1>
  <h2 style="font-size:30px;margin:30px 0 4px">Record leave</h2><p class="note" style="margin:0 0 6px">Note down leave an employee has taken. Only you can see this; employees have no leave section.</p>
  <form class="f" id="lf2"><label>Employee<select id="le2">${S.team.map(m=>`<option value="${m.id}" ${m.id===first?'selected':''}>${esc(m.name)}</option>`).join('')}</select></label><label>Type<select id="lt">${Object.keys(LEAVE).map(k=>`<option>${k}</option>`).join('')}</select></label><label>From<input type="date" id="lfr" value="${t}" required></label><label>To<input type="date" id="lto" value="${t}" required></label><label style="grid-column:span 2">Reason (optional)<input id="lr" maxlength="120"></label><button class="btn sm">Add</button></form><p class="note" id="le" role="alert" style="color:var(--acc)"></p>
- <h2 style="font-size:30px;margin:30px 0 8px">Leave summary ${yr}</h2><div class="scroll"><table><tr><th>Employee</th><th>Casual</th><th>Sick</th><th>Earned</th></tr>${S.team.map(m=>`<tr><td>${esc(m.name)}</td>${cell(m.id,'Casual')}${cell(m.id,'Sick')}${cell(m.id,'Earned')}</tr>`).join('')}</table></div>
- <h2 style="font-size:30px;margin:30px 0 8px">Leave log</h2><div class="scroll"><table><tr><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Reason</th><th></th></tr>${L.map(l=>`<tr><td>${esc(nameOf(l.staff_id))}</td><td>${l.type}</td><td>${dates(l)}</td><td>${l.days}</td><td>${esc(l.reason||'')}</td><td><button class="ic" data-ld="${l.id}" aria-label="Delete leave entry">Delete</button></td></tr>`).join('')||'<tr><td colspan="6" class="mut">No leave recorded yet.</td></tr>'}</table></div>`+att;
+ <h2 style="font-size:30px;margin:30px 0 8px">Leave summary ${yr}</h2><div class="scroll"><table class="rt"><tr><th>Employee</th><th>Casual</th><th>Sick</th><th>Earned</th></tr>${S.team.map(m=>`<tr><td>${esc(m.name)}</td>${cell(m.id,'Casual')}${cell(m.id,'Sick')}${cell(m.id,'Earned')}</tr>`).join('')}</table></div>
+ <h2 style="font-size:30px;margin:30px 0 8px">Leave log</h2><div class="scroll"><table class="rt t6"><tr><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Reason</th><th></th></tr>${L.map(l=>`<tr><td>${esc(nameOf(l.staff_id))}</td><td>${l.type}</td><td>${dates(l)}</td><td>${l.days}</td><td>${esc(l.reason||'')}</td><td><button class="ic" data-ld="${l.id}" aria-label="Delete leave entry">Delete</button></td></tr>`).join('')||'<tr><td colspan="6" class="mut">No leave recorded yet.</td></tr>'}</table></div>`+att;
  document.querySelectorAll('[data-ld]').forEach(b=>b.onclick=()=>{if(confirm('Delete this leave entry?'))act(()=>call('admin_leave_delete',{p_id:+b.dataset.ld}))});
  $('#lf2').onsubmit=e=>{e.preventDefault();const f=$('#lfr').value,to=$('#lto').value;
   if(!f||!to||to<f){$('#le').textContent='End date must be on or after start date.';return}
@@ -189,13 +248,14 @@ function docs(){$('#m').innerHTML=`<span class="eyebrow">Documents</span><h1>Pay
  <h2 style="font-size:30px;margin:34px 0 4px">Handbook</h2>
  ${[['Working hours','Core hours are agreed with your lead. Check in and out daily from Home.'],['Leave policy','Casual 12, Sick 8, Earned 15 days per year. Tell the founder about any leave and it will be recorded in the portal.'],['Client work','Share demo builds with the founder before sending to clients. Keep client data out of public tools.']].map(([a,b])=>`<details><summary style="font-size:22px">${a}</summary><div class="body">${b}</div></details>`).join('')}`}
 function dir(){$('#m').innerHTML=`<span class="eyebrow">People</span><h1>Directory</h1><label style="margin-top:18px;max-width:380px">Search<input id="q" placeholder="Name or role" autocomplete="off"></label><div id="dl"></div>`;
- const r=()=>{const q=$('#q').value.toLowerCase();$('#dl').innerHTML=S.team.filter(t=>(t.name+t.role).toLowerCase().includes(q)).map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong><br><span class="mut">${esc(t.role)}</span></div>${t.id!==S.user?`<button class="btn sm" data-msg="${t.id}" style="margin-right:8px">Message</button>`:''}${t.email?`<a class="btn sm ghost" href="mailto:${esc(t.email)}">Email</a>`:''}</div>`).join('')||'<p class="mut">No matches.</p>';$('#dl').querySelectorAll('[data-msg]').forEach(b=>b.onclick=()=>{CH.peer=b.dataset.msg;CH.msgs=[];CH.sig=null;view='chat';portal()})};$('#q').oninput=r;r()}
+ const r=()=>{const q=$('#q').value.toLowerCase();$('#dl').innerHTML=S.team.filter(t=>(t.name+t.role).toLowerCase().includes(q)).map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong><br><span class="mut">${esc(t.role)}</span></div>${t.id!==S.user?`<button class="btn sm" data-msg="${t.id}" style="margin-right:8px">Message</button><button class="btn sm ghost" data-call="${t.id}" aria-label="Call ${esc(t.name)}" style="margin-right:8px">Call</button>`:''}${t.email?`<a class="btn sm ghost" href="mailto:${esc(t.email)}">Email</a>`:''}</div>`).join('')||'<p class="mut">No matches.</p>';$('#dl').querySelectorAll('[data-msg]').forEach(b=>b.onclick=()=>{CH.peer=b.dataset.msg;CH.msgs=[];CH.sig=null;view='chat';portal()});$('#dl').querySelectorAll('[data-call]').forEach(b=>b.onclick=()=>startCall(b.dataset.call,false))};$('#q').oninput=r;r()}
 function profile(){const u=me(),has=!!u.avatar;
  $('#m').innerHTML=`<span class="eyebrow">Your profile</span><h1>Profile</h1>
  <div class="card" style="margin-top:24px;display:flex;gap:22px;align-items:center;flex-wrap:wrap">${av(u,96)}<div style="flex:1;min-width:200px"><h3 style="font-size:32px">${esc(u.name)}</h3><div class="mut">${esc(u.role)}</div>${u.email?`<a href="mailto:${esc(u.email)}" class="mut">${esc(u.email)}</a>`:''}</div></div>
  <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Profile photo</h3><p class="mut" style="margin:8px 0 16px">Pick a photo from your gallery, then drag and zoom to frame it. Anyone on your team can tap your photo to view it full size.</p>
  <input type="file" id="pf" accept="image/*" hidden><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn sm" id="pb" type="button">${has?'Change photo':'Upload photo'}</button>${has?'<button class="btn sm ghost" id="pr" type="button">Remove photo</button>':''}</div><p class="note" id="pe" role="alert" style="color:var(--acc)"></p></div>
- <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Change password</h3><form class="f" id="cp"><label>Current password<input id="co" type="password" autocomplete="current-password" required></label><label>New password (min 8)<input id="cn" type="password" autocomplete="new-password" minlength="8" required></label><button class="btn sm">Update</button></form><p class="note" id="cm" role="alert"></p></div>`;
+ <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Change password</h3><form class="f" id="cp"><label>Current password<input id="co" type="password" autocomplete="current-password" required></label><label>New password (min 8)<input id="cn" type="password" autocomplete="new-password" minlength="8" required></label><button class="btn sm">Update</button></form><p class="note" id="cm" role="alert"></p></div>
+ <div class="card" style="margin-top:16px"><h3 style="font-size:24px">Sign out</h3><p class="mut" style="margin:8px 0 16px">Signing out also marks you checked out for the day.</p><button class="btn sm ghost" id="pso" type="button">Sign out</button></div>`;
  $('#pb').onclick=()=>$('#pf').click();
  $('#pf').onchange=async e=>{const f=e.target.files[0];if(!f)return;const er=$('#pe');
   if(!/^image\//.test(f.type)){er.textContent='Please choose an image file.';return}
@@ -203,14 +263,15 @@ function profile(){const u=me(),has=!!u.avatar;
   e.target.value='';let b;try{b=await cropDialog(f)}catch(x){if(x&&x.message==='cancel')return;er.textContent='Could not read that image. Try a JPG or PNG.';return}
   er.textContent='Uploading…';act(()=>call('set_avatar',{p_avatar:b}))};
  if(has)$('#pr').onclick=()=>act(()=>call('set_avatar',{p_avatar:null}));
+ $('#pso').onclick=doSignOut;
  $('#cp').onsubmit=async e=>{e.preventDefault();const m=$('#cm');try{await call('change_password',{p_old:$('#co').value,p_new:$('#cn').value});$('#cp').reset();m.style.color='var(--ok)';m.textContent='Password updated.'}catch(x){m.style.color='var(--acc)';m.textContent=friendly(x.message)}}}
 function team(){const u=me();
  $('#m').innerHTML=`<span class="eyebrow">Admin</span><h1>Team</h1>
- <form class="f" id="tm" style="margin-top:20px"><label>Profile name<input id="tn" required maxlength="60"></label><label>Role<input id="tr" value="Team member" maxlength="60"></label><label>Password<input id="tpw" type="text" required minlength="8" autocomplete="off" placeholder="min 8 characters"></label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="ta" style="width:auto"> Admin</label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="tl" style="width:auto"> Marketing (Leads table)</label><button class="btn sm">Add member</button></form>
+ <form class="f" id="tm" style="margin-top:20px"><label>Profile name<input id="tn" required maxlength="60"></label><label>Role<input id="tr" value="Team member" maxlength="60"></label><label>Password<input id="tpw" type="text" required minlength="8" autocomplete="off" placeholder="min 8 characters"></label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="ta" style="width:auto"> Admin</label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="tl" style="width:auto"> Marketing (Leads table)</label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="td" style="width:auto"> Developer (Client follow-ups)</label><button class="btn sm">Add member</button></form>
  <p class="note">Share the profile name and password privately. Members can change their password from Profile.</p>
- <div style="margin-top:12px">${S.team.map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${t.admin?' <span class="pill">Admin</span>':''}${t.leads?' <span class="pill">Marketing</span>':''}<br><span class="mut">${esc(t.role)}</span></div><button class="ic" data-ed="${t.id}" style="margin-right:6px">Edit</button><button class="ic" data-rp="${t.id}">Change password</button>${t.id!==u.id?`<button class="ic" data-rm="${t.id}" style="margin-left:6px">Remove</button>`:''}</div>`).join('')}</div>`;
- $('#tm').onsubmit=e=>{e.preventDefault();act(()=>call('admin_add_member',{p_name:$('#tn').value.trim(),p_role:$('#tr').value.trim(),p_password:$('#tpw').value,p_admin:$('#ta').checked,p_leads:$('#tl').checked}))};
- document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const t=S.team.find(x=>x.id===b.dataset.rm);if(t&&confirm('Remove '+t.name+'? Their attendance and leave records are deleted, and their leads move to you.'))act(()=>call('admin_remove_member',{p_id:t.id}))});
+ <div style="margin-top:12px">${S.team.map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${t.admin?' <span class="pill">Admin</span>':''}${t.leads?' <span class="pill">Marketing</span>':''}${t.dev?' <span class="pill">Developer</span>':''}<br><span class="mut">${esc(t.role)}</span></div><button class="ic" data-ed="${t.id}" style="margin-right:6px">Edit</button><button class="ic" data-rp="${t.id}">Change password</button>${t.id!==u.id?`<button class="ic" data-rm="${t.id}" style="margin-left:6px">Remove</button>`:''}</div>`).join('')}</div>`;
+ $('#tm').onsubmit=e=>{e.preventDefault();act(()=>call('admin_add_member',{p_name:$('#tn').value.trim(),p_role:$('#tr').value.trim(),p_password:$('#tpw').value,p_admin:$('#ta').checked,p_leads:$('#tl').checked,p_dev:$('#td').checked}))};
+ document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const t=S.team.find(x=>x.id===b.dataset.rm);if(t&&confirm('Remove '+t.name+'? Their attendance and leave records are deleted, and their leads and client projects move to you.'))act(()=>call('admin_remove_member',{p_id:t.id}))});
  document.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>pwDialog(S.team.find(x=>x.id===b.dataset.rp)));
  document.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editDialog(S.team.find(x=>x.id===b.dataset.ed)))}
 function editDialog(t){if(!t)return;const o=$('#edd');if(o)o.remove();const d=document.createElement('dialog');d.id='edd';
@@ -218,6 +279,7 @@ function editDialog(t){if(!t)return;const o=$('#edd');if(o)o.remove();const d=do
  <label>Profile name<input id="en" required minlength="2" maxlength="60" value="${esc(t.name)}"></label>
  <label>Role<input id="er2" maxlength="60" value="${esc(t.role)}"></label>
  <label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="el" style="width:auto" ${t.leads?'checked':''}> Marketing: give this person a Leads table</label>
+ <label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="edv" style="width:auto" ${t.dev?'checked':''}> Developer: give this person Client follow-ups</label>
  <p class="note" id="ee" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
  <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="ec">Cancel</button><button class="btn sm" type="submit" id="es">Save</button></div></form>`;
  document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#en').focus();$('#en').select();
@@ -225,7 +287,7 @@ function editDialog(t){if(!t)return;const o=$('#edd');if(o)o.remove();const d=do
  $('#edf').onsubmit=async e=>{e.preventDefault();const er=$('#ee'),n=$('#en').value.trim();
   if(n.length<2){er.textContent='Name must be at least 2 characters.';return}
   $('#es').disabled=true;
-  try{await call('admin_update_member',{p_id:t.id,p_name:n,p_role:$('#er2').value.trim(),p_leads:$('#el').checked});await pull();d.close();portal();toast('Profile updated')}
+  try{await call('admin_update_member',{p_id:t.id,p_name:n,p_role:$('#er2').value.trim(),p_leads:$('#el').checked,p_dev:$('#edv').checked});await pull();d.close();portal();toast('Profile updated')}
   catch(x){er.textContent=friendly(x.message);$('#es').disabled=false}}}
 function pwDialog(t){if(!t)return;const o=$('#pwd');if(o)o.remove();const d=document.createElement('dialog');d.id='pwd';
  d.innerHTML=`<form id="pwf" style="display:grid;gap:14px;width:min(360px,80vw)"><h3 style="font-size:26px">Change password</h3><p class="mut" style="margin:0">for <strong>${esc(t.name)}</strong>. They will be signed out on their other devices.</p>
@@ -284,10 +346,10 @@ let CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}},chatT=n
 const unreadTotal=()=>(CH.sum.group&&CH.sum.group.unread||0)+CH.sum.dms.reduce((n,d)=>n+d.unread,0);
 function setBadge(){const n=unreadTotal(),b=$('#cbadge');if(b){b.textContent=n>99?'99+':n;b.hidden=!n}document.title=(n?'('+n+') ':'')+'Hanumate Team Portal'}
 async function refreshSummary(){try{CH.sum=await call('chat_summary');setBadge();paintList()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
-function startBadge(){clearInterval(badgeT);badgeT=setInterval(()=>{if(S.user&&!document.hidden)refreshSummary()},15000);refreshSummary()}
+function startBadge(){clearInterval(badgeT);badgeT=setInterval(()=>{if(S.user&&!document.hidden)refreshSummary()},15000);refreshSummary();startCallWatch()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.user){refreshSummary();poll()}});
 const fmt=i=>{const d=new Date(i);return d.toDateString()===new Date().toDateString()?tm(i):d.toLocaleDateString([],{day:'numeric',month:'short'})};
-function chat(){clearInterval(chatT);$('#m').innerHTML=`<div class="chat ${CH.peer?'open':''}"><div class="cl" id="clist" role="list" aria-label="Chats"></div><div class="ct" id="cthread"></div></div>`;
+function chat(){clearInterval(chatT);document.body.classList.toggle('inthread',!!CH.peer);$('#m').innerHTML=`<div class="chat ${CH.peer?'open':''}"><div class="cl" id="clist" role="list" aria-label="Chats"></div><div class="ct" id="cthread"></div></div>`;
  paintList();paintShell();chatT=setInterval(()=>poll(),4000);if(CH.peer)poll(true);refreshSummary()}
 function paintList(){const el=$('#clist');if(!el)return;const u=me();if(!u)return;const g=CH.sum.group||{unread:0},dm=Object.fromEntries(CH.sum.dms.map(d=>[d.peer,d]));
  const people=S.team.filter(t=>t.id!==u.id).sort((a,b)=>((dm[b.id]&&dm[b.id].last_at)||'').localeCompare((dm[a.id]&&dm[a.id].last_at)||'')||a.name.localeCompare(b.name));
@@ -299,10 +361,10 @@ function paintList(){const el=$('#clist');if(!el)return;const u=me();if(!u)retur
 function paintShell(){const el=$('#cthread');if(!el)return;
  if(!CH.peer){el.innerHTML='<div class="cempty"><p class="mut">Select a teammate to start chatting.</p></div>';return}
  const t=CH.peer==='group'?null:S.team.find(x=>x.id===CH.peer);
- el.innerHTML=`<div class="chd"><button class="ic cback" id="cb" aria-label="Back to chats">←</button>${t?av(t,40):'<span class="av" style="width:40px;height:40px;background:var(--ink)">#</span>'}<div><b>${t?esc(t.name):'Team chat'}</b><br><small class="mut">${t?esc(t.role):'Everyone in the team'}</small></div></div>
+ el.innerHTML=`<div class="chd"><button class="ic cback" id="cb" aria-label="Back to chats">←</button>${t?av(t,40):'<span class="av" style="width:40px;height:40px;background:var(--ink)">#</span>'}<div><b>${t?esc(t.name):'Team chat'}</b><br><small class="mut">${t?esc(t.role):'Everyone in the team'}</small></div>${t?'<span style="margin-left:auto;display:flex;gap:6px"><button type="button" class="ic" id="cvo" aria-label="Voice call">📞</button><button type="button" class="ic" id="cvi" aria-label="Video call">🎥</button></span>':''}</div>
  <div class="cm" id="cmsgs" tabindex="0" aria-live="polite" aria-label="Messages"></div>
  <form class="cf" id="cform"><textarea id="ctx" rows="1" maxlength="1000" placeholder="Type a message" aria-label="Message"></textarea><button class="btn sm" type="submit" id="csend">Send</button></form>`;
- $('#cb').onclick=()=>{CH.peer=null;chat()};
+ $('#cb').onclick=()=>{CH.peer=null;chat()};if(t){$('#cvo').onclick=()=>startCall(t.id,false);$('#cvi').onclick=()=>startCall(t.id,true)}
  const tx=$('#ctx');tx.oninput=()=>{tx.style.height='auto';tx.style.height=Math.min(tx.scrollHeight,120)+'px'};
  tx.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('#cform').requestSubmit()}};
  $('#cform').onsubmit=async e=>{e.preventDefault();const b=tx.value.trim(),bt=$('#csend');if(!b)return;bt.disabled=true;
@@ -325,19 +387,19 @@ async function poll(force){if(!S.user||!CH.peer||(document.hidden&&!force))retur
 const LSRC=['Instagram','WhatsApp','Referral','Cold call','Walk-in','Website','Other'],LST=['New','Contacted','Interested','Proposal sent','Converted','Lost'];
 let LF={s:'all',q:''};
 function leads(){
- $('#m').innerHTML=`<span class="eyebrow">Marketing</span><h1>Leads</h1><form class="f" id="lfm" style="margin-top:18px;grid-template-columns:minmax(180px,1fr) 180px auto"><label>Search<input id="lq" placeholder="Name, phone, notes" value="${esc(LF.q)}" autocomplete="off"></label><label>Status<select id="ls"><option value="all">All</option>${LST.map(x=>`<option ${LF.s===x?'selected':''}>${x}</option>`).join('')}</select></label><button type="button" class="btn sm" id="la">Add lead</button></form><div id="lbody"></div>`;
+ $('#m').innerHTML=`<span class="eyebrow">Marketing</span><h1>Leads</h1><form class="f tb" id="lfm" style="margin-top:18px"><label>Search<input id="lq" placeholder="Name, phone, notes" value="${esc(LF.q)}" autocomplete="off"></label><label>Status<select id="ls"><option value="all">All</option>${LST.map(x=>`<option ${LF.s===x?'selected':''}>${x}</option>`).join('')}</select></label><button type="button" class="btn sm" id="la">Add lead</button></form><div id="lbody"></div>`;
  $('#lfm').onsubmit=e=>e.preventDefault();$('#lq').oninput=e=>{LF.q=e.target.value;paintLeads()};$('#ls').onchange=e=>{LF.s=e.target.value;paintLeads()};$('#la').onclick=()=>leadDialog(null);paintLeads()}
 function paintLeads(){const u=me(),el=$('#lbody');if(!el)return;const t=today(),all=S.leads,q=LF.q.trim().toLowerCase(),done=['Converted','Lost'];
  const rows=all.filter(l=>(LF.s==='all'||l.status===LF.s)&&(!q||[l.name,l.phone,l.email,l.notes,l.source].join(' ').toLowerCase().includes(q)));
  const conv=all.filter(l=>l.status==='Converted').length,rate=all.length?Math.round(conv/all.length*100):0,active=all.filter(l=>!done.includes(l.status)).length,due=all.filter(l=>l.follow_up&&l.follow_up<=t&&!done.includes(l.status)).length;
  el.innerHTML=`<div class="grid" style="margin-top:18px"><div class="card"><span class="mut">Total leads</span><div class="big">${all.length}</div></div><div class="card"><span class="mut">Active</span><div class="big">${active}</div></div><div class="card"><span class="mut">Follow-ups due</span><div class="big" style="${due?'color:var(--acc)':''}">${due}</div></div><div class="card"><span class="mut">Converted to clients</span><div class="big">${conv}<small class="mut" style="font:14px var(--b)"> · ${rate}%</small></div></div></div>
- <div class="scroll" style="margin-top:18px"><table><tr><th>Lead</th>${u.admin?'<th>Owner</th>':''}<th>Contact</th><th>Source</th><th>Status</th><th>Follow-up</th><th>Notes</th><th></th></tr>${rows.map(l=>{const od=l.follow_up&&l.follow_up<t&&!done.includes(l.status),n=l.notes||'';
-  return `<tr><td><strong>${esc(l.name)}</strong></td>${u.admin?`<td>${esc(nameOf(l.owner))}</td>`:''}<td>${l.phone?`<a href="tel:${esc(l.phone.replace(/[^\d+]/g,''))}">${esc(l.phone)}</a>`:''}${l.phone&&l.email?'<br>':''}${l.email?`<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>`:''}</td><td>${esc(l.source)}</td><td><select data-ls="${l.id}" aria-label="Status of ${esc(l.name)}">${LST.map(x=>`<option ${l.status===x?'selected':''}>${x}</option>`).join('')}</select></td><td${od?' style="color:var(--acc);font-weight:600"':''}>${l.follow_up||'—'}</td><td style="max-width:240px">${esc(n.slice(0,90))}${n.length>90?'…':''}</td><td style="white-space:nowrap"><button class="ic" data-le="${l.id}">Edit</button> <button class="ic" data-lx="${l.id}" aria-label="Delete lead ${esc(l.name)}">Delete</button></td></tr>`}).join('')||`<tr><td colspan="8" class="mut">${all.length?'No leads match.':'No leads yet. Click Add lead to start your list.'}</td></tr>`}</table></div>`;
+ <div class="scroll" style="margin-top:18px"><table class="rt t8"><tr><th>Lead</th>${u.admin?'<th>Owner</th>':''}<th>Contact</th><th>Source</th><th>Status</th><th>Follow-up</th><th>Notes</th><th></th></tr>${rows.map(l=>{const od=l.follow_up&&l.follow_up<t&&!done.includes(l.status),n=l.notes||'';
+  return `<tr><td style="min-width:170px"><strong>${esc(l.name)}</strong></td>${u.admin?`<td>${esc(nameOf(l.owner))}</td>`:''}<td>${l.phone?`<a href="tel:${esc(l.phone.replace(/[^\d+]/g,''))}">${esc(l.phone)}</a>`:''}${l.phone&&l.email?'<br>':''}${l.email?`<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>`:''}</td><td>${esc(l.source)}</td><td><select data-ls="${l.id}" aria-label="Status of ${esc(l.name)}">${LST.map(x=>`<option ${l.status===x?'selected':''}>${x}</option>`).join('')}</select></td><td${od?' style="color:var(--acc);font-weight:600"':''}>${l.follow_up||'—'}</td><td style="min-width:200px;max-width:260px">${esc(n.slice(0,90))}${n.length>90?'…':''}</td><td style="white-space:nowrap"><button class="ic" data-le="${l.id}">Edit</button> <button class="ic" data-lx="${l.id}" aria-label="Delete lead ${esc(l.name)}">Delete</button></td></tr>`}).join('')||`<tr><td colspan="8" class="mut">${all.length?'No leads match.':'No leads yet. Click Add lead to start your list.'}</td></tr>`}</table></div>`;
  el.querySelectorAll('[data-ls]').forEach(x=>x.onchange=()=>act(()=>call('lead_status',{p_id:+x.dataset.ls,p_status:x.value})));
  el.querySelectorAll('[data-le]').forEach(b=>b.onclick=()=>leadDialog(S.leads.find(x=>String(x.id)===b.dataset.le)));
  el.querySelectorAll('[data-lx]').forEach(b=>b.onclick=()=>{const l=S.leads.find(x=>String(x.id)===b.dataset.lx);if(l&&confirm('Delete lead "'+l.name+'"?'))act(()=>call('lead_delete',{p_id:l.id}))})}
 function leadDialog(l){const o=$('#ldd');if(o)o.remove();const d=document.createElement('dialog');d.id='ldd';const e=l||{};
- d.innerHTML=`<form id="ldf" style="display:grid;gap:12px;width:min(520px,84vw);max-height:78vh;overflow:auto;padding:2px"><h3 style="font-size:26px">${l?'Edit lead':'Add lead'}</h3>
+ d.innerHTML=`<form id="ldf" style="display:grid;gap:12px;width:min(520px,84vw);max-height:78vh;max-height:78dvh;overflow:auto;padding:2px"><h3 style="font-size:26px">${l?'Edit lead':'Add lead'}</h3>
  <label>Lead or business name<input id="ln" required maxlength="120" value="${esc(e.name||'')}"></label>
  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px"><label>Phone<input id="lp" type="tel" maxlength="30" value="${esc(e.phone||'')}"></label><label>Email<input id="lm" type="email" maxlength="120" value="${esc(e.email||'')}"></label>
  <label>Source<select id="lsr">${LSRC.map(x=>`<option ${e.source===x?'selected':''}>${x}</option>`).join('')}</select></label><label>Status<select id="lst">${LST.map(x=>`<option ${(e.status||'New')===x?'selected':''}>${x}</option>`).join('')}</select></label>
@@ -357,12 +419,13 @@ function progress(){const emps=S.team.filter(t=>!t.admin),wk=Date.now()-7*864e5,
  const open=S.tasks.filter(x=>x.s!=='done').length,week=S.tasks.filter(x=>x.s==='done'&&x.d&&new Date(x.d)>=wk).length,inn=emps.filter(e=>here(e.id)).length,unas=S.tasks.filter(x=>!x.who&&x.s!=='done').length;
  $('#m').innerHTML=`<span class="eyebrow">Founder</span><h1>Team progress</h1>
  <div class="grid"><div class="card"><span class="mut">Open tasks</span><div class="big">${open}</div>${unas?`<small class="mut">${unas} unassigned</small>`:''}</div><div class="card"><span class="mut">Done in the last 7 days</span><div class="big">${week}</div></div><div class="card"><span class="mut">Checked in today</span><div class="big">${inn}<small class="mut" style="font:14px var(--b)"> / ${emps.length}</small></div></div></div>
- <div class="grid" style="margin-top:20px">${emps.map(e=>{const s=stats(e.id),a=here(e.id),pc=n=>s.n?n/s.n*100:0,L=e.leads?S.leads.filter(l=>l.owner===e.id):[];
+ <div class="grid gl" style="margin-top:20px">${emps.map(e=>{const s=stats(e.id),a=here(e.id),pc=n=>s.n?n/s.n*100:0,L=e.leads?S.leads.filter(l=>l.owner===e.id):[],P=e.dev?S.projects.filter(x=>x.owner===e.id&&x.status!=='Delivered'):[];
   return `<div class="card pcard"><div class="who" style="border:0;padding:0">${av(e,44)}<div style="flex:1"><strong>${esc(e.name)}</strong>${e.leads?' <span class="pill">Marketing</span>':''}<br><span class="mut">${esc(e.role)}</span></div></div>
   <p class="mut">${a?(a.check_out?'Checked out at '+tm(a.check_out):'Checked in at '+tm(a.check_in)):'Not checked in today'}</p>
   <div class="pbar" role="img" aria-label="${s.done} of ${s.n} tasks done" style="margin-top:12px"><i class="d" style="width:${pc(s.done)}%"></i><i class="p" style="width:${pc(s.doing)}%"></i></div>
   <p>${s.n?`${s.done} done · ${s.doing} in progress · ${s.todo} to do`:'No tasks assigned yet'}</p><p class="mut">Finished in the last 7 days: <strong>${s.wk}</strong></p>
   ${e.leads?`<p class="mut">Leads: ${L.length} · ${L.filter(l=>l.status==='Converted').length} converted · ${L.filter(l=>l.follow_up&&l.follow_up<=t&&!dn.includes(l.status)).length} follow-ups due</p>`:''}
+  ${e.dev?`<p class="mut">Client projects: ${P.length} active${P.some(x=>x.deadline)?' · next deadline '+dfmt(P.filter(x=>x.deadline).sort((a,b)=>a.deadline.localeCompare(b.deadline))[0].deadline):''}</p>`:''}
   <button class="btn sm ghost" style="margin-top:14px" data-pv="${e.id}">View work</button></div>`}).join('')||'<p class="mut">No employees yet. Add them in the Team tab.</p>'}</div>`;
  document.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>workDialog(S.team.find(x=>x.id===b.dataset.pv)))}
 function workDialog(e){if(!e)return;const o=$('#wkd');if(o)o.remove();const d=document.createElement('dialog');d.id='wkd';
@@ -371,16 +434,129 @@ function workDialog(e){if(!e)return;const o=$('#wkd');if(o)o.remove();const d=do
  list=(arr,ex)=>arr.length?`<ul style="margin:6px 0 0;padding-left:18px">${arr.map(x=>`<li>${esc(x.t)} <small class="mut">· ${esc(x.p)}${ex?ex(x):''}</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">Nothing here.</p>',
  done=by('done').sort((a,b)=>(b.d||'').localeCompare(a.d||'')).slice(0,8),
  act2=L.filter(l=>!['Converted','Lost'].includes(l.status)).sort((a,b)=>(a.follow_up||'9999').localeCompare(b.follow_up||'9999')).slice(0,6);
- d.innerHTML=`<div style="width:min(640px,88vw);max-height:78vh;overflow:auto;padding:2px"><div class="who" style="border:0;padding:0 0 4px">${av(e,48)}<div style="flex:1"><h3 style="font-size:26px">${esc(e.name)}</h3><span class="mut">${esc(e.role)}</span></div><button class="ic" id="wkx" aria-label="Close">✕</button></div>
+ const PR=S.projects.filter(x=>x.owner===e.id).sort((a,b)=>(a.deadline||'9999').localeCompare(b.deadline||'9999'));
+ d.innerHTML=`<div style="width:min(640px,88vw);max-height:78vh;max-height:78dvh;overflow:auto;padding:2px"><div class="who" style="border:0;padding:0 0 4px">${av(e,48)}<div style="flex:1"><h3 style="font-size:26px">${esc(e.name)}</h3><span class="mut">${esc(e.role)}</span></div><button class="ic" id="wkx" aria-label="Close">✕</button></div>
  <h3 class="sh">In progress (${by('doing').length})</h3>${list(by('doing'))}
  <h3 class="sh">To do (${by('todo').length})</h3>${list(by('todo'))}
  <h3 class="sh">Recently done</h3>${list(done,x=>x.d?' · done '+dd(x.d):'')}
  ${e.leads?`<h3 class="sh">Leads (${L.length} total · ${L.filter(l=>l.status==='Converted').length} converted)</h3>${act2.length?`<ul style="margin:6px 0 0;padding-left:18px">${act2.map(l=>`<li>${esc(l.name)} <small class="mut">· ${esc(l.status)}${l.follow_up?' · follow up '+dd(l.follow_up):''}</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">No active leads.</p>'}`:''}
- <h3 class="sh">Attendance (last 7 records)</h3><div class="scroll"><table><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No attendance yet.</td></tr>'}</table></div>
+ ${e.dev?`<h3 class="sh">Client projects (${PR.length})</h3>${PR.length?`<ul style="margin:6px 0 0;padding-left:18px">${PR.map(x=>`<li>${esc(x.client)} <small class="mut">· ${esc(x.status)}${x.deadline?' · deadline '+dd(x.deadline):''} · ${(x.features||[]).filter(f=>f.d).length}/${(x.features||[]).length} features</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">No client projects yet.</p>'}`:''}
+ <h3 class="sh">Attendance (last 7 records)</h3><div class="scroll"><table class="rt"><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No attendance yet.</td></tr>'}</table></div>
  <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn sm ghost" id="wkm">Message</button><button class="btn sm" id="wkc">Close</button></div></div>`;
  document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();
  $('#wkx').onclick=$('#wkc').onclick=()=>d.close();
  $('#wkm').onclick=()=>{CH.peer=e.id;CH.msgs=[];CH.sig=null;d.close();view='chat';portal()}}
+const PST=['Planning','In development','In review','Delivered','On hold'];
+let PF={s:'all',q:''};
+const dayN=d=>Math.round((new Date(d+'T00:00:00')-new Date(today()+'T00:00:00'))/864e5),rel=d=>{const n=dayN(d);return n<0?(-n)+'d overdue':n===0?'today':'in '+n+'d'},dfmt=d=>new Date(d+'T00:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'});
+function followups(){
+ $('#m').innerHTML=`<span class="eyebrow">Developers</span><h1>Follow-ups</h1><form class="f tb" id="pfm" style="margin-top:18px"><label>Search<input id="xq" placeholder="Client, project, notes" value="${esc(PF.q)}" autocomplete="off"></label><label>Status<select id="xsf"><option value="all">All</option>${PST.map(x=>`<option ${PF.s===x?'selected':''}>${x}</option>`).join('')}</select></label><button type="button" class="btn sm" id="xadd">Add client project</button></form><div id="pbody"></div>`;
+ $('#pfm').onsubmit=e=>e.preventDefault();$('#xq').oninput=e=>{PF.q=e.target.value;paintProjects()};$('#xsf').onchange=e=>{PF.s=e.target.value;paintProjects()};$('#xadd').onclick=()=>projectDialog(null);paintProjects()}
+function paintProjects(){const u=me(),el=$('#pbody');if(!el)return;const q=PF.q.trim().toLowerCase(),all=S.projects,live=all.filter(p=>p.status!=='Delivered');
+ const rows=all.filter(p=>(PF.s==='all'||p.status===PF.s)&&(!q||[p.client,p.project,p.contact,p.phone,p.notes].join(' ').toLowerCase().includes(q))).sort((a,b)=>(a.status==='Delivered')-(b.status==='Delivered')||(a.deadline||'9999').localeCompare(b.deadline||'9999'));
+ const soon=live.filter(p=>p.deadline&&dayN(p.deadline)>=0&&dayN(p.deadline)<=7).length,due=live.filter(p=>p.next_follow_up&&dayN(p.next_follow_up)<=0).length,left=live.reduce((n,p)=>n+(p.features||[]).filter(x=>!x.d).length,0);
+ el.innerHTML=`<div class="grid" style="margin-top:18px"><div class="card"><span class="mut">Active projects</span><div class="big">${live.length}</div></div><div class="card"><span class="mut">Deadlines in 7 days</span><div class="big" style="${soon?'color:var(--acc)':''}">${soon}</div></div><div class="card"><span class="mut">Follow-ups due</span><div class="big" style="${due?'color:var(--acc)':''}">${due}</div></div><div class="card"><span class="mut">Features left to add</span><div class="big">${left}</div></div></div>
+ <div class="grid gl" style="margin-top:20px">${rows.map(p=>{const f=p.features||[],dn=f.filter(x=>x.d).length,fin=p.status==='Delivered',od=!fin&&p.deadline&&dayN(p.deadline)<0,fd=!fin&&p.next_follow_up&&dayN(p.next_follow_up)<=0;
+  return `<div class="card pcard"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><strong style="font:400 22px/1.2 var(--d)">${esc(p.client)}</strong><span class="pill">${esc(p.status)}</span></div><span class="mut">${esc(p.project||'')}</span>
+  <p>Deadline: ${p.deadline?`<strong${od?' style="color:var(--acc)"':''}>${dfmt(p.deadline)}${fin?'':' · '+rel(p.deadline)}</strong>`:'<span class="mut">not set</span>'}</p>
+  <p>Next follow-up: ${p.next_follow_up?`<strong${fd?' style="color:var(--acc)"':''}>${dfmt(p.next_follow_up)}${fin?'':' · '+rel(p.next_follow_up)}</strong>`:'<span class="mut">not set</span>'}</p>
+  <div class="pbar" role="img" aria-label="${dn} of ${f.length} features added" style="margin-top:12px"><i class="d" style="width:${f.length?dn/f.length*100:0}%"></i></div><p class="mut">${f.length?dn+' of '+f.length+' features added':'No features listed yet'}</p>
+  ${u.admin?`<p class="mut">Developer: ${esc(nameOf(p.owner))}</p>`:''}<button class="btn sm ghost" style="margin-top:12px" data-po="${p.id}">Open</button></div>`}).join('')||`<p class="mut">${all.length?'No projects match.':'No client projects yet. Click Add client project to start.'}</p>`}</div>`;
+ el.querySelectorAll('[data-po]').forEach(b=>b.onclick=()=>projectDialog(S.projects.find(x=>String(x.id)===b.dataset.po)))}
+function projectDialog(p){const o=$('#prd');if(o)o.remove();const d=document.createElement('dialog');d.id='prd';const e=p||{};
+ let F=JSON.parse(JSON.stringify(e.features||[])),G=JSON.parse(JSON.stringify(e.followups||[]));
+ d.innerHTML=`<form id="xfm" style="display:grid;gap:12px;width:min(720px,90vw);max-height:82vh;max-height:82dvh;overflow:auto;padding:2px"><h3 style="font-size:26px">${p?'Client project':'Add client project'}</h3>
+ <h3 class="sh" style="margin-top:2px">Client</h3><div class="pg"><label>Client or business<input id="xc" required maxlength="120" value="${esc(e.client||'')}"></label><label>Contact person<input id="xn" maxlength="80" value="${esc(e.contact||'')}"></label><label>Phone<input id="xp" type="tel" maxlength="30" value="${esc(e.phone||'')}"></label><label>Email<input id="xm" type="email" maxlength="120" value="${esc(e.email||'')}"></label><label>Project<input id="xj" maxlength="120" placeholder="e.g. Jewellery website" value="${esc(e.project||'')}"></label></div>
+ <h3 class="sh">Delivery</h3><div class="pg"><label>Deadline<input id="xd" type="date" value="${esc(e.deadline||'')}"></label><label>Status<select id="xs">${PST.map(x=>`<option ${(e.status||'Planning')===x?'selected':''}>${x}</option>`).join('')}</select></label><label>Next follow-up<input id="xf" type="date" value="${esc(e.next_follow_up||'')}"></label></div>
+ <h3 class="sh">Features</h3><div class="pg" style="grid-template-columns:1fr auto;align-items:center"><input id="xfi" maxlength="200" placeholder="A feature the client wants" aria-label="New feature"><button type="button" class="btn sm" id="xfa">Add</button></div><div id="xfl"></div>
+ <h3 class="sh">Follow-up log</h3><div class="pg" style="grid-template-columns:1fr auto;align-items:center"><input id="xgi" maxlength="500" placeholder="What did you discuss with the client?" aria-label="Follow-up note"><button type="button" class="btn sm" id="xga">Log</button></div><div id="xgl"></div>
+ <label>Notes<textarea id="xnote" rows="3" maxlength="2000">${esc(e.notes||'')}</textarea></label>
+ <p class="note" id="xerr" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
+ <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap">${p?'<button type="button" class="btn sm ghost" id="xdel">Delete project</button>':'<span></span>'}<span style="display:flex;gap:10px"><button type="button" class="btn sm ghost" id="xcx">Cancel</button><button class="btn sm" type="submit" id="xsv">Save</button></span></div></form>`;
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#xc').focus();
+ const li=([x,i])=>`<li class="fi"><label style="display:flex;gap:10px;align-items:center;flex:1;color:var(--ink);font-size:16px"><input type="checkbox" data-ft="${i}" ${x.d?'checked':''} style="width:auto"><span style="${x.d?'text-decoration:line-through;color:var(--mut)':''}">${esc(x.t)}</span></label><button type="button" class="ic" data-fx="${i}" aria-label="Remove feature">✕</button></li>`;
+ const paintF=()=>{const ix=F.map((x,i)=>[x,i]),todo=ix.filter(([x])=>!x.d),dn=ix.filter(([x])=>x.d);
+  $('#xfl').innerHTML=`<p class="mut" style="margin:6px 0 0;font-size:14px">${dn.length} of ${F.length} features added</p><p class="sh2">To add (${todo.length})</p><ul class="fl">${todo.map(li).join('')||'<li class="mut" style="padding:6px 0">Nothing left to add.</li>'}</ul><p class="sh2">Already added (${dn.length})</p><ul class="fl">${dn.map(li).join('')||'<li class="mut" style="padding:6px 0">None yet.</li>'}</ul>`;
+  d.querySelectorAll('[data-ft]').forEach(c=>c.onchange=()=>{F[+c.dataset.ft].d=c.checked;paintF()});d.querySelectorAll('[data-fx]').forEach(b=>b.onclick=()=>{F.splice(+b.dataset.fx,1);paintF()})};
+ const paintG=()=>{$('#xgl').innerHTML=G.length?`<ul class="fl">${G.map((x,i)=>[x,i]).reverse().map(([x,i])=>`<li class="fi"><div style="flex:1"><small class="mut">${esc(dfmt(x.at))}</small><br>${esc(x.note)}</div><button type="button" class="ic" data-gx="${i}" aria-label="Remove log entry">✕</button></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0;font-size:14px">No follow-ups logged yet.</p>';
+  d.querySelectorAll('[data-gx]').forEach(b=>b.onclick=()=>{G.splice(+b.dataset.gx,1);paintG()})};
+ const addF=()=>{const v=$('#xfi').value.trim();if(!v)return;F.push({t:v,d:false});$('#xfi').value='';paintF()},addG=()=>{const v=$('#xgi').value.trim();if(!v)return;G.push({at:today(),note:v});$('#xgi').value='';paintG()};
+ $('#xfa').onclick=addF;$('#xga').onclick=addG;
+ $('#xfi').onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();addF()}};$('#xgi').onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();addG()}};
+ paintF();paintG();$('#xcx').onclick=()=>d.close();
+ if(p)$('#xdel').onclick=async()=>{if(!confirm('Delete the project for "'+p.client+'"? This cannot be undone.'))return;try{await call('project_delete',{p_id:p.id});await pull();d.close();portal();toast('Project deleted')}catch(x){$('#xerr').textContent=friendly(x.message)}};
+ $('#xfm').onsubmit=async ev=>{ev.preventDefault();const c=$('#xc').value.trim();if(!c){$('#xerr').textContent='Enter the client name.';return}
+  addF();addG();$('#xsv').disabled=true;
+  try{await call('project_save',{p_id:p?p.id:null,p_client:c,p_contact:$('#xn').value.trim(),p_phone:$('#xp').value.trim(),p_email:$('#xm').value.trim(),p_project:$('#xj').value.trim(),p_deadline:$('#xd').value||null,p_status:$('#xs').value,p_next:$('#xf').value||null,p_features:F,p_followups:G,p_notes:$('#xnote').value.trim()});await pull();d.close();portal();toast('Project saved')}
+  catch(x){$('#xerr').textContent=friendly(x.message);$('#xsv').disabled=false}}}
+const ICE=[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302']}];
+/* TURN relay: needed when both people are on strict networks. Add yours here, e.g. {urls:'turn:HOST:3478',username:'USER',credential:'PASS'} */
+let CALL=null,INC=null,stopInc=null,ringT=null,actx=null;
+function ticker(ms,fn){try{const w=new Worker(URL.createObjectURL(new Blob(['setInterval(function(){postMessage(0)},'+ms+')'],{type:'text/javascript'})));w.onmessage=()=>fn();return()=>w.terminate()}catch(e){const t=setInterval(fn,ms);return()=>clearInterval(t)}}
+async function getMedia(video){
+ if(!navigator.mediaDevices||!window.RTCPeerConnection){toast('Calls are not supported here. Open the portal over https in Chrome, Edge, Firefox or Safari.');return null}
+ try{return await navigator.mediaDevices.getUserMedia({audio:true,video:video?{facingMode:'user'}:false})}
+ catch(e){toast(video?'Camera or microphone is blocked. Allow access in your browser and try again.':'Microphone is blocked. Allow access in your browser and try again.');return null}}
+function sendIce(c){if(!CALL)return;if(!CALL.id){CALL.iceOut.push(c);return}call('call_ice',{p_id:CALL.id,p_cand:c}).catch(()=>{})}
+function makePC(){const C=CALL,pc=new RTCPeerConnection({iceServers:ICE});C.pc=pc;C.remote=new MediaStream();
+ C.local.getTracks().forEach(t=>pc.addTrack(t,C.local));
+ pc.ontrack=e=>{if(!C.remote.getTracks().includes(e.track))C.remote.addTrack(e.track);const v=$('#rv');if(v){v.srcObject=C.remote;const pl=v.play();if(pl&&pl.catch)pl.catch(()=>{})}paintInfo()};
+ pc.onicecandidate=e=>{if(e.candidate)sendIce(e.candidate.toJSON())};
+ pc.onconnectionstatechange=()=>{if(CALL!==C)return;const s=pc.connectionState;
+  if(s==='connected'&&!C.t0){C.t0=Date.now();paintInfo()}
+  else if(s==='failed'){toast('Could not connect the call. Your network may need a TURN server.');endCall()}};
+ return pc}
+async function startCall(peer,video){if(CALL||INC){toast('You are already on a call.');return}
+ const t=S.team.find(x=>x.id===peer);if(!t)return;const m=await getMedia(video);if(!m)return;
+ const C=CALL={role:'caller',peer,video,local:m,id:null,iceOut:[],since:0,status:'Calling…',pend:[]};paintCall();
+ try{const pc=makePC(),off=await pc.createOffer();await pc.setLocalDescription(off);
+  const id=await call('call_start',{p_callee:peer,p_video:video,p_offer:{type:off.type,sdp:off.sdp}});
+  if(CALL!==C){call('call_end',{p_id:id}).catch(()=>{});return}
+  C.id=id;C.iceOut.splice(0).forEach(sendIce);C.status='Ringing…';paintInfo();C.stop=ticker(1000,pollCall)}
+ catch(e){if(CALL===C)cleanupCall();toast(e.message==='busy'?t.name+' is on another call.':friendly(e.message))}}
+async function answerCall(){const I=INC;if(!I||CALL)return;hideIncoming();INC=null;
+ const m=await getMedia(I.video);if(!m){call('call_end',{p_id:I.id}).catch(()=>{});return}
+ const C=CALL={role:'callee',peer:I.caller,video:I.video,local:m,id:I.id,iceOut:[],since:0,status:'Connecting…',pend:[]};paintCall();
+ try{const pc=makePC();await pc.setRemoteDescription(I.offer);const ans=await pc.createAnswer();await pc.setLocalDescription(ans);
+  await call('call_answer',{p_id:I.id,p_answer:{type:ans.type,sdp:ans.sdp}});C.iceOut.splice(0).forEach(sendIce);C.stop=ticker(1000,pollCall);pollCall()}
+ catch(e){if(CALL===C)cleanupCall();toast(friendly(e.message)||'Could not answer the call.')}}
+async function pollCall(){const C=CALL;if(!C||!C.id||C.busy)return;C.busy=true;
+ try{const r=await call('call_state',{p_id:C.id,p_since:C.since});if(CALL!==C)return;
+  if(['ended','declined','missed'].includes(r.status)){toast(r.status==='declined'?'Call declined':r.status==='missed'?'No answer':'Call ended');cleanupCall();return}
+  if(C.role==='caller'&&r.answer&&!C.pc.remoteDescription){await C.pc.setRemoteDescription(r.answer);C.pend.splice(0).forEach(c=>C.pc.addIceCandidate(c).catch(()=>{}))}
+  (r.ice||[]).forEach(x=>{C.since=Math.max(C.since,x.id);if(C.pc.remoteDescription)C.pc.addIceCandidate(x.cand).catch(()=>{});else C.pend.push(x.cand)});
+  if(r.status==='active'&&!C.t0&&C.status!=='Connecting…'){C.status='Connecting…';paintInfo()}}
+ catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}
+ finally{C.busy=false}}
+async function endCall(){const C=CALL;if(!C)return;const id=C.id;cleanupCall();if(id)await call('call_end',{p_id:id}).catch(()=>{})}
+function cleanupCall(){const C=CALL;CALL=null;if(C){if(C.stop)C.stop();clearInterval(C.tt);try{C.local&&C.local.getTracks().forEach(t=>t.stop())}catch(e){}try{C.pc&&C.pc.close()}catch(e){}}const ov=$('#callov');if(ov)ov.remove();setBadge()}
+function paintCall(){const C=CALL;if(!C||$('#callov'))return;const t=S.team.find(x=>x.id===C.peer)||{name:'Unknown'};
+ const ov=document.createElement('div');ov.id='callov';ov.className='callov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Call with '+t.name);
+ ov.innerHTML=`<video id="rv" autoplay playsinline></video><div class="cinfo" id="cinfo"></div><video id="lv" autoplay playsinline muted></video><div class="cbtns"><button type="button" class="cb" id="cmute" aria-pressed="false" aria-label="Mute microphone">🎙️</button><button type="button" class="cb" id="ccam" aria-pressed="false" aria-label="Turn camera off">📷</button><button type="button" class="cb end" id="cend" aria-label="End call"><span>📞</span></button></div>`;
+ document.body.appendChild(ov);$('#lv').srcObject=C.local;
+ $('#cmute').onclick=e=>{const b=e.currentTarget,on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.textContent=on?'🔇':'🎙️';C.local.getAudioTracks().forEach(x=>x.enabled=!on)};
+ if(C.video)$('#ccam').onclick=e=>{const b=e.currentTarget,on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.textContent=on?'🚫':'📷';C.local.getVideoTracks().forEach(x=>x.enabled=!on)};else $('#ccam').style.display='none';
+ $('#cend').onclick=()=>endCall();$('#cend').focus();C.tt=setInterval(paintInfo,1000);paintInfo()}
+function paintInfo(){const C=CALL,ov=$('#callov');if(!C||!ov)return;const t=S.team.find(x=>x.id===C.peer)||{name:'Unknown'},rv=C.remote&&C.remote.getVideoTracks().length>0;
+ const st=C.t0?(()=>{const s=Math.floor((Date.now()-C.t0)/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')})():C.status;
+ ov.classList.toggle('vid',!!rv);ov.classList.toggle('lvon',!!(C.video&&C.local.getVideoTracks().length));
+ $('#cinfo').innerHTML=(rv?'':av(t,120,true))+`<h2>${esc(t.name)}</h2><p style="margin:0;opacity:.8" aria-live="polite">${esc(st)}</p>`}
+function ringStart(){ringStop();const beep=()=>{try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=440;g.gain.setValueAtTime(.15,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.8);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.8)}catch(e){}};beep();ringT=setInterval(beep,2000)}
+function ringStop(){clearInterval(ringT);ringT=null}
+function showIncoming(){const I=INC,t=S.team.find(x=>x.id===I.caller)||{name:'Someone'};
+ const ov=document.createElement('div');ov.id='incov';ov.className='callov';ov.setAttribute('role','alertdialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Incoming call from '+t.name);
+ ov.innerHTML=`<div class="cinfo">${av(t,120,true)}<h2>${esc(t.name)}</h2><p style="margin:0;opacity:.8">${I.video?'Incoming video call':'Incoming voice call'}…</p></div><div class="cbtns" style="gap:64px"><button type="button" class="cb end" id="idec" aria-label="Decline call"><span>📞</span></button><button type="button" class="cb acc" id="iacc" aria-label="Accept call">📞</button></div>`;
+ document.body.appendChild(ov);document.title='📞 Incoming call · Hanumate';ringStart();$('#iacc').focus();
+ $('#iacc').onclick=answerCall;$('#idec').onclick=()=>{const x=INC;INC=null;hideIncoming();if(x)call('call_end',{p_id:x.id}).catch(()=>{})}}
+function hideIncoming(){ringStop();const o=$('#incov');if(o)o.remove();setBadge()}
+async function checkIncoming(){if(!S.user||CALL)return;
+ try{const r=await call('call_incoming');if(CALL)return;if(r&&!INC){INC=r;showIncoming()}else if(!r&&INC){INC=null;hideIncoming()}}
+ catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
+function startCallWatch(){if(stopInc)stopInc();stopInc=ticker(3000,checkIncoming);checkIncoming()}
+async function doSignOut(){if(CALL)await endCall();let m='';try{await call('logout');m='Checked out at '+tm(new Date().toISOString())+'. See you soon.'}catch(e){}signedOut(m)}
+if(window.visualViewport){const vv=()=>document.documentElement.style.setProperty('--vvh',window.visualViewport.height+'px');window.visualViewport.addEventListener('resize',vv);vv()}
+{const lt=()=>document.querySelectorAll('table.rt:not([data-l])').forEach(t=>{if(!t.rows.length)return;const h=[...t.rows[0].cells].map(c=>c.textContent.trim());[...t.rows].slice(1).forEach(r=>[...r.cells].forEach((c,i)=>{if(h[i]&&!c.hasAttribute('colspan'))c.dataset.label=h[i]}));t.dataset.l=1});
+ new MutationObserver(()=>requestAnimationFrame(lt)).observe(document.body,{childList:true,subtree:true})}
 (async function boot(){
  $('#app').innerHTML='<div class="login"><p class="mut">Loading…</p></div>';
  if(TOK){try{await pull();if(me()){portal();startBadge();return}}catch(e){TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(x){}}}
