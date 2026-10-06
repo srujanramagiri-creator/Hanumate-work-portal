@@ -172,6 +172,99 @@ aside{scrollbar-width:none}aside::-webkit-scrollbar{display:none}
  aside .me{position:sticky;bottom:0;background:var(--sf);border-top:1px solid var(--line);margin-inline:-14px;padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px))}
 }
 @media(max-width:1024px) and (max-height:760px){.tab{padding:9px 14px}aside .logo{margin-bottom:12px}}
+
+/* ===== Lead Tracker ===== */
+:root{--c-p:#b7791f;--c-i:#1f9d55;--c-n:#d64545;--c-w:#2f6fdb;--c-c:#7c5cff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--c-p:#f5b301;--c-i:#34d17a;--c-n:#ff6b6b;--c-w:#5b9dff;--c-c:#a78bfa}}
+:root[data-theme="dark"]{--c-p:#f5b301;--c-i:#34d17a;--c-n:#ff6b6b;--c-w:#5b9dff;--c-c:#a78bfa}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lhead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}.lhead h1{margin-bottom:0}
+.lacts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.lacts .btn{gap:8px}.ldate{color:var(--mut);font-size:14px;margin-left:6px;white-space:nowrap}
+#lstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:12px;margin-top:22px}
+.sc{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-align:left;display:grid;gap:8px;color:var(--ink);font:inherit}
+button.sc{cursor:pointer;transition:transform .2s,border-color .2s}button.sc:hover{transform:translateY(-2px)}button.sc.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
+.sc b{font:400 34px/1 var(--d)}.sc span{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);line-height:1.3}
+.sc.p b{color:var(--c-p)}.sc.i b{color:var(--c-i)}.sc.c b{color:var(--ok)}.sc.v b{color:var(--c-c)}.sc.o b{color:var(--c-n)}
+.ltb{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}.ltb select{width:auto;flex:none}
+.lsr{position:relative;display:block;flex:1 1 260px}.lsr svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none}.lsr input{padding-left:42px}
+.ltb .btn{gap:8px;background:var(--acc);border-color:var(--acc);color:#fff}.ltb .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.lcount{margin:14px 2px 0;color:var(--mut);font-size:13px}
+.lbox{margin-top:10px;background:var(--sf);border:1px solid var(--line);border-radius:16px;overflow:hidden}.lscroll{overflow-x:auto}
+table.lt{width:100%;border-collapse:collapse;min-width:860px}
+.lt th{font:600 11.5px var(--b);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding:16px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--line)}
+.lt th button{all:unset;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lt th button:hover{color:var(--ink)}.lt th button:focus-visible{outline:2px solid var(--acc);border-radius:4px}
+.lt th .ar{font-size:9px;opacity:.45}.lt th[aria-sort] .ar{opacity:1;color:var(--acc)}
+.lt td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:middle}.lt tbody tr:last-child td{border-bottom:0}.lt tbody tr:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.ln{color:var(--mut);width:44px}.lname{min-width:165px}.lnw{display:flex;gap:10px;align-items:flex-start}.lname .lic{font-size:18px;line-height:1.35;flex:none}.lname b{font-weight:600}.lname small{display:block;color:var(--mut);font-size:12px}
+.lty{color:var(--mut);white-space:nowrap}.lph{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;letter-spacing:.02em;color:var(--mut);white-space:nowrap}
+select.spill{appearance:none;-webkit-appearance:none;width:auto;min-width:0;min-height:0;border:0;border-radius:99px;padding:7px 16px 7px 26px;font:600 13px var(--b);cursor:pointer;color:var(--cc);background:radial-gradient(circle at 13px 50%,currentColor 3.5px,transparent 4.5px),color-mix(in srgb,var(--cc) 16%,transparent)}
+.spill.p{--cc:var(--c-p)}.spill.i{--cc:var(--c-i)}.spill.n{--cc:var(--c-n)}.spill.w{--cc:var(--c-w)}.spill.c{--cc:var(--c-c)}.spill option{color:var(--ink);background:var(--sf)}
+.fu{all:unset;cursor:pointer;display:inline-flex;gap:8px;align-items:center;color:var(--mut);padding:4px 6px;border-radius:8px;white-space:nowrap;font-size:14px}.fu:hover{background:var(--line)}.fu.over{color:var(--c-n);font-weight:600}.fu:focus-visible{outline:2px solid var(--acc)}
+.fued{display:flex;gap:6px;align-items:center}.fued input{width:auto}
+.lacw{display:flex;gap:5px;white-space:nowrap;justify-content:flex-end}.lac{width:1%;position:sticky;right:0;background:var(--sf)}.lt th:last-child{position:sticky;right:0;background:var(--sf)}.lt tbody tr:hover .lac{background:color-mix(in srgb,var(--ink) 4%,var(--sf))}
+@media(max-width:1400px){.ln,.lt th:first-child{display:none}}
+.abtn{width:34px;height:34px;flex:none;border-radius:10px;border:1px solid var(--bc,var(--line));background:color-mix(in srgb,var(--bc,transparent) 12%,transparent);color:var(--bc,var(--mut));display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s;padding:0;min-height:0}
+.abtn:hover{transform:translateY(-1px);background:color-mix(in srgb,var(--bc,var(--ink)) 22%,transparent)}.abtn:focus-visible{outline:2px solid var(--acc)}
+.abtn.wa{--bc:var(--c-i)}.abtn.ph{--bc:var(--c-w)}.abtn.nt.has{--bc:var(--c-c)}.abtn.dl{--bc:var(--c-n)}.abtn[aria-disabled=true]{opacity:.35;pointer-events:none}
+.lempty{padding:34px 14px!important;text-align:center;color:var(--mut)}.lmore{display:block;margin:16px auto 4px}
+/* Labels/notes preview only exist in the card layout */
+.abl,.lnt{display:none}
+/* ===== Leads: card layout for phones + tablets (<=1024px) ===== */
+@media(max-width:1024px){
+ .lscroll{overflow:visible}table.lt{min-width:0}.lt thead{display:none}.lt,.lt tbody{display:grid}
+ .lbox{background:none;border:0;border-radius:0;overflow:visible}
+ .lt tbody{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .lt tr{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-areas:"name name name ed dl" "ty ty tel tel tel" "sc sc sc fu fu" "wa wa call call nt";gap:10px 8px;align-items:center;padding:14px;background:var(--sf);border:1px solid var(--line);border-radius:16px;transition:border-color .2s}
+ .lt tbody tr:hover{background:var(--sf)}.lt tbody tr:last-child td{border-bottom:0}
+ .lt tr.ov{border-color:color-mix(in srgb,var(--c-n) 50%,var(--line))}
+ .lt td{padding:0;border:0;min-width:0}.ln{display:none}
+ .lname{grid-area:name;min-width:0}.lnw{align-items:flex-start}.lname b{display:block;overflow-wrap:anywhere;line-height:1.3}
+ .lnt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px;font-size:12.5px;line-height:1.4;color:var(--mut)}
+ .lty{grid-area:ty;white-space:normal;overflow:hidden;text-overflow:ellipsis;font-size:13.5px}
+ .lph{grid-area:tel;text-align:right;white-space:normal;font-size:13.5px}
+ .lsc{grid-area:sc;justify-self:start;max-width:100%}.lfu{grid-area:fu;justify-self:end;min-width:0}.ovt{display:none}
+ select.spill{min-height:40px;padding:9px 18px 9px 28px;font-size:13.5px}
+ .fu{min-height:40px;padding:0 10px;gap:6px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;box-sizing:border-box}
+ .fu.over{border-color:color-mix(in srgb,var(--c-n) 55%,var(--line))}
+ /* action cell dissolves so each button can sit in the card grid */
+ .lac,.lacw{display:contents}
+ .abtn{width:auto;height:46px;border-radius:12px}.abtn:hover{transform:none}.abtn:active{transform:scale(.96)}
+ .abtn.wa{grid-area:wa;gap:8px}.abtn.ph{grid-area:call;gap:8px}.abtn.nt{grid-area:nt}
+ .abtn.ed,.abtn.dl{width:42px;height:42px}.abtn.ed{grid-area:ed;justify-self:end}.abtn.dl{grid-area:dl;justify-self:end}
+ .abtn.wa,.abtn.ph{display:flex;align-items:center;justify-content:center}
+ .abtn.wa,.abtn.ph{background:color-mix(in srgb,var(--bc) 16%,transparent);border-color:color-mix(in srgb,var(--bc) 55%,transparent)}
+ .abl{display:inline;font:600 14px var(--b)}
+ .lt tr:has(.lempty){display:block;grid-column:1/-1}.lt td[colspan]{display:block}
+}
+@media(max-width:700px){
+ .ldate{display:none}.lhead .lacts{width:100%}.lacts .btn{flex:1 1 0;padding-inline:8px;gap:6px;font-size:13px;min-width:0;display:inline-flex;align-items:center;justify-content:center}
+ #lstats{display:flex;overflow-x:auto;scroll-padding-inline:clamp(20px,4vw,48px);gap:10px;margin-inline:calc(-1*clamp(20px,4vw,48px));padding:2px clamp(20px,4vw,48px) 6px;scroll-snap-type:x proximity;scrollbar-width:none}
+ #lstats::-webkit-scrollbar{display:none}.sc{flex:0 0 118px;scroll-snap-align:start;padding:12px 14px}.sc b{font-size:28px}
+ .ltb select{flex:1 1 40%;min-width:0}.ltb .btn{flex:1 1 100%}.lsr{flex:1 1 100%}
+ .lt tbody{grid-template-columns:minmax(0,1fr);gap:10px}
+}
+@media(max-width:360px){.abl{font-size:13px}.lt tr{padding:12px}}
+/* ===== Notification centre ===== */
+.bell{position:relative;width:44px;height:44px;flex:none;border:0;border-radius:12px;background:none;color:var(--ink);cursor:pointer;display:grid;place-items:center}.bell:hover{background:var(--line)}.bell .bdg{position:absolute;top:3px;right:0;margin:0;padding:3px 6px;font-size:10px}
+.bellt{display:flex;gap:10px;align-items:center;padding:10px 14px;border:0;background:none;border-radius:10px;text-align:left;cursor:pointer;color:var(--mut);font:inherit;position:relative;transition:background .2s,color .2s}.bellt:hover{background:var(--line);color:var(--ink)}.bellt .bdg{margin-left:auto}
+@media(max-width:1024px){.bellt{display:none}}@media(min-width:1025px){.bell{display:none}}
+.ntp{position:fixed;inset:0;z-index:70}.ntsc{position:absolute;inset:0;background:rgba(10,8,6,.5);animation:ntf .2s}
+.ntpn{position:absolute;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--sf);color:var(--ink);border-left:1px solid var(--line);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);animation:nts .28s cubic-bezier(.2,.8,.2,1)}
+.ntpn header{display:flex;align-items:center;gap:8px;padding:14px 12px 12px 20px;border-bottom:1px solid var(--line)}.ntpn h2{font-size:26px;margin:0 auto 0 0}
+.ntcl{width:44px;height:44px;border:0;border-radius:12px;background:none;color:var(--ink);font-size:18px;cursor:pointer}.ntcl:hover{background:var(--line)}
+.ntl{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.nti2{display:flex;gap:12px;width:100%;text-align:left;padding:14px 44px 14px 20px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font:inherit;cursor:pointer;position:relative}.nti2:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.nti2.un{background:color-mix(in srgb,var(--acc) 8%,transparent)}.nti2.un::after{content:"";position:absolute;right:20px;top:24px;width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.nti{width:38px;height:38px;border-radius:50%;background:var(--line);display:grid;place-items:center;flex:none;font-size:18px}
+.ntx{display:grid;gap:2px;min-width:0;flex:1}.ntx b{font-weight:600;overflow-wrap:anywhere}.ntx small{color:var(--mut);font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.ntx em{font-style:normal;font-size:12px;color:var(--mut)}
+.ntempty{padding:70px 24px;text-align:center;color:var(--mut)}
+.ntpm{margin:14px 16px 0;padding:14px;border:1px dashed var(--line);border-radius:12px;display:grid;gap:10px;font-size:14px;color:var(--mut);justify-items:start}
+.ntpn footer{padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}.ntmu{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--mut)}.ntmu input{width:auto}
+.ntb{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));z-index:65;width:min(440px,calc(100vw - 24px));transform:translate(-50%,-150%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s .35s}
+.ntb.on{transform:translate(-50%,0);visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.ntb button{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--sf);color:var(--ink);font:inherit;cursor:pointer;box-shadow:0 12px 36px rgba(0,0,0,.22)}
+@keyframes ntf{from{opacity:0}}@keyframes nts{from{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){.ntb,.ntb.on{transition:none}.ntpn,.ntsc{animation:none}}
 </style>
 </head>
 <body>
@@ -188,7 +281,7 @@ async function rpc(fn,args={}){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{me
 const call=(fn,a)=>rpc(fn,Object.assign({p_token:TOK},a));
 const FR={in_call:'You are already on a call.',gone:'That call is no longer available.',bad_offer:'Could not start the call.',too_big:'Too many features or follow-up notes. Remove some and try again.',bad_status:'Pick a valid status.',bad_type:'Pick a leave type.',slow_down:'You are sending too fast. Wait a moment.',bad_text:'Message must be 1 to 1000 characters.',bad_peer:'You cannot message that person.',insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
 const friendly=m=>FR[m]||m||'Something went wrong.';
-function signedOut(msg){if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
+function signedOut(msg){ntStop();if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
 let S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]},view='home';
 const me=()=>S.team.find(t=>t.id===S.user),nameOf=id=>S.team.find(t=>t.id===id)?.name||'—';
 const ini=n=>(n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
@@ -197,8 +290,8 @@ const today=()=>new Date().toLocaleDateString('en-CA'),tm=i=>new Date(i).toLocal
 let tt;function toast(m){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';e.className='toast';e.setAttribute('role','status');document.body.appendChild(e)}e.textContent=m;e.style.display='block';clearTimeout(tt);tt=setTimeout(()=>e.style.display='none',3800)}
 async function pull(){const d=await call('portal_data');S.user=d.me;
  S.team=d.team.map(x=>({id:x.id,name:x.name,role:x.role,email:x.email,admin:x.is_admin,avatar:x.avatar,leads:x.leads,dev:x.dev}));S.leads=d.leads||[];S.projects=d.projects||[];
- S.tasks=d.tasks.map(x=>({id:x.id,t:x.title,p:x.project,s:x.status,who:x.assignee,d:x.done_at,c:x.created_at}));S.att=d.attendance;S.leaves=d.leaves;S.news=d.news}
-async function act(fn){try{await fn();await pull();portal()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.');else toast(friendly(e.message))}}
+ S.tasks=d.tasks.map(x=>({id:x.id,t:x.title,p:x.project,s:x.status,who:x.assignee,d:x.done_at,c:x.created_at}));S.att=d.attendance;S.leaves=d.leaves;S.news=d.news;ntScan(NTQ)}
+async function act(fn){try{await fn();NTQ=true;try{await pull()}finally{NTQ=false}portal()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.');else toast(friendly(e.message))}}
 const shrink=f=>new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{const n=320,c=document.createElement('canvas');c.width=c.height=n;const m=Math.min(i.width,i.height);c.getContext('2d').drawImage(i,(i.width-m)/2,(i.height-m)/2,m,m,0,0,n,n);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.8))};i.onerror=()=>{URL.revokeObjectURL(u);no()};i.src=u});
 
 function login(msg){document.body.classList.remove('inthread');
@@ -222,10 +315,10 @@ const TI={home:'🏠',work:'✅',progress:'📊',leads:'🎯',followups:'🗓️
 const TABS=[['home','Home'],['work','Work'],['progress','Progress'],['leads','Leads'],['followups','Follow-ups'],['chat','Chat'],['time','Time & Leave'],['docs','Payslips & Docs'],['dir','Directory'],['profile','Profile']];
 function portal(){
  clearInterval(chatT);document.body.classList.remove('inthread','menu-open');const u=me();if(!u)return login();if((view==='leads'&&!(u.admin||u.leads))||(view==='team'&&!u.admin)||(view==='docs'&&!u.admin)||(view==='progress'&&!u.admin)||(view==='followups'&&!(u.admin||u.dev)))view='home';
- $('#app').innerHTML=`<div class="shell"><header class="topbar"><button type="button" class="hb" id="hb" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><i></i><i></i><i></i><span id="hbadge" class="bdg" hidden></span></button><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a><span class="vt" id="vt"></span></header><div class="scrim" id="scrim"></div><aside id="nav" aria-label="Main menu"><button type="button" class="dclose" id="dclose" aria-label="Close menu">✕</button><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a>${TABS.filter(([k])=>(k!=='leads'||u.admin||u.leads)&&(k!=='docs'||u.admin)&&(k!=='progress'||u.admin)&&(k!=='followups'||u.admin||u.dev)).concat(u.admin?[['team','Team']]:[]).map(([k,l])=>`<button class="tab" data-v="${k}" ${k===view?'aria-current="page"':''}>${TI[k]?'<span class="ti" aria-hidden="true">'+TI[k]+'</span>':''}<span class="tl">${k==='time'&&!u.admin?'Attendance':l}</span>${k==='chat'?'<span id="cbadge" class="bdg" hidden></span>':''}</button>`).join('')}
- <div class="me" style="margin-top:auto;font-size:14px"><div style="display:flex;gap:10px;align-items:center">${av(u,32)}<span class="mut">${esc(u.name)}</span></div><button class="ic" id="out" style="margin-top:8px">Sign out</button></div></aside><main id="m"></main></div>`;
+ $('#app').innerHTML=`<div class="shell"><header class="topbar"><button type="button" class="hb" id="hb" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><i></i><i></i><i></i><span id="hbadge" class="bdg" hidden></span></button><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a><span class="vt" id="vt"></span><button type="button" class="bell" id="bellb" aria-label="Notifications"></button></header><div class="scrim" id="scrim"></div><aside id="nav" aria-label="Main menu"><button type="button" class="dclose" id="dclose" aria-label="Close menu">✕</button><a class="logo" href="#" onclick="return false"><span class="sun"></span>Hanumate</a>${TABS.filter(([k])=>(k!=='leads'||u.admin||u.leads)&&(k!=='docs'||u.admin)&&(k!=='progress'||u.admin)&&(k!=='followups'||u.admin||u.dev)).concat(u.admin?[['team','Team']]:[]).map(([k,l])=>`<button class="tab" data-v="${k}" ${k===view?'aria-current="page"':''}>${TI[k]?'<span class="ti" aria-hidden="true">'+TI[k]+'</span>':''}<span class="tl">${k==='time'&&!u.admin?'Attendance':l}</span>${k==='chat'?'<span id="cbadge" class="bdg" hidden></span>':''}</button>`).join('')}
+ <button type="button" class="bellt" id="bellt" aria-label="Notifications"></button><div class="me" style="margin-top:auto;font-size:14px"><div style="display:flex;gap:10px;align-items:center">${av(u,32)}<span class="mut">${esc(u.name)}</span></div><button class="ic" id="out" style="margin-top:8px">Sign out</button></div></aside><main id="m"></main></div>`;
  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{view=b.dataset.v;portal()});
- $('#out').onclick=doSignOut;
+ $('#out').onclick=doSignOut;ntBind();
  ({home,work,time,docs,dir,profile,team,chat,leads,progress,followups})[view]();setBadge();{const cur=document.querySelector('.tab[aria-current] .tl'),vt=$('#vt');if(vt&&cur)vt.textContent=cur.textContent;$('#hb').onclick=()=>menu(true);$('#scrim').onclick=$('#dclose').onclick=()=>menu(false)}
 }
 function home(){const u=me(),t=today(),last=S.att.find(x=>x.staff_id===u.id),a=last&&(last.day===t||!last.check_out)?last:null,mine=S.tasks.filter(x=>x.who===u.id&&x.s!=='done').length,h=new Date().getHours();
@@ -361,8 +454,8 @@ document.addEventListener('keydown',e=>{const a=e.target;if((e.key==='Enter'||e.
 let CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}},chatT=null,badgeT=null;
 const unreadTotal=()=>(CH.sum.group&&CH.sum.group.unread||0)+CH.sum.dms.reduce((n,d)=>n+d.unread,0);
 function setBadge(){const n=unreadTotal(),b=$('#cbadge'),hb=$('#hbadge');if(b){b.textContent=n>99?'99+':n;b.hidden=!n}if(hb){hb.textContent=n>99?'99+':n;hb.hidden=!n}document.title=(n?'('+n+') ':'')+'Hanumate Team Portal'}
-async function refreshSummary(){try{CH.sum=await call('chat_summary');setBadge();paintList()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
-function startBadge(){clearInterval(badgeT);badgeT=setInterval(()=>{if(S.user&&!document.hidden)refreshSummary()},15000);refreshSummary();startCallWatch()}
+async function refreshSummary(){try{CH.sum=await call('chat_summary');ntChat();setBadge();paintList()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
+function startBadge(){ntStart();clearInterval(badgeT);badgeT=setInterval(()=>{if(S.user&&!document.hidden)refreshSummary()},15000);refreshSummary();startCallWatch()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.user){refreshSummary();poll()}});
 const fmt=i=>{const d=new Date(i);return d.toDateString()===new Date().toDateString()?tm(i):d.toLocaleDateString([],{day:'numeric',month:'short'})};
 function chat(){clearInterval(chatT);document.body.classList.toggle('inthread',!!CH.peer);$('#m').innerHTML=`<div class="chat ${CH.peer?'open':''}"><div class="cl" id="clist" role="list" aria-label="Chats"></div><div class="ct" id="cthread"></div></div>`;
@@ -400,36 +493,117 @@ async function poll(force){if(!S.user||!CH.peer||(document.hidden&&!force))retur
   const lastOld=CH.msgs.length?CH.msgs[CH.msgs.length-1].id:0,lastNew=r.msgs.length?r.msgs[r.msgs.length-1].id:0;
   CH.msgs=r.msgs;CH.sig=r.sig;CH.seen=r.seen;paintMsgs(lastNew!==lastOld);refreshSummary()}
  catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
-const LSRC=['Instagram','WhatsApp','Referral','Cold call','Walk-in','Website','Other'],LST=['New','Contacted','Interested','Proposal sent','Converted','Lost'];
-let LF={s:'all',q:''};
-function leads(){
- $('#m').innerHTML=`<span class="eyebrow">Marketing</span><h1>Leads</h1><form class="f tb" id="lfm" style="margin-top:18px"><label>Search<input id="lq" placeholder="Name, phone, notes" value="${esc(LF.q)}" autocomplete="off"></label><label>Status<select id="ls"><option value="all">All</option>${LST.map(x=>`<option ${LF.s===x?'selected':''}>${x}</option>`).join('')}</select></label><button type="button" class="btn sm" id="la">Add lead</button></form><div id="lbody"></div>`;
- $('#lfm').onsubmit=e=>e.preventDefault();$('#lq').oninput=e=>{LF.q=e.target.value;paintLeads()};$('#ls').onchange=e=>{LF.s=e.target.value;paintLeads()};$('#la').onclick=()=>leadDialog(null);paintLeads()}
-function paintLeads(){const u=me(),el=$('#lbody');if(!el)return;const t=today(),all=S.leads,q=LF.q.trim().toLowerCase(),done=['Converted','Lost'];
- const rows=all.filter(l=>(LF.s==='all'||l.status===LF.s)&&(!q||[l.name,l.phone,l.email,l.notes,l.source].join(' ').toLowerCase().includes(q)));
- const conv=all.filter(l=>l.status==='Converted').length,rate=all.length?Math.round(conv/all.length*100):0,active=all.filter(l=>!done.includes(l.status)).length,due=all.filter(l=>l.follow_up&&l.follow_up<=t&&!done.includes(l.status)).length;
- el.innerHTML=`<div class="grid" style="margin-top:18px"><div class="card"><span class="mut">Total leads</span><div class="big">${all.length}</div></div><div class="card"><span class="mut">Active</span><div class="big">${active}</div></div><div class="card"><span class="mut">Follow-ups due</span><div class="big" style="${due?'color:var(--acc)':''}">${due}</div></div><div class="card"><span class="mut">Converted to clients</span><div class="big">${conv}<small class="mut" style="font:14px var(--b)"> · ${rate}%</small></div></div></div>
- <div class="scroll" style="margin-top:18px"><table class="rt t8"><tr><th>Lead</th>${u.admin?'<th>Owner</th>':''}<th>Contact</th><th>Source</th><th>Status</th><th>Follow-up</th><th>Notes</th><th></th></tr>${rows.map(l=>{const od=l.follow_up&&l.follow_up<t&&!done.includes(l.status),n=l.notes||'';
-  return `<tr><td style="min-width:170px"><strong>${esc(l.name)}</strong></td>${u.admin?`<td>${esc(nameOf(l.owner))}</td>`:''}<td>${l.phone?`<a href="tel:${esc(l.phone.replace(/[^\d+]/g,''))}">${esc(l.phone)}</a>`:''}${l.phone&&l.email?'<br>':''}${l.email?`<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>`:''}</td><td>${esc(l.source)}</td><td><select data-ls="${l.id}" aria-label="Status of ${esc(l.name)}">${LST.map(x=>`<option ${l.status===x?'selected':''}>${x}</option>`).join('')}</select></td><td${od?' style="color:var(--acc);font-weight:600"':''}>${l.follow_up||'—'}</td><td style="min-width:200px;max-width:260px">${esc(n.slice(0,90))}${n.length>90?'…':''}</td><td style="white-space:nowrap"><button class="ic" data-le="${l.id}">Edit</button> <button class="ic" data-lx="${l.id}" aria-label="Delete lead ${esc(l.name)}">Delete</button></td></tr>`}).join('')||`<tr><td colspan="8" class="mut">${all.length?'No leads match.':'No leads yet. Click Add lead to start your list.'}</td></tr>`}</table></div>`;
- el.querySelectorAll('[data-ls]').forEach(x=>x.onchange=()=>act(()=>call('lead_status',{p_id:+x.dataset.ls,p_status:x.value})));
- el.querySelectorAll('[data-le]').forEach(b=>b.onclick=()=>leadDialog(S.leads.find(x=>String(x.id)===b.dataset.le)));
- el.querySelectorAll('[data-lx]').forEach(b=>b.onclick=()=>{const l=S.leads.find(x=>String(x.id)===b.dataset.lx);if(l&&confirm('Delete lead "'+l.name+'"?'))act(()=>call('lead_delete',{p_id:l.id}))})}
+const LSRC=['Instagram','WhatsApp','Referral','Cold call','Walk-in','Website','Other'],LST=['Pending','Interested','Not interested','Has website','Completed'],LACT=['Pending','Interested'],TYPES=['Clinic','Hospital','Restaurant','Salon','Shop','Hotel','School','Gym','Real estate','Other'];
+let LF={s:'all',t:'all',o:'all',q:'',sort:'id',dir:1,n:100};
+const SV=(d,z)=>`<svg viewBox="0 0 24 24" width="${z||18}" height="${z||18}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const IC={wa:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+ call:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+ note:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
+ edit:'<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+ del:'<path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>',
+ cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',plus:'<path d="M12 5v14M5 12h14"/>',
+ dl:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>',ul:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/>',
+ list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',search:'<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>'};
+const TYI=[[/clinic|hospital|doctor|dental|physio|pharma/i,'🏥'],[/restaurant|hotel|cafe|biryani|bakery|food|dhaba/i,'🍽️'],[/salon|beauty|spa|parlou?r/i,'💇'],[/school|college|institute|academy|coaching/i,'🎓'],[/gym|fitness|yoga/i,'🏋️'],[/shop|store|mart|boutique|jewel|garment|textile|showroom/i,'🛍️'],[/real estate|builder|construction|interior|furniture/i,'🏗️'],[/law|advocate|account|consult/i,'⚖️']];
+const tyIcon=l=>{const x=(l.business_type||'')+' '+l.name;for(const[r,e]of TYI)if(r.test(x))return e;return'🏢'};
+const lDig=p=>(p||'').replace(/\D/g,''),waNum=p=>{const d=lDig(p);return d.length===10?'91'+d:d};
+const fShort=d=>{const x=new Date(d+'T00:00:00');return x.toLocaleDateString('en-GB',x.getFullYear()!==new Date().getFullYear()?{day:'numeric',month:'short',year:'numeric'}:{day:'numeric',month:'short'})};
+const stC=s=>({'Pending':'p','Interested':'i','Not interested':'n','Has website':'w','Completed':'c'}[s]||'p');
+function leads(){const u=me();
+ $('#m').innerHTML=`<div class="lhead"><div><span class="eyebrow">Marketing · Hanumate Software</span><h1>Lead Tracker</h1></div><div class="lacts"><button type="button" class="btn sm ghost" id="lbk">${SV(IC.list,16)} Bulk Add</button><button type="button" class="btn sm ghost" id="lex">${SV(IC.dl,16)} Export</button><button type="button" class="btn sm ghost" id="lim">${SV(IC.ul,16)} Import</button><span class="ldate">${new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}</span><input type="file" id="lfile" accept=".csv,text/csv" hidden></div></div>
+ <div id="lstats"></div>
+ <form class="ltb" id="lfm"><label class="lsr"><span class="vh">Search</span>${SV(IC.search,17)}<input id="lq" type="search" placeholder="Search by name or phone…" value="${esc(LF.q)}" autocomplete="off"></label><select id="ls" aria-label="Filter by status"><option value="all">All statuses</option>${LST.map(x=>`<option>${x}</option>`).join('')}</select><select id="lty" aria-label="Filter by type"></select>${u.admin?'<select id="lo" aria-label="Filter by employee"></select>':''}<button type="button" class="btn" id="la">${SV(IC.plus,16)} Add Lead</button></form>
+ <datalist id="tylist"></datalist><div id="lbody"></div>`;
+ $('#lfm').onsubmit=e=>e.preventDefault();
+ $('#lq').oninput=e=>{LF.q=e.target.value;LF.n=100;paintLeads()};
+ $('#ls').onchange=e=>{LF.s=e.target.value;LF.n=100;paintLeads()};
+ $('#lty').onchange=e=>{LF.t=e.target.value;LF.n=100;paintLeads()};
+ if($('#lo'))$('#lo').onchange=e=>{LF.o=e.target.value;LF.n=100;paintLeads()};
+ $('#la').onclick=()=>leadDialog(null);$('#lbk').onclick=bulkDialog;$('#lex').onclick=exportLeads;$('#lim').onclick=()=>$('#lfile').click();$('#lfile').onchange=importLeads;
+ [$('#lstats'),$('#lbody')].forEach(w=>{w.onclick=leadClick;w.onchange=leadChange});paintLeads()}
+function paintLeads(){const u=me(),sEl=$('#lstats'),el=$('#lbody');if(!el||!sEl||!u)return;const all=S.leads;
+ const cnt=s=>all.filter(l=>l.status===s).length,isOv=l=>l.follow_up&&LACT.includes(l.status)&&dayN(l.follow_up)<0,over=all.filter(isOv).length,conv=all.length?Math.round((cnt('Interested')+cnt('Completed'))/all.length*100):0;
+ const sc=(n,lab,cls,st)=>st?`<button type="button" class="sc ${cls}${LF.s===st?' on':''}" data-st="${st}" aria-pressed="${LF.s===st}"><b>${n}</b><span>${lab}</span></button>`:`<div class="sc ${cls}"><b>${n}</b><span>${lab}</span></div>`;
+ sEl.innerHTML=sc(all.length,'Total leads','')+sc(cnt('Pending'),'Pending','p','Pending')+sc(cnt('Interested'),'Interested','i','Interested')+sc(cnt('Completed'),'Completed','c','Completed')+sc(cnt('Not interested'),'Not interested','v','Not interested')+sc(conv+'%','Conversion','v')+sc(over,'Overdue follow-ups','o');
+ const types=[...new Set(all.map(l=>(l.business_type||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));if(LF.t!=='all'&&!types.includes(LF.t))LF.t='all';
+ const ty=$('#lty');ty.innerHTML='<option value="all">All types</option>'+types.map(x=>`<option>${esc(x)}</option>`).join('');ty.value=LF.t;
+ const dl=$('#tylist');if(dl)dl.innerHTML=[...new Set([...TYPES,...types])].map(x=>`<option value="${esc(x)}"></option>`).join('');
+ const lo=$('#lo');if(lo){const own=[...new Set(all.map(l=>l.owner))];if(LF.o!=='all'&&!own.includes(LF.o))LF.o='all';lo.innerHTML='<option value="all">All employees</option>'+own.map(id=>`<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join('');lo.value=LF.o}
+ $('#ls').value=LF.s;
+ const q=LF.q.trim().toLowerCase(),qd=lDig(q);
+ const rows=all.filter(l=>(LF.s==='all'||l.status===LF.s)&&(LF.t==='all'||(l.business_type||'').trim()===LF.t)&&(LF.o==='all'||l.owner===LF.o)&&(!q||l.name.toLowerCase().includes(q)||(l.phone||'').toLowerCase().includes(q)||(qd.length>=3&&lDig(l.phone).includes(qd))||(l.notes||'').toLowerCase().includes(q)||(l.business_type||'').toLowerCase().includes(q)));
+ const key={name:l=>l.name.toLowerCase(),type:l=>(l.business_type||'').toLowerCase()||'\uffff',status:l=>LST.indexOf(l.status),follow:l=>l.follow_up||'9999-12-31',id:l=>l.id}[LF.sort];
+ rows.sort((a,b)=>{const x=key(a),y=key(b);return(x>y?1:x<y?-1:0)*LF.dir||a.id-b.id});
+ const th=(k,lab)=>`<th ${LF.sort===k?`aria-sort="${LF.dir>0?'ascending':'descending'}"`:''}><button type="button" data-sort="${k}">${lab} <span class="ar" aria-hidden="true">${LF.sort===k&&LF.dir<0?'▼':'▲'}</span></button></th>`;
+ const row=(l,i)=>{const ok=lDig(l.phone).length>=6,ov=isOv(l),has=!!(l.notes&&l.notes.trim()),dis=ok?'':' aria-disabled="true" tabindex="-1"';
+  const fu=l.follow_up?`<button type="button" class="fu${ov?' over':''}" data-f="${l.id}" aria-label="${ov?'Overdue. ':''}Change follow-up date">${ov?'<span class="ovt">Overdue · </span>':''}${esc(fShort(l.follow_up))} ${SV(IC.edit,13)}</button>`:`<button type="button" class="fu" data-f="${l.id}" aria-label="Set follow-up date">— ${SV(IC.cal,15)}</button>`;
+  return `<tr${ov?' class="ov"':''}><td class="ln">${i+1}</td><td class="lname"><div class="lnw"><span class="lic" aria-hidden="true">${tyIcon(l)}</span><div><b>${esc(l.name)}</b>${u.admin?`<small>${esc(nameOf(l.owner))}</small>`:''}${has?`<span class="lnt">${esc(l.notes.trim())}</span>`:''}</div></div></td><td class="lty">${esc(l.business_type||'—')}</td><td class="lph">${esc(l.phone||'—')}</td><td class="lsc"><select class="spill ${stC(l.status)}" data-ls="${l.id}" aria-label="Status of ${esc(l.name)}">${LST.map(x=>`<option${l.status===x?' selected':''}>${x}</option>`).join('')}</select></td><td class="lfu">${fu}</td><td class="lac"><div class="lacw"><a class="abtn wa" href="${ok?'https://wa.me/'+waNum(l.phone):'#'}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(l.name)}"${dis}>${SV(IC.wa,20)}<span class="abl">WhatsApp</span></a><a class="abtn ph" href="${ok?'tel:+'+waNum(l.phone):'#'}" aria-label="Call ${esc(l.name)}"${dis}>${SV(IC.call,20)}<span class="abl">Call</span></a><button type="button" class="abtn nt${has?' has':''}" data-n="${l.id}" aria-label="Notes for ${esc(l.name)}">${SV(IC.note)}</button><button type="button" class="abtn ed" data-e="${l.id}" aria-label="Edit ${esc(l.name)}">${SV(IC.edit)}</button><button type="button" class="abtn dl" data-x="${l.id}" aria-label="Delete ${esc(l.name)}">${SV(IC.del)}</button></div></td></tr>`};
+ el.innerHTML=`<p class="lcount" aria-live="polite">${rows.length===all.length?all.length+' lead'+(all.length===1?'':'s'):rows.length+' of '+all.length+' leads'}</p><div class="lbox"><div class="lscroll"><table class="lt"><thead><tr><th>#</th>${th('name','Business name')}${th('type','Type')}<th>Phone</th>${th('status','Status')}${th('follow','Follow-up')}<th>Actions</th></tr></thead><tbody>${rows.slice(0,LF.n).map(row).join('')||`<tr><td colspan="7" class="lempty">${all.length?'No leads match your filters.':'No leads yet. Click Add Lead, Bulk Add or Import to start your list.'}</td></tr>`}</tbody></table></div></div>${rows.length>LF.n?`<button type="button" class="btn sm ghost lmore" data-more="1">Show more (${rows.length-LF.n} left)</button>`:''}`}
+function leadClick(e){const b=e.target.closest('[data-e],[data-x],[data-n],[data-f],[data-sort],[data-st],[data-more]');if(!b)return;const D=b.dataset;
+ if(D.sort){LF.dir=LF.sort===D.sort?-LF.dir:1;LF.sort=D.sort;return paintLeads()}
+ if(D.st){LF.s=LF.s===D.st?'all':D.st;LF.n=100;return paintLeads()}
+ if(D.more){LF.n+=100;return paintLeads()}
+ const l=S.leads.find(x=>String(x.id)===(D.e||D.x||D.n||D.f));if(!l)return;
+ if(D.e)leadDialog(l);else if(D.n)noteDialog(l);else if(D.f)editFollow(b,l);
+ else if(confirm('Delete "'+l.name+'"? This cannot be undone.'))leadDo(()=>call('lead_delete',{p_id:l.id}),()=>{S.leads=S.leads.filter(x=>x!==l)})}
+function leadChange(e){const s=e.target.closest('[data-ls]');if(!s)return;const l=S.leads.find(x=>String(x.id)===s.dataset.ls);if(l)leadDo(()=>call('lead_status',{p_id:l.id,p_status:s.value}),()=>{l.status=s.value})}
+async function leadDo(rpc,apply){try{if(apply)apply();paintLeads();await rpc()}catch(x){toast(friendly(x.message));try{await pull()}catch(y){}paintLeads()}}
+function editFollow(b,l){const td=b.closest('td');td.innerHTML=`<span class="fued"><input type="date" value="${esc(l.follow_up||'')}" aria-label="Follow-up date"><button type="button" class="ic" aria-label="Cancel">✕</button></span>`;const i=td.querySelector('input');i.focus();try{if(i.showPicker)i.showPicker()}catch(x){}
+ i.onchange=()=>{const v=i.value||null;leadDo(()=>call('lead_follow',{p_id:l.id,p_date:v}),()=>{l.follow_up=v})};td.querySelector('button').onclick=()=>paintLeads();i.onkeydown=ev=>{if(ev.key==='Escape')paintLeads()}}
+function noteDialog(l){const o=$('#ntd');if(o)o.remove();const d=document.createElement('dialog');d.id='ntd';
+ d.innerHTML=`<form id="ntf" style="display:grid;gap:12px;width:min(480px,88vw)"><h3 style="font-size:24px">Notes · ${esc(l.name)}</h3><label><span class="vh">Notes</span><textarea id="ntx" rows="7" maxlength="2000" placeholder="Call summary, what they asked for, next steps…">${esc(l.notes||'')}</textarea></label><div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="ntc">Cancel</button><button class="btn sm" type="submit">Save notes</button></div></form>`;
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#ntx').focus();$('#ntc').onclick=()=>d.close();
+ $('#ntf').onsubmit=e=>{e.preventDefault();const v=$('#ntx').value.trim();d.close();leadDo(()=>call('lead_note',{p_id:l.id,p_notes:v}),()=>{l.notes=v||null})}}
 function leadDialog(l){const o=$('#ldd');if(o)o.remove();const d=document.createElement('dialog');d.id='ldd';const e=l||{};
- d.innerHTML=`<form id="ldf" style="display:grid;gap:12px;width:min(520px,84vw);max-height:78vh;max-height:78dvh;overflow:auto;padding:2px"><h3 style="font-size:26px">${l?'Edit lead':'Add lead'}</h3>
- <label>Lead or business name<input id="ln" required maxlength="120" value="${esc(e.name||'')}"></label>
- <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px"><label>Phone<input id="lp" type="tel" maxlength="30" value="${esc(e.phone||'')}"></label><label>Email<input id="lm" type="email" maxlength="120" value="${esc(e.email||'')}"></label>
- <label>Source<select id="lsr">${LSRC.map(x=>`<option ${e.source===x?'selected':''}>${x}</option>`).join('')}</select></label><label>Status<select id="lst">${LST.map(x=>`<option ${(e.status||'New')===x?'selected':''}>${x}</option>`).join('')}</select></label>
- <label>Next follow-up<input id="lf3" type="date" value="${esc(e.follow_up||'')}"></label></div>
+ d.innerHTML=`<form id="ldf" style="display:grid;gap:12px;width:min(540px,88vw);max-height:80vh;max-height:80dvh;overflow:auto;padding:2px"><h3 style="font-size:26px">${l?'Edit lead':'Add lead'}</h3>
+ <label>Business name<input id="ln" required maxlength="120" value="${esc(e.name||'')}"></label>
+ <div class="pg"><label>Type<input id="lty2" list="tylist" maxlength="40" placeholder="e.g. Clinic" value="${esc(e.business_type||'')}"></label><label>Phone<input id="lp" type="tel" maxlength="30" value="${esc(e.phone||'')}"></label><label>Status<select id="lst">${LST.map(x=>`<option${(e.status||'Pending')===x?' selected':''}>${x}</option>`).join('')}</select></label><label>Next follow-up<input id="lf3" type="date" value="${esc(e.follow_up||'')}"></label><label>Email (optional)<input id="lm" type="email" maxlength="120" value="${esc(e.email||'')}"></label><label>Source (optional)<select id="lsr"><option value="">—</option>${LSRC.map(x=>`<option${e.source===x?' selected':''}>${x}</option>`).join('')}</select></label></div>
  <label>Notes<textarea id="lno" rows="4" maxlength="2000">${esc(e.notes||'')}</textarea></label>
  <p class="note" id="lerr" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
  <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="lc">Cancel</button><button class="btn sm" type="submit" id="ls2">Save lead</button></div></form>`;
- document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#ln').focus();
- $('#lc').onclick=()=>d.close();
- $('#ldf').onsubmit=async ev=>{ev.preventDefault();const n=$('#ln').value.trim();if(!n){$('#lerr').textContent='Enter a name.';return}
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#ln').focus();$('#lc').onclick=()=>d.close();
+ $('#ldf').onsubmit=async ev=>{ev.preventDefault();const n=$('#ln').value.trim();if(!n){$('#lerr').textContent='Enter the business name.';return}
   $('#ls2').disabled=true;
-  try{await call('lead_save',{p_id:l?l.id:null,p_name:n,p_phone:$('#lp').value.trim(),p_email:$('#lm').value.trim(),p_source:$('#lsr').value,p_status:$('#lst').value,p_follow:$('#lf3').value||null,p_notes:$('#lno').value.trim()});await pull();d.close();portal();toast('Lead saved')}
+  try{await call('lead_save',{p_id:l?l.id:null,p_name:n,p_type:$('#lty2').value.trim(),p_phone:$('#lp').value.trim(),p_email:$('#lm').value.trim(),p_source:$('#lsr').value,p_status:$('#lst').value,p_follow:$('#lf3').value||null,p_notes:$('#lno').value.trim()});await pull();d.close();paintLeads();toast('Lead saved')}
   catch(x){$('#lerr').textContent=friendly(x.message);$('#ls2').disabled=false}}}
-function progress(){const emps=S.team.filter(t=>!t.admin),wk=Date.now()-7*864e5,t=today(),dn=['Converted','Lost'];
+function parseBulk(text,ty,fd){const out=[],isP=x=>/^\+?\d[\d\s()-]{5,}$/.test(x);
+ text.split(/\r?\n/).forEach(line=>{const parts=line.split(/\t|\||,/).map(x=>x.trim()).filter(Boolean);if(!parts.length)return;const ph=parts.find(isP),rest=parts.filter(x=>!isP(x));if(!rest.length)return;
+  out.push({name:rest[0].slice(0,120),phone:ph||'',type:rest[1]||ty||'',follow_up:fd||''})});return out}
+function bulkDialog(){const o=$('#bkd');if(o)o.remove();const d=document.createElement('dialog');d.id='bkd';
+ d.innerHTML=`<form id="bkf" style="display:grid;gap:12px;width:min(560px,90vw);max-height:82vh;max-height:82dvh;overflow:auto;padding:2px"><h3 style="font-size:26px">Bulk add leads</h3><p class="mut" style="margin:0;font-size:14px">One lead per line: business name, phone number. A third column can hold the type. Phone numbers already in the tracker are skipped.</p>
+ <label>Leads<textarea id="bkt" rows="9" placeholder="Teja Reddy Clinic, 9912888172&#10;Piles Clinic Warangal, 9190646 14311, Clinic"></textarea></label>
+ <div class="pg"><label>Type for all (optional)<input id="bky" list="tylist" maxlength="40"></label><label>Follow-up for all (optional)<input id="bkdt" type="date"></label></div>
+ <p class="note" id="bkc" role="status" style="margin:0">0 leads ready</p><p class="note" id="bke" role="alert" style="color:var(--acc);margin:0;min-height:1.2em"></p>
+ <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn sm ghost" id="bkx">Cancel</button><button class="btn sm" type="submit" id="bks">Add leads</button></div></form>`;
+ document.body.appendChild(d);d.addEventListener('close',()=>d.remove());d.showModal();$('#bkt').focus();$('#bkx').onclick=()=>d.close();
+ const cur=()=>parseBulk($('#bkt').value,$('#bky').value.trim(),$('#bkdt').value),upd=()=>{const n=cur().length;$('#bkc').textContent=n+' lead'+(n===1?'':'s')+' ready'};
+ ['bkt','bky','bkdt'].forEach(i=>$('#'+i).addEventListener('input',upd));
+ $('#bkf').onsubmit=async ev=>{ev.preventDefault();const r=cur();if(!r.length){$('#bke').textContent='Add at least one line.';return}if(r.length>2000){$('#bke').textContent='Add up to 2000 leads at a time.';return}
+  $('#bks').disabled=true;d.close();await sendBulk(r)}}
+async function sendBulk(rows){let a=0,s=0,err=null;
+ try{for(let i=0;i<rows.length;i+=200){const r=await call('lead_bulk',{p_rows:rows.slice(i,i+200)});a+=r.added;s+=r.skipped}}catch(x){err=x}
+ try{await pull()}catch(x){}paintLeads();
+ toast(err?friendly(err.message)+(a?' · '+a+' added before the error':''):'Added '+a+' lead'+(a===1?'':'s')+(s?' · '+s+' skipped (duplicate phone or no name)':''))}
+function parseCSV(t){const rows=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+ if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
+ else if(ch==='"')q=true;else if(ch===','){r.push(c);c=''}
+ else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;r.push(c);c='';if(r.some(x=>x.trim()))rows.push(r);r=[]}else c+=ch}
+ r.push(c);if(r.some(x=>x.trim()))rows.push(r);return rows}
+const normStatus=s=>{s=(s||'').toLowerCase().replace(/[_-]/g,' ').trim();if(!s)return'Pending';if(/not\s*interest|reject|lost|declin/.test(s))return'Not interested';if(/website/.test(s))return'Has website';if(/complet|done|convert|closed|won|client/.test(s))return'Completed';if(/interest|hot|warm|proposal/.test(s))return'Interested';return'Pending'};
+const normDate=s=>{s=(s||'').trim();if(!s)return'';if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;const m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){const y=m[3].length===2?'20'+m[3]:m[3];return y+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0')}const t=Date.parse(s);return isNaN(t)?'':new Date(t-new Date(t).getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+async function importLeads(e){const f=e.target.files[0];e.target.value='';if(!f)return;if(f.size>3e6){toast('That file is too large (max 3 MB).');return}
+ const rows=parseCSV((await f.text()).replace(/^\ufeff/,''));if(!rows.length){toast('That file is empty.');return}
+ const H=rows[0].map(h=>h.toLowerCase().replace(/[^a-z]/g,'')),has=H.some(h=>/^(name|business|lead|company|phone|mobile|number|type|status)/.test(h)),col=(...re)=>H.findIndex(h=>re.some(r=>r.test(h)));
+ const M=has?{name:col(/^(business|name|lead|company)/),phone:col(/^(phone|mobile|number|contact|whatsapp)/),type:col(/^(type|category)/),status:col(/^status/),fu:col(/^follow/),notes:col(/^(note|remark|comment)/),email:col(/^email/),src:col(/^source/)}:{name:0,phone:1,type:2,status:-1,fu:-1,notes:-1,email:-1,src:-1};
+ const g=(r,i)=>i>=0&&r[i]!==undefined?String(r[i]).trim():'';
+ const data=rows.slice(has?1:0).map(r=>({name:g(r,M.name),phone:g(r,M.phone),type:g(r,M.type),status:normStatus(g(r,M.status)),follow_up:normDate(g(r,M.fu)),notes:g(r,M.notes),email:g(r,M.email),source:g(r,M.src)})).filter(x=>x.name);
+ if(!data.length){toast('No leads found. The file needs a business name column.');return}if(data.length>2000){toast('Too many rows. Import up to 2000 at a time.');return}
+ if(confirm('Import '+data.length+' lead'+(data.length===1?'':'s')+' from "'+f.name+'"? Phone numbers already in the tracker are skipped.'))sendBulk(data)}
+function exportLeads(){const q=v=>{v=String(v==null?'':v);if(/^[=+\-@]/.test(v)&&!/^\+?\d[\d\s()-]*$/.test(v))v="'"+v;return'"'+v.replace(/"/g,'""')+'"'};
+ const rows=S.leads.map(l=>[l.name,l.business_type,l.phone,l.email,l.status,l.follow_up,l.source,l.notes,nameOf(l.owner),(l.created_at||'').slice(0,10)]);
+ const csv='\ufeff'+[['Business name','Type','Phone','Email','Status','Follow-up','Source','Notes','Owner','Added'],...rows].map(r=>r.map(q).join(',')).join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='leads-'+today()+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},800);toast('Exported '+rows.length+' lead'+(rows.length===1?'':'s'))}
+function progress(){const emps=S.team.filter(t=>!t.admin),wk=Date.now()-7*864e5,t=today(),dn=['Completed','Not interested','Has website'];
  const stats=id=>{const m=S.tasks.filter(x=>x.who===id),c=k=>m.filter(x=>x.s===k).length;return{n:m.length,todo:c('todo'),doing:c('doing'),done:c('done'),wk:m.filter(x=>x.s==='done'&&x.d&&new Date(x.d)>=wk).length}};
  const here=id=>{const a=S.att.find(x=>x.staff_id===id);return a&&(a.day===t||!a.check_out)?a:null};
  const open=S.tasks.filter(x=>x.s!=='done').length,week=S.tasks.filter(x=>x.s==='done'&&x.d&&new Date(x.d)>=wk).length,inn=emps.filter(e=>here(e.id)).length,unas=S.tasks.filter(x=>!x.who&&x.s!=='done').length;
@@ -440,7 +614,7 @@ function progress(){const emps=S.team.filter(t=>!t.admin),wk=Date.now()-7*864e5,
   <p class="mut">${a?(a.check_out?'Checked out at '+tm(a.check_out):'Checked in at '+tm(a.check_in)):'Not checked in today'}</p>
   <div class="pbar" role="img" aria-label="${s.done} of ${s.n} tasks done" style="margin-top:12px"><i class="d" style="width:${pc(s.done)}%"></i><i class="p" style="width:${pc(s.doing)}%"></i></div>
   <p>${s.n?`${s.done} done · ${s.doing} in progress · ${s.todo} to do`:'No tasks assigned yet'}</p><p class="mut">Finished in the last 7 days: <strong>${s.wk}</strong></p>
-  ${e.leads?`<p class="mut">Leads: ${L.length} · ${L.filter(l=>l.status==='Converted').length} converted · ${L.filter(l=>l.follow_up&&l.follow_up<=t&&!dn.includes(l.status)).length} follow-ups due</p>`:''}
+  ${e.leads?`<p class="mut">Leads: ${L.length} · ${L.filter(l=>l.status==='Completed').length} completed · ${L.filter(l=>l.follow_up&&l.follow_up<=t&&!dn.includes(l.status)).length} follow-ups due</p>`:''}
   ${e.dev?`<p class="mut">Client projects: ${P.length} active${P.some(x=>x.deadline)?' · next deadline '+dfmt(P.filter(x=>x.deadline).sort((a,b)=>a.deadline.localeCompare(b.deadline))[0].deadline):''}</p>`:''}
   <button class="btn sm ghost" style="margin-top:14px" data-pv="${e.id}">View work</button></div>`}).join('')||'<p class="mut">No employees yet. Add them in the Team tab.</p>'}</div>`;
  document.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>workDialog(S.team.find(x=>x.id===b.dataset.pv)))}
@@ -449,13 +623,13 @@ function workDialog(e){if(!e)return;const o=$('#wkd');if(o)o.remove();const d=do
  dd=i=>new Date(i).toLocaleDateString([],{day:'numeric',month:'short'}),
  list=(arr,ex)=>arr.length?`<ul style="margin:6px 0 0;padding-left:18px">${arr.map(x=>`<li>${esc(x.t)} <small class="mut">· ${esc(x.p)}${ex?ex(x):''}</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">Nothing here.</p>',
  done=by('done').sort((a,b)=>(b.d||'').localeCompare(a.d||'')).slice(0,8),
- act2=L.filter(l=>!['Converted','Lost'].includes(l.status)).sort((a,b)=>(a.follow_up||'9999').localeCompare(b.follow_up||'9999')).slice(0,6);
+ act2=L.filter(l=>!['Completed','Not interested','Has website'].includes(l.status)).sort((a,b)=>(a.follow_up||'9999').localeCompare(b.follow_up||'9999')).slice(0,6);
  const PR=S.projects.filter(x=>x.owner===e.id).sort((a,b)=>(a.deadline||'9999').localeCompare(b.deadline||'9999'));
  d.innerHTML=`<div style="width:min(640px,88vw);max-height:78vh;max-height:78dvh;overflow:auto;padding:2px"><div class="who" style="border:0;padding:0 0 4px">${av(e,48)}<div style="flex:1"><h3 style="font-size:26px">${esc(e.name)}</h3><span class="mut">${esc(e.role)}</span></div><button class="ic" id="wkx" aria-label="Close">✕</button></div>
  <h3 class="sh">In progress (${by('doing').length})</h3>${list(by('doing'))}
  <h3 class="sh">To do (${by('todo').length})</h3>${list(by('todo'))}
  <h3 class="sh">Recently done</h3>${list(done,x=>x.d?' · done '+dd(x.d):'')}
- ${e.leads?`<h3 class="sh">Leads (${L.length} total · ${L.filter(l=>l.status==='Converted').length} converted)</h3>${act2.length?`<ul style="margin:6px 0 0;padding-left:18px">${act2.map(l=>`<li>${esc(l.name)} <small class="mut">· ${esc(l.status)}${l.follow_up?' · follow up '+dd(l.follow_up):''}</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">No active leads.</p>'}`:''}
+ ${e.leads?`<h3 class="sh">Leads (${L.length} total · ${L.filter(l=>l.status==='Completed').length} completed)</h3>${act2.length?`<ul style="margin:6px 0 0;padding-left:18px">${act2.map(l=>`<li>${esc(l.name)} <small class="mut">· ${esc(l.status)}${l.follow_up?' · follow up '+dd(l.follow_up):''}</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">No active leads.</p>'}`:''}
  ${e.dev?`<h3 class="sh">Client projects (${PR.length})</h3>${PR.length?`<ul style="margin:6px 0 0;padding-left:18px">${PR.map(x=>`<li>${esc(x.client)} <small class="mut">· ${esc(x.status)}${x.deadline?' · deadline '+dd(x.deadline):''} · ${(x.features||[]).filter(f=>f.d).length}/${(x.features||[]).length} features</small></li>`).join('')}</ul>`:'<p class="mut" style="margin:6px 0 0">No client projects yet.</p>'}`:''}
  <h3 class="sh">Attendance (last 7 records)</h3><div class="scroll"><table class="rt"><tr><th>Date</th><th>In</th><th>Out</th></tr>${A.map(a=>`<tr><td>${a.day}</td><td>${tm(a.check_in)}</td><td>${a.check_out?tm(a.check_out):'—'}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No attendance yet.</td></tr>'}</table></div>
  <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn sm ghost" id="wkm">Message</button><button class="btn sm" id="wkc">Close</button></div></div>`;
@@ -565,14 +739,14 @@ function showIncoming(){const I=INC,t=S.team.find(x=>x.id===I.caller)||{name:'So
  ov.innerHTML=`<div class="cinfo">${av(t,120,true)}<h2>${esc(t.name)}</h2><p style="margin:0;opacity:.8">${I.video?'Incoming video call':'Incoming voice call'}…</p></div><div class="cbtns" style="gap:64px"><button type="button" class="cb end" id="idec" aria-label="Decline call"><span>📞</span></button><button type="button" class="cb acc" id="iacc" aria-label="Accept call">📞</button></div>`;
  document.body.appendChild(ov);document.title='📞 Incoming call · Hanumate';ringStart();$('#iacc').focus();
  $('#iacc').onclick=answerCall;$('#idec').onclick=()=>{const x=INC;INC=null;hideIncoming();if(x)call('call_end',{p_id:x.id}).catch(()=>{})}}
-function hideIncoming(){if(pfStop){pfStop();pfStop=null}ringStop();const o=$('#incov');if(o)o.remove();setBadge()}
+function hideIncoming(){ntRingStop();if(pfStop){pfStop();pfStop=null}ringStop();const o=$('#incov');if(o)o.remove();setBadge()}
 let hidN=0,pfStop=null;
 async function checkIncoming(){if(!S.user||CALL)return;if(document.hidden&&(++hidN%3))return;
- try{const r=await call('call_incoming');if(CALL)return;if(r&&!INC){INC=r;INC.pend=[];INC.since=0;showIncoming();pfStop=ticker(500,prefetchIce)}else if(!r&&INC){INC=null;hideIncoming()}}
+ try{const r=await call('call_incoming');if(CALL)return;if(r&&!INC){INC=r;INC.pend=[];INC.since=0;showIncoming();ntRing(INC);pfStop=ticker(500,prefetchIce)}else if(!r&&INC){ntMissed(INC);INC=null;hideIncoming()}}
  catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
 async function prefetchIce(){const I=INC;if(!I||CALL||I.busy)return;I.busy=true;
  try{const r=await call('call_state',{p_id:I.id,p_since:I.since});if(INC!==I)return;
-  if(!['ringing','active'].includes(r.status)){INC=null;hideIncoming();return}
+  if(!['ringing','active'].includes(r.status)){ntMissed(I);INC=null;hideIncoming();return}
   (r.ice||[]).forEach(x=>{I.since=Math.max(I.since,x.id);I.pend.push(x.cand)})}
  catch(e){}finally{I.busy=false}}
 function startCallWatch(){if(stopInc)stopInc();stopInc=ticker(1000,checkIncoming);checkIncoming()}
@@ -586,6 +760,77 @@ async function doSignOut(){if(CALL)await endCall();let m='';try{await call('logo
 if(window.visualViewport){const vv=()=>document.documentElement.style.setProperty('--vvh',window.visualViewport.height+'px');window.visualViewport.addEventListener('resize',vv);vv()}
 {const lt=()=>document.querySelectorAll('table.rt:not([data-l])').forEach(t=>{if(!t.rows.length)return;const h=[...t.rows[0].cells].map(c=>c.textContent.trim());[...t.rows].slice(1).forEach(r=>[...r.cells].forEach((c,i)=>{if(h[i]&&!c.hasAttribute('colspan'))c.dataset.label=h[i]}));t.dataset.l=1});
  new MutationObserver(()=>requestAnimationFrame(lt)).observe(document.body,{childList:true,subtree:true})}
+/* ===== Notification centre (in-app bell, banners, sounds, desktop alerts, call ring) ===== */
+const NTI={chat:'💬',task:'✅',leave:'🌴',news:'📣',lead:'🎯',missed:'📵'},TSL={todo:'To do',doing:'In progress',done:'Done'},
+ NTSYS=('Notification' in window)&&!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const NT={l:[],seen:new Set(),prev:{},ready:false,open:false,mute:false,key:null,stop:null,opener:null,sys:null,bt:null};
+let NTQ=false;
+const ntK=()=>'hm_nt1_'+S.user;
+function ntLoad(){NT.key=ntK();let j=null;try{j=JSON.parse(localStorage.getItem(NT.key)||'null')}catch(e){}
+ NT.ready=!!j;NT.l=(j&&j.l)||[];NT.seen=new Set((j&&j.s)||[]);NT.prev=(j&&j.pt)||{};try{NT.mute=localStorage.getItem('hm_nt_mute')==='1'}catch(e){}}
+function ntSave(){if(!NT.key)return;try{localStorage.setItem(NT.key,JSON.stringify({l:NT.l.slice(0,60),s:[...NT.seen].slice(-500),pt:NT.prev}));NT.ready=true}catch(e){}}
+const ntAgo=t=>{const s=(Date.now()-t)/1e3;return s<60?'just now':s<3600?Math.floor(s/60)+' min ago':s<86400?Math.floor(s/3600)+' h ago':Math.floor(s/86400)+' d ago'};
+function ntBell(){const n=NT.l.filter(x=>!x.r).length,c=n>99?'99+':n,bd=`<span class="bdg"${n?'':' hidden'}>${c}</span>`,lab='Notifications'+(n?', '+n+' unread':'');
+ const b=$('#bellb'),t=$('#bellt');
+ if(b){b.setAttribute('aria-label',lab);b.innerHTML=SV('<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',22)+bd}
+ if(t){t.setAttribute('aria-label',lab);t.innerHTML=`<span class="ti" aria-hidden="true">🔔</span><span class="tl">Notifications</span>${bd}`}}
+function ntBind(){const o=e=>ntOpen(e.currentTarget);const b=$('#bellb'),t=$('#bellt');if(b)b.onclick=o;if(t)t.onclick=o;ntBell()}
+function ntChime(){if(NT.mute)return;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();const n=actx.currentTime;
+ [[660,0],[880,.12]].forEach(([f,d])=>{const o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,n+d);g.gain.exponentialRampToValueAtTime(.12,n+d+.02);g.gain.exponentialRampToValueAtTime(.0001,n+d+.35);o.connect(g);g.connect(actx.destination);o.start(n+d);o.stop(n+d+.4)})}catch(e){}}
+function ntSys(e,keep){if(!NTSYS||Notification.permission!=='granted')return null;try{const n=new Notification(e.t,{body:e.b||'',tag:e.k,requireInteraction:!!keep});n.onclick=()=>{try{window.focus()}catch(x){}n.close();if(e.go&&!keep)ntGo(e)};return n}catch(x){return null}}
+function ntBanner(e){const w=$('#ntb');if(!w)return;w.innerHTML=`<button type="button"><span class="nti" aria-hidden="true">${NTI[e.kind]||'🔔'}</span><span class="ntx"><b>${esc(e.t)}</b><small>${esc(e.b||'')}</small></span></button>`;
+ w.classList.add('on');w.firstChild.onclick=()=>{w.classList.remove('on');ntGo(e)};clearTimeout(NT.bt);NT.bt=setTimeout(()=>w.classList.remove('on'),5500)}
+function ntFire(e){ntSave();ntBell();if(NT.open)ntPaint();ntChime();if(document.hidden)ntSys(e);else if(!INC&&!CALL)ntBanner(e)}
+function ntAdd(n,quiet){if(NT.seen.has(n.k)&&!n.upd)return;NT.seen.add(n.k);if(quiet)return;
+ NT.l=NT.l.filter(x=>x.k!==n.k);const e={k:n.k,kind:n.kind,t:n.t,b:n.b,go:n.go,n:n.n,at:Date.now(),r:0};NT.l.unshift(e);if(NT.l.length>60)NT.l.length=60;ntFire(e)}
+function ntScan(quiet,D){const u=me();if(!u)return;D=D||S;if(NT.key!==ntK())ntLoad();const q=quiet||!NT.ready,t=today();
+ const mine=(D.tasks||[]).filter(x=>x.who===u.id),pv=NT.prev,nx={};
+ mine.forEach(x=>{nx[x.id]=x.s;if(pv[x.id]===undefined)ntAdd({k:'ta:'+x.id,kind:'task',t:'New task assigned to you',b:x.t+(x.p?' · '+x.p:''),go:{v:'work'}},q);
+  else if(pv[x.id]!==x.s)ntAdd({k:'ts:'+x.id,kind:'task',t:'Task moved to '+(TSL[x.s]||x.s),b:x.t,go:{v:'work'},upd:1},q)});
+ NT.prev=nx;
+ (D.leaves||[]).filter(l=>l.staff_id===u.id).forEach(l=>{const a=String(l.from_date).slice(0,10),z=String(l.to_date||l.from_date).slice(0,10);
+  ntAdd({k:'lv:'+(l.id!=null?l.id:l.type+a+z),kind:'leave',t:'Leave recorded for you',b:l.type+' · '+fShort(a)+(z!==a?' – '+fShort(z):'')+' · '+l.days+' day'+(l.days==1?'':'s'),go:{v:'time'}},q)});
+ (D.news||[]).forEach(n=>ntAdd({k:'nw:'+(n.id!=null?n.id:n.created_at),kind:'news',t:'New announcement',b:n.body,go:{v:'home'}},q));
+ if(u.admin||u.leads){const m=(D.leads||[]).filter(l=>l.owner===u.id&&l.follow_up&&LACT.includes(l.status)),due=m.filter(l=>dayN(l.follow_up)===0).length,over=m.filter(l=>dayN(l.follow_up)<0).length;
+  if(due||over)ntAdd({k:'ld:'+t,kind:'lead',t:'Lead follow-ups need you',b:[due?due+' due today':'',over?over+' overdue':''].filter(Boolean).join(' · '),go:{v:'leads'}},false)}
+ ntSave();ntBell();if(NT.open)ntPaint()}
+function ntChat(){const u=me();if(!u)return;if(NT.key!==ntK())ntLoad();const g=CH.sum.group||{unread:0};
+ const it=[['group',g.unread||0,'Team chat',g.last_body,g.last_sender&&g.last_sender!==u.id?nameOf(g.last_sender).split(' ')[0]+': ':'',g.last_sender===u.id]]
+  .concat((CH.sum.dms||[]).map(d=>[d.peer,d.unread||0,nameOf(d.peer),d.last_body,'',!!d.last_mine]));let ch=false;
+ it.forEach(([id,un,name,body,pre,mineMsg])=>{const k='ch:'+id,ex=NT.l.find(x=>x.k===k),watching=view==='chat'&&CH.peer===id&&!document.hidden;
+  if(!un){if(ex){if(!ex.r){ex.r=1;ch=true}ex.n=0}return}
+  if(watching||mineMsg||(ex&&ex.n===un))return;
+  const c=(body||'New message'),b=pre+(c.length>90?c.slice(0,90)+'…':c);
+  ntAdd({k,kind:'chat',t:name+(un>1?' · '+un+' new messages':''),b,go:{v:'chat',p:id},n:un,upd:1},false)});
+ if(ch){ntSave();ntBell();if(NT.open)ntPaint()}}
+function ntRing(I){const t=S.team.find(x=>x.id===I.caller)||{name:'Someone'};try{if(navigator.vibrate)navigator.vibrate([500,250,500,250,500,250,500])}catch(e){}
+ if(document.hidden){NT.sys=ntSys({k:'hm-call',t:t.name+' is calling',b:I.video?'Incoming video call · open the portal to answer':'Incoming voice call · open the portal to answer'},true)}}
+function ntRingStop(){try{if(navigator.vibrate)navigator.vibrate(0)}catch(e){}if(NT.sys){try{NT.sys.close()}catch(e){}NT.sys=null}}
+function ntMissed(I){if(!I||!me())return;if(NT.key!==ntK())ntLoad();const t=S.team.find(x=>x.id===I.caller)||{name:'Someone'};
+ ntAdd({k:'ms:'+I.id,kind:'missed',t:'Missed '+(I.video?'video':'voice')+' call',b:'from '+t.name,go:{v:'chat',p:I.caller}},false)}
+async function ntTick(){if(!S.user||CALL||INC)return;try{const d=await call('portal_data');if(!S.user)return;
+ ntScan(false,{tasks:d.tasks.map(x=>({id:x.id,t:x.title,p:x.project,s:x.status,who:x.assignee})),leaves:d.leaves,news:d.news,leads:d.leads||[]});
+ if(document.hidden)refreshSummary()}catch(e){if(e.message==='not_signed_in')signedOut('Session expired. Please sign in again.')}}
+function ntStart(){if(!$('#ntb')){const w=document.createElement('div');w.id='ntb';w.className='ntb';w.setAttribute('role','status');w.setAttribute('aria-live','polite');document.body.appendChild(w)}
+ if(NT.stop)NT.stop();if(S.user&&NT.key!==ntK())ntLoad();NT.stop=ticker(30000,ntTick);ntBell()}
+function ntStop(){if(NT.stop){NT.stop();NT.stop=null}ntClose(true);ntRingStop();NT.key=null;NT.l=[];NT.seen=new Set();NT.prev={};NT.ready=false;const w=$('#ntb');if(w)w.remove()}
+async function ntGo(e){if(!e)return;e.r=1;ntSave();ntClose(true);const g=e.go||{};
+ if(g.v==='chat'){CH.peer=g.p||null;CH.msgs=[];CH.sig=null}
+ NTQ=true;try{await pull()}catch(x){}NTQ=false;view=g.v||'home';portal()}
+function ntPaint(){const l=$('#ntl');if(!l)return;
+ l.innerHTML=NT.l.length?NT.l.map((e,i)=>`<button type="button" class="nti2${e.r?'':' un'}" data-i="${i}"><span class="nti" aria-hidden="true">${NTI[e.kind]||'🔔'}</span><span class="ntx"><b>${esc(e.t)}</b><small>${esc(e.b||'')}</small><em>${ntAgo(e.at)}${e.r?'':' · unread'}</em></span></button>`).join(''):`<div class="ntempty"><p style="font-size:34px;margin:0">🔔</p><p>You're all caught up.</p></div>`;
+ l.querySelectorAll('.nti2').forEach(b=>b.onclick=()=>ntGo(NT.l[+b.dataset.i]));
+ const pm=$('#ntperm');if(pm){const pr=NTSYS&&Notification.permission;
+  pm.innerHTML=!NTSYS?'':pr==='default'?'<div class="ntpm"><span>Get a desktop alert when this tab is in the background.</span><button type="button" class="btn sm" id="ntallow">Turn on alerts</button></div>':pr==='denied'?'<div class="ntpm"><span>Desktop alerts are blocked for this site. Allow them in your browser\'s site settings.</span></div>':'';
+  const a=$('#ntallow');if(a)a.onclick=async()=>{try{await Notification.requestPermission()}catch(x){}ntPaint()}}}
+function ntKey(ev){if(ev.key==='Escape'){ev.preventDefault();ntClose()}else if(ev.key==='Tab'){const f=[...document.querySelectorAll('#ntp button,#ntp input')].filter(x=>!x.disabled&&x.offsetParent);if(!f.length)return;const a=f[0],z=f[f.length-1];if(ev.shiftKey&&document.activeElement===a){ev.preventDefault();z.focus()}else if(!ev.shiftKey&&document.activeElement===z){ev.preventDefault();a.focus()}}}
+function ntOpen(op){if(NT.open||!S.user)return;NT.open=true;NT.opener=op||null;const p=document.createElement('div');p.id='ntp';p.className='ntp';
+ p.innerHTML=`<div class="ntsc" id="ntsc"></div><section class="ntpn" role="dialog" aria-modal="true" aria-labelledby="ntth"><header><h2 id="ntth">Notifications</h2><button type="button" class="ic" id="ntra">Mark all read</button><button type="button" class="ntcl" id="ntcl" aria-label="Close notifications">✕</button></header><div id="ntperm"></div><div class="ntl" id="ntl"></div><footer><label class="ntmu"><input type="checkbox" id="ntmu"${NT.mute?' checked':''}> Mute notification sounds</label></footer></section>`;
+ document.body.appendChild(p);ntPaint();$('#ntcl').onclick=$('#ntsc').onclick=()=>ntClose();
+ $('#ntra').onclick=()=>{NT.l.forEach(x=>x.r=1);ntSave();ntBell();ntPaint()};
+ $('#ntmu').onchange=e=>{NT.mute=e.target.checked;try{localStorage.setItem('hm_nt_mute',NT.mute?'1':'0')}catch(x){}};
+ document.addEventListener('keydown',ntKey);$('#ntcl').focus()}
+function ntClose(skip){if(!NT.open)return;NT.open=false;document.removeEventListener('keydown',ntKey);const p=$('#ntp');if(p)p.remove();if(!skip&&NT.opener&&document.contains(NT.opener))NT.opener.focus();NT.opener=null}
 (async function boot(){
  $('#app').innerHTML='<div class="login"><p class="mut">Loading…</p></div>';
  if(TOK){try{await pull();if(me()){portal();startBadge();return}}catch(e){TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(x){}}}
