@@ -60,6 +60,10 @@ main{padding:clamp(20px,4vw,48px);min-width:0}main h1{font-size:clamp(34px,5vw,5
 form.f{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end;margin-top:14px}
 label{display:grid;gap:4px;font-size:13px;color:var(--mut)}
 input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}input:focus,select:focus,textarea:focus{border-color:var(--acc);outline:none}
+.pill.ai{background:linear-gradient(135deg,#fda660,#f26a1c);color:#fff;font-weight:600;letter-spacing:.04em;padding:2px 9px}
+.tpg{display:inline-flex;gap:4px;align-items:center;padding:4px 2px}.tpg i{width:6px;height:6px;border-radius:50%;background:var(--mut,#8a8a8a);opacity:.35;animation:tpg 1.1s ease-in-out infinite}.tpg i:nth-child(2){animation-delay:.15s}.tpg i:nth-child(3){animation-delay:.3s}
+@keyframes tpg{0%,70%,100%{opacity:.3;transform:translateY(0)}35%{opacity:1;transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.tpg i{animation:none;opacity:.6}}
 .pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;background:var(--line)}.pill.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
 table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:500}
 .scroll{overflow-x:auto}.who{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
@@ -682,9 +686,22 @@ async function rpc(fn,args={}){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{me
 const call=(fn,a)=>rpc(fn,Object.assign({p_token:TOK},a));
 const FR={full:'A call can have up to 8 people.',bad_member:'Pick at least one teammate to call.',in_call:'You are already on a call.',gone:'That call is no longer available.',bad_offer:'Could not start the call.',too_big:'Too many features or follow-up notes. Remove some and try again.',bad_status:'Pick a valid status.',bad_type:'Pick a leave type.',slow_down:'You are sending too fast. Wait a moment.',bad_text:'Message must be 1 to 1000 characters.',bad_peer:'You cannot message that person.',insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
 const friendly=m=>FR[m]||m||'Something went wrong.';
-function signedOut(msg){srchClose();ntStop();if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
+function signedOut(msg){srchClose();ntStop();if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,typing:null,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
 let S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]},view='home';
 const me=()=>S.team.find(t=>t.id===S.user),nameOf=id=>S.team.find(t=>t.id===id)?.name||'—';
+/* ---- AI teammates (Vennela). The Groq key lives ONLY in the Supabase Edge Function secret GROQ_API_KEY, never in this file. ---- */
+const AI_NAMES=['vennela','pranavi'],AI_FN=SB_URL+'/functions/v1/vennela-reply';
+const isAI=t=>!!t&&AI_NAMES.includes(String(t.name||'').trim().toLowerCase()),isAIid=id=>isAI(S.team.find(t=>t.id===id)),aiTag=t=>'',adminAiTag=t=>isAI(t)?' <span class="pill ai" title="Admin only: this member is run by the AI function">AI</span>':'';
+const aiAsked=(pr,b)=>pr==='group'?S.team.filter(t=>isAI(t)&&new RegExp('(^|\\s)@'+String(t.name).trim().split(/\s+/)[0]+'\\b','i').test(b)).map(t=>t.id):(isAIid(pr)?[pr]:[]);
+async function askAI(peer,ids){if(!TOK||!ids||!ids.length)return;CH.typing=peer;paintMsgs(true);
+ const iv=setInterval(()=>{if(CH.peer===peer&&CH.typing===peer)poll(true)},1200);
+ try{for(const id of ids){const v=S.team.find(t=>t.id===id),nm=v?v.name:'They';
+  try{const r=await fetch(AI_FN,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({token:TOK,peer:peer==='group'?null:peer,ai:id})});
+   const j=await r.json().catch(()=>null);
+   if(r.status===404)throw new Error('ai_not_deployed');
+   if(!r.ok||(j&&j.error&&!j.skipped)){const er=new Error((j&&j.error)||'ai_failed');er.detail=j&&j.detail;throw er}}
+  catch(e){const adm=!!(me()&&me().admin);toast(e.message==='ai_not_deployed'?(adm?'The vennela-reply function is not deployed yet. Deploy it in Supabase.':nm+' is not available right now. Try again later.'):e.message==='not_signed_in'?'Session expired. Please sign in again.':e.message==='busy'?nm+' is a bit tied up. Try again in a moment.':adm?nm+' could not reply: '+(e.detail||'try again.'):nm+' could not reply right now. Try again in a bit.')}}}
+ finally{clearInterval(iv);if(CH.typing===peer)CH.typing=null;if(CH.peer===peer)await poll(true)}}
 const ini=n=>(n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
 const av=(t,z,n)=>`<span class="av"${t.avatar&&!n?` data-view="${esc(t.id)}" role="button" tabindex="0" aria-label="View photo of ${esc(t.name)}"`:''}${z?` style="width:${z}px;height:${z}px;font-size:${Math.round(z/3)}px"`:''}>${t.avatar?`<img src="${esc(t.avatar)}" alt="${esc(t.name)}">`:ini(t.name)}</span>`;
 const today=()=>new Date().toLocaleDateString('en-CA'),tm=i=>new Date(i).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
@@ -757,7 +774,7 @@ function docs(){$('#m').innerHTML=`<span class="eyebrow">Documents</span><h1>Pay
  <h2 style="font-size:30px;margin:34px 0 4px">Handbook</h2>
  ${[['Working hours','Core hours are agreed with your lead. Check in and out daily from Home.'],['Leave policy','Casual 12, Sick 8, Earned 15 days per year. Tell the founder about any leave and it will be recorded in the portal.'],['Client work','Share demo builds with the founder before sending to clients. Keep client data out of public tools.']].map(([a,b])=>`<details><summary style="font-size:22px">${a}</summary><div class="body">${b}</div></details>`).join('')}`}
 function dir(){$('#m').innerHTML=`<span class="eyebrow">People</span><h1>Team</h1><div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-top:18px"><label style="max-width:380px;flex:1 1 260px">Search<input id="q" placeholder="Name or role" autocomplete="off"></label><button type="button" class="btn sm" id="gdir">New group call</button></div><div id="dl"></div>`;
- $('#gdir').onclick=()=>groupPicker(false,false);const r=()=>{const q=$('#q').value.toLowerCase();$('#dl').innerHTML=S.team.filter(t=>(t.name+t.role).toLowerCase().includes(q)).map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong><br><span class="mut">${esc(t.role)}</span></div>${t.id!==S.user?`<button class="btn sm" data-msg="${t.id}" style="margin-right:8px">Message</button><button class="btn sm ghost" data-call="${t.id}" aria-label="Call ${esc(t.name)}" style="margin-right:8px">Call</button>`:''}${t.email?`<a class="btn sm ghost" href="mailto:${esc(t.email)}">Email</a>`:''}</div>`).join('')||'<p class="mut">No matches.</p>';$('#dl').querySelectorAll('[data-msg]').forEach(b=>b.onclick=()=>{CH.peer=b.dataset.msg;CH.msgs=[];CH.sig=null;view='chat';portal()});$('#dl').querySelectorAll('[data-call]').forEach(b=>b.onclick=()=>startCall(b.dataset.call,false))};$('#q').oninput=r;r()}
+ $('#gdir').onclick=()=>groupPicker(false,false);const r=()=>{const q=$('#q').value.toLowerCase();$('#dl').innerHTML=S.team.filter(t=>(t.name+t.role).toLowerCase().includes(q)).map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${aiTag(t)}<br><span class="mut">${esc(t.role)}</span></div>${t.id!==S.user?`<button class="btn sm" data-msg="${t.id}" style="margin-right:8px">Message</button>${isAI(t)?'':`<button class="btn sm ghost" data-call="${t.id}" aria-label="Call ${esc(t.name)}" style="margin-right:8px">Call</button>`}`:''}${t.email?`<a class="btn sm ghost" href="mailto:${esc(t.email)}">Email</a>`:''}</div>`).join('')||'<p class="mut">No matches.</p>';$('#dl').querySelectorAll('[data-msg]').forEach(b=>b.onclick=()=>{CH.peer=b.dataset.msg;CH.msgs=[];CH.sig=null;view='chat';portal()});$('#dl').querySelectorAll('[data-call]').forEach(b=>b.onclick=()=>startCall(b.dataset.call,false))};$('#q').oninput=r;r()}
 function profile(){const u=me(),has=!!u.avatar;
  $('#m').innerHTML=`<span class="eyebrow">Your profile</span><h1>Settings</h1>
  <div class="card" style="margin-top:24px;display:flex;gap:22px;align-items:center;flex-wrap:wrap">${av(u,96)}<div style="flex:1;min-width:200px"><h3 style="font-size:32px">${esc(u.name)}</h3><div class="mut">${esc(u.role)}</div>${u.email?`<a href="mailto:${esc(u.email)}" class="mut">${esc(u.email)}</a>`:''}</div></div>
@@ -778,7 +795,7 @@ function team(){const u=me();
  $('#m').innerHTML=`<span class="eyebrow">Admin</span><h1>Manage team</h1>
  <form class="f" id="tm" style="margin-top:20px"><label>Profile name<input id="tn" required maxlength="60"></label><label>Role<input id="tr" value="Team member" maxlength="60"></label><label>Password<input id="tpw" type="text" required minlength="8" autocomplete="off" placeholder="min 8 characters"></label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="ta" style="width:auto"> Admin</label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="tl" style="width:auto"> Marketing (Leads table)</label><label style="grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input type="checkbox" id="td" style="width:auto"> Developer (Client follow-ups)</label><button class="btn sm">Add member</button></form>
  <p class="note">Share the profile name and password privately. Members can change their password from Profile.</p>
- <div style="margin-top:12px">${S.team.map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${t.admin?' <span class="pill">Admin</span>':''}${t.leads?' <span class="pill">Marketing</span>':''}${t.dev?' <span class="pill">Developer</span>':''}<br><span class="mut">${esc(t.role)}</span></div><button class="ic" data-ed="${t.id}" style="margin-right:6px">Edit</button><button class="ic" data-rp="${t.id}">Change password</button>${t.id!==u.id?`<button class="ic" data-rm="${t.id}" style="margin-left:6px">Remove</button>`:''}</div>`).join('')}</div>`;
+ <div style="margin-top:12px">${S.team.map(t=>`<div class="who">${av(t)}<div style="flex:1"><strong>${esc(t.name)}</strong>${adminAiTag(t)}${t.admin?' <span class="pill">Admin</span>':''}${t.leads?' <span class="pill">Marketing</span>':''}${t.dev?' <span class="pill">Developer</span>':''}<br><span class="mut">${esc(t.role)}</span></div><button class="ic" data-ed="${t.id}" style="margin-right:6px">Edit</button><button class="ic" data-rp="${t.id}">Change password</button>${t.id!==u.id?`<button class="ic" data-rm="${t.id}" style="margin-left:6px">Remove</button>`:''}</div>`).join('')}</div>`;
  $('#tm').onsubmit=e=>{e.preventDefault();act(()=>call('admin_add_member',{p_name:$('#tn').value.trim(),p_role:$('#tr').value.trim(),p_password:$('#tpw').value,p_admin:$('#ta').checked,p_leads:$('#tl').checked,p_dev:$('#td').checked}))};
  document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const t=S.team.find(x=>x.id===b.dataset.rm);if(t&&confirm('Remove '+t.name+'? Their attendance and leave records are deleted, and their leads and client projects move to you.'))act(()=>call('admin_remove_member',{p_id:t.id}))});
  document.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>pwDialog(S.team.find(x=>x.id===b.dataset.rp)));
@@ -862,7 +879,7 @@ function chat(){clearInterval(chatT);document.body.classList.toggle('inthread',!
  paintList();paintShell();chatT=setInterval(()=>poll(),4000);if(CH.peer)poll(true);refreshSummary()}
 function paintList(){const el=$('#clist');if(!el)return;const u=me();if(!u)return;const g=CH.sum.group||{unread:0},dm=Object.fromEntries(CH.sum.dms.map(d=>[d.peer,d]));
  const people=S.team.filter(t=>t.id!==u.id).sort((a,b)=>((dm[b.id]&&dm[b.id].last_at)||'').localeCompare((dm[a.id]&&dm[a.id].last_at)||'')||a.name.localeCompare(b.name));
- const row=(id,a,name,pv,at,un)=>`<button class="cr ${CH.peer===id?'on':''}" data-p="${id}" role="listitem">${a}<span class="ci"><span class="cn"><b>${esc(name)}</b><small>${at?fmt(at):''}</small></span><span class="cp"><span>${esc(pv)}</span>${un?`<span class="bdg">${un}</span>`:''}</span></span></button>`;
+ const row=(id,a,name,pv,at,un)=>`<button class="cr ${CH.peer===id?'on':''}" data-p="${id}" role="listitem">${a}<span class="ci"><span class="cn"><b>${esc(name)}${aiTag(S.team.find(x=>x.id===id))}</b><small>${at?fmt(at):''}</small></span><span class="cp"><span>${esc(pv)}</span>${un?`<span class="bdg">${un}</span>`:''}</span></span></button>`;
  const cut=x=>(x||'').length>38?x.slice(0,38)+'…':(x||'');
  el.innerHTML=`<button type="button" class="cnewc" id="gnew" role="listitem"><span class="gi">${SV(ADDP,20)}</span>New group call</button>`+row('group','<span class="av" style="background:var(--ink)">#</span>','Team chat',g.last_body?(g.last_sender===u.id?'You: ':nameOf(g.last_sender).split(' ')[0]+': ')+cut(g.last_body):'Everyone in the team',g.last_at,g.unread)
   +people.map(t=>{const d=dm[t.id];return row(t.id,av(t,null,true),t.name,d?(d.last_mine?'You: ':'')+cut(d.last_body):t.role,d&&d.last_at,d?d.unread:0)}).join('');
@@ -870,23 +887,24 @@ function paintList(){const el=$('#clist');if(!el)return;const u=me();if(!u)retur
 function paintShell(){const el=$('#cthread');if(!el)return;
  if(!CH.peer){el.innerHTML='<div class="cempty"><p class="mut">Select a teammate to start chatting.</p></div>';return}
  const t=CH.peer==='group'?null:S.team.find(x=>x.id===CH.peer);
- el.innerHTML=`<div class="chd"><button class="ic cback" id="cb" aria-label="Back to chats">←</button>${t?av(t,40):'<span class="av" style="width:40px;height:40px;background:var(--ink)">#</span>'}<div><b>${t?esc(t.name):'Team chat'}</b><br><small class="mut">${t?esc(t.role):'Everyone in the team'}</small></div><span style="margin-left:auto;display:flex;gap:6px">${t?'<button type="button" class="ic" id="cvo" aria-label="Voice call">📞</button><button type="button" class="ic" id="cvi" aria-label="Video call">🎥</button><button type="button" class="ic" id="cgp" aria-label="Start a group call with '+esc(t.name)+'">'+SV(ADDP,18)+'</button>':'<button type="button" class="ic" id="gvo" aria-label="Start a group voice call">📞</button><button type="button" class="ic" id="gvi" aria-label="Start a group video call">🎥</button>'}</span></div>
+ el.innerHTML=`<div class="chd"><button class="ic cback" id="cb" aria-label="Back to chats">←</button>${t?av(t,40):'<span class="av" style="width:40px;height:40px;background:var(--ink)">#</span>'}<div><b>${t?esc(t.name):'Team chat'}${aiTag(t)}</b><br><small class="mut">${t?esc(t.role):'Everyone in the team'}</small></div><span style="margin-left:auto;display:flex;gap:6px">${t&&isAI(t)?'':t?'<button type="button" class="ic" id="cvo" aria-label="Voice call">📞</button><button type="button" class="ic" id="cvi" aria-label="Video call">🎥</button><button type="button" class="ic" id="cgp" aria-label="Start a group call with '+esc(t.name)+'">'+SV(ADDP,18)+'</button>':'<button type="button" class="ic" id="gvo" aria-label="Start a group voice call">📞</button><button type="button" class="ic" id="gvi" aria-label="Start a group video call">🎥</button>'}</span></div>
  <div class="cm" id="cmsgs" tabindex="0" aria-live="polite" aria-label="Messages"></div>
  <form class="cf" id="cform"><textarea id="ctx" rows="1" maxlength="1000" placeholder="Type a message" aria-label="Message"></textarea><button class="btn sm" type="submit" id="csend">Send</button></form>`;
- $('#cb').onclick=()=>{CH.peer=null;chat()};if(t){$('#cvo').onclick=()=>startCall(t.id,false);$('#cvi').onclick=()=>startCall(t.id,true);$('#cgp').onclick=()=>groupPicker(false,false,[t.id])}else{$('#gvo').onclick=()=>groupPicker(false,true);$('#gvi').onclick=()=>groupPicker(true,true)}
+ $('#cb').onclick=()=>{CH.peer=null;chat()};if(t&&isAI(t)){}else if(t){$('#cvo').onclick=()=>startCall(t.id,false);$('#cvi').onclick=()=>startCall(t.id,true);$('#cgp').onclick=()=>groupPicker(false,false,[t.id])}else{$('#gvo').onclick=()=>groupPicker(false,true);$('#gvi').onclick=()=>groupPicker(true,true)}
  const tx=$('#ctx');tx.oninput=()=>{tx.style.height='auto';tx.style.height=Math.min(tx.scrollHeight,120)+'px'};
  tx.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('#cform').requestSubmit()}};
  $('#cform').onsubmit=async e=>{e.preventDefault();const b=tx.value.trim(),bt=$('#csend');if(!b)return;bt.disabled=true;
-  try{await call('chat_send',{p_peer:CH.peer==='group'?null:CH.peer,p_body:b});tx.value='';tx.style.height='';await poll(true);const m=$('#cmsgs');if(m)m.scrollTop=m.scrollHeight}
-  catch(x){toast(friendly(x.message))}bt.disabled=false;tx.focus()};
+  const pr=CH.peer;let ask=[];
+  try{await call('chat_send',{p_peer:pr==='group'?null:pr,p_body:b});tx.value='';tx.style.height='';ask=aiAsked(pr,b);await poll(true);const m=$('#cmsgs');if(m)m.scrollTop=m.scrollHeight}
+  catch(x){toast(friendly(x.message))}bt.disabled=false;tx.focus();if(ask.length)askAI(pr,ask)};
  paintMsgs(true);tx.focus()}
 function paintMsgs(stick){const el=$('#cmsgs');if(!el)return;const u=me(),near=el.scrollHeight-el.scrollTop-el.clientHeight<80;let last='';
  el.innerHTML=CH.msgs.map(m=>{const mine=m.sender===u.id,ds=new Date(m.created_at).toDateString(),
   sep=ds!==last?`<div class="cday"><span>${ds===new Date().toDateString()?'Today':new Date(m.created_at).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</span></div>`:'';last=ds;
   const who=!mine&&CH.peer==='group'?`<small class="cwho">${esc(nameOf(m.sender))}</small>`:'',
   tick=mine&&CH.peer!=='group'?(m.id<=CH.seen?'<span class="seen" title="Seen">✓✓</span>':'<span title="Sent">✓</span>'):'';
-  return sep+`<div class="mrow ${mine?'me':''}"><div class="bub">${who}<span class="bt">${esc(m.body)}</span><span class="mm">${tm(m.created_at)} ${tick}${mine?`<button class="mdel" data-d="${m.id}" aria-label="Delete message">Delete</button>`:''}</span></div></div>`}).join('')||'<p class="mut cnone">No messages yet. Say hello 👋</p>';
- if(stick||near)el.scrollTop=el.scrollHeight;
+  return sep+`<div class="mrow ${mine?'me':''}"><div class="bub">${who}<span class="bt">${esc(m.body)}</span><span class="mm">${tm(m.created_at)} ${tick}${mine?`<button class="mdel" data-d="${m.id}" aria-label="Delete message">Delete</button>`:''}</span></div></div>`}).join('')+(CH.typing&&CH.typing===CH.peer?`<div class="mrow"><div class="bub" role="status" aria-label="${esc((S.team.find(t=>t.id===CH.peer&&isAI(t))||{}).name||'Someone')} is typing"><span class="tpg"><i></i><i></i><i></i></span></div></div>`:'')||'<p class="mut cnone">No messages yet. Say hello 👋</p>';
+ if(stick||near||CH.typing)el.scrollTop=el.scrollHeight;
  el.querySelectorAll('.mdel').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this message for everyone?'))return;try{await call('chat_delete',{p_id:+b.dataset.d});await poll(true)}catch(x){toast(friendly(x.message))}})}
 async function poll(force){if(!S.user||!CH.peer||(document.hidden&&!force))return;const peer=CH.peer;
  try{const r=await call('chat_thread',{p_peer:peer==='group'?null:peer,p_sig:force?null:CH.sig});if(CH.peer!==peer||r.same)return;
@@ -1203,7 +1221,7 @@ async function doSync(C){if(CALL!==C||!C.id||C.busy)return;C.busy=true;
 function pollCall(){const C=CALL;if(!C||!C.id)return;C.k=(C.k||0)+1;const ps=Object.values(C.peers),neg=ps.some(p=>!p.ok),ring=!ps.length;if(!neg&&C.k%(ring?2:5))return;doSync(C)}
 /* --- start / join / leave --- */
 async function startGroup(ids,video){unlockAudio();if(CALL||INC){toast('You are already on a call.');return}
- ids=[...new Set(ids)].filter(x=>x&&x!==S.user&&S.team.some(t=>t.id===x));if(!ids.length)return;
+ ids=[...new Set(ids)].filter(x=>x&&x!==S.user&&!isAIid(x)&&S.team.some(t=>t.id===x));if(!ids.length)return;
  if(ids.length>GMAX-1){toast('A call can have up to '+GMAX+' people.');return}
  const m=await getMedia(video);if(!m)return;if(CALL||INC){m.getTracks().forEach(t=>t.stop());return}
  const C=CALL=newCall(null,video,m,ids);paintCall();
@@ -1270,11 +1288,11 @@ function addPeople(){const C=CALL;if(!C||!C.id){toast('One moment, the call is s
  peopleDialog({title:'Add people',cta:'Invite',room,skip:act.map(m=>m.uid),info:'In this call: '+info.join(', '),
   on:async ids=>{try{await call('gcall_invite',{p_call:C.id,p_members:ids});toast(ids.length===1?'Inviting '+first(ids[0])+'…':'Inviting '+ids.length+' people…');doSync(C)}catch(e){toast(friendly(e.message))}}})}
 function groupPicker(video,all,pre){if(CALL||INC){toast('You are already on a call.');return}
- const ids=S.team.filter(t=>t.id!==S.user).map(t=>t.id);
+ const ids=S.team.filter(t=>t.id!==S.user&&!isAI(t)).map(t=>t.id);
  peopleDialog({title:'New group call',cta:'Start call',kind:true,video,pre:all?ids.slice(0,GMAX-1):(pre||[]),room:GMAX-1,on:(sel,v)=>startGroup(sel,v)})}
 function peopleDialog(o){const old=$('#gad');if(old){try{old.close()}catch(e){}old.remove()}
  const d=document.createElement('dialog');d.id='gad';d.setAttribute('aria-label',o.title);
- const cand=S.team.filter(t=>t.id!==S.user&&!(o.skip||[]).includes(t.id)).sort((a,b)=>a.name.localeCompare(b.name)),
+ const cand=S.team.filter(t=>t.id!==S.user&&!isAI(t)&&!(o.skip||[]).includes(t.id)).sort((a,b)=>a.name.localeCompare(b.name)),
   sel=new Set((o.pre||[]).filter(id=>cand.some(t=>t.id===id)).slice(0,o.room));
  d.innerHTML=`<form id="gaf" style="display:grid;gap:14px;width:min(460px,88vw)"><h3 style="font-size:26px">${esc(o.title)}</h3>${o.info?`<p class="mut" style="margin:0;font-size:14px">${esc(o.info)}</p>`:''}`
   +(o.kind?`<fieldset class="gk"><legend class="vh">Call type</legend><label><input type="radio" name="gk" value="0"${o.video?'':' checked'}> Voice</label><label><input type="radio" name="gk" value="1"${o.video?' checked':''}> Video</label></fieldset>`:'')
