@@ -60,6 +60,8 @@ main{padding:clamp(20px,4vw,48px);min-width:0}main h1{font-size:clamp(34px,5vw,5
 form.f{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end;margin-top:14px}
 label{display:grid;gap:4px;font-size:13px;color:var(--mut)}
 input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}input:focus,select:focus,textarea:focus{border-color:var(--acc);outline:none}
+.cchips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px 0;border-top:1px solid var(--line)}.cchips[hidden],.qarep[hidden]{display:none}.cchip{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:99px;padding:3px 6px 3px 10px;font-size:12px;background:var(--bg)}.cchip button{border:0;background:none;cursor:pointer;color:var(--mut);font-size:14px;line-height:1;padding:2px 4px}
+.qarep{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--acc) 8%,var(--sf));font-size:13px}.qarep b{font-weight:600}.qarep .btn{padding:4px 12px}
 .pill.ai{background:linear-gradient(135deg,#fda660,#f26a1c);color:#fff;font-weight:600;letter-spacing:.04em;padding:2px 9px}
 .tpg{display:inline-flex;gap:4px;align-items:center;padding:4px 2px}.tpg i{width:6px;height:6px;border-radius:50%;background:var(--mut,#8a8a8a);opacity:.35;animation:tpg 1.1s ease-in-out infinite}.tpg i:nth-child(2){animation-delay:.15s}.tpg i:nth-child(3){animation-delay:.3s}
 @keyframes tpg{0%,70%,100%{opacity:.3;transform:translateY(0)}35%{opacity:1;transform:translateY(-3px)}}
@@ -686,19 +688,36 @@ async function rpc(fn,args={}){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{me
 const call=(fn,a)=>rpc(fn,Object.assign({p_token:TOK},a));
 const FR={full:'A call can have up to 8 people.',bad_member:'Pick at least one teammate to call.',in_call:'You are already on a call.',gone:'That call is no longer available.',bad_offer:'Could not start the call.',too_big:'Too many features or follow-up notes. Remove some and try again.',bad_status:'Pick a valid status.',bad_type:'Pick a leave type.',slow_down:'You are sending too fast. Wait a moment.',bad_text:'Message must be 1 to 1000 characters.',bad_peer:'You cannot message that person.',insufficient_balance:'Not enough leave balance.',forbidden:'You do not have permission to do that.',name_taken:'That profile name is already used.',weak_password:'Password must be at least 8 characters.',wrong_password:'Current password is wrong.',bad_name:'Name must be 2 to 60 characters.',bad_dates:'End date must be on or after start date.',cannot_remove_self:'You cannot remove yourself.',bad_image:'That image could not be saved.'};
 const friendly=m=>FR[m]||m||'Something went wrong.';
-function signedOut(msg){srchClose();ntStop();if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);CH={peer:null,msgs:[],sig:null,seen:0,typing:null,sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
+function signedOut(msg){srchClose();ntStop();if(stopInc){stopInc();stopInc=null}cleanupCall();hideIncoming();INC=null;clearInterval(badgeT);clearInterval(chatT);S.qaReport=null;CH={peer:null,msgs:[],sig:null,seen:0,typing:null,files:[],sum:{group:{unread:0},dms:[]}};document.title='Hanumate Team Portal';TOK=null;try{localStorage.removeItem(TOK_KEY)}catch(e){}S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]};login(msg)}
 let S={user:null,team:[],tasks:[],att:[],leaves:[],news:[]},view='home';
 const me=()=>S.team.find(t=>t.id===S.user),nameOf=id=>S.team.find(t=>t.id===id)?.name||'—';
-/* ---- AI teammates (Vennela). The Groq key lives ONLY in the Supabase Edge Function secret GROQ_API_KEY, never in this file. ---- */
-const AI_NAMES=['vennela','pranavi'],AI_FN=SB_URL+'/functions/v1/vennela-reply';
+/* ---- AI teammates (Vennela, Pranavi, Keerthana). Keerthana = UI/UX reviewer: reads a GitHub link or attached files.  The Groq key lives ONLY in the Supabase Edge Function secret GROQ_API_KEY, never in this file. ---- */
+const AI_NAMES=['vennela','pranavi','keerthana','akash'],QA_NAMES=['pranavi'],DS_NAMES=['keerthana'],FE_NAMES=['akash'],AI_FN=SB_URL+'/functions/v1/vennela-reply';
 const isAI=t=>!!t&&AI_NAMES.includes(String(t.name||'').trim().toLowerCase()),isAIid=id=>isAI(S.team.find(t=>t.id===id)),aiTag=t=>'',adminAiTag=t=>isAI(t)?' <span class="pill ai" title="Admin only: this member is run by the AI function">AI</span>':'';
+const isQA=t=>!!t&&QA_NAMES.includes(String(t.name||'').trim().toLowerCase());
+const isDS=t=>!!t&&DS_NAMES.includes(String(t.name||'').trim().toLowerCase()),isFE=t=>!!t&&FE_NAMES.includes(String(t.name||'').trim().toLowerCase()),canF=t=>isQA(t)||isDS(t)||isFE(t),
+ aiFn=t=>isDS(t)?SB_URL+'/functions/v1/keerthana-reply':isFE(t)?SB_URL+'/functions/v1/akash-reply':AI_FN;
+const QA_EXT=/\.(html?|css|js|mjs|json|txt)$/i,QA_MAX=700*1024;
+const kb=n=>Math.max(1,Math.round(n/1024))+' KB';
+function paintChips(){const c=$('#cchips');if(!c)return;const f=CH.files||[];c.hidden=!f.length;c.innerHTML=f.map((x,i)=>`<span class="cchip">📎 ${esc(x.name)} · ${kb(x.size)}<button type="button" data-rm="${i}" aria-label="Remove ${esc(x.name)}">×</button></span>`).join('');c.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{CH.files.splice(+b.dataset.rm,1);paintChips()})}
+function paintQA(){const el=$('#qarep');if(!el)return;const q=S.qaReport;if(!q||q.peer!==CH.peer){el.hidden=true;return}el.hidden=false;
+ el.innerHTML=`<span>📋 <b>${q.kind==='design'?'Design review ready':q.kind==='dev'?'Code notes ready':'QA report ready'}</b> · ${esc(q.name)}</span><button type="button" class="btn sm" id="qadl">Download</button><button type="button" class="btn sm ghost" id="qacp">Copy</button><button type="button" class="ic" id="qax" aria-label="Dismiss report">×</button>`;
+ $('#qadl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([q.text],{type:'text/markdown'}));a.download=q.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
+ $('#qacp').onclick=async()=>{try{await navigator.clipboard.writeText(q.text);toast('Report copied')}catch{toast('Could not copy. Use Download instead.')}};
+ $('#qax').onclick=()=>{S.qaReport=null;paintQA()}}
+async function addFiles(list){const have=CH.files||[];for(const f of Array.from(list)){if(have.length>=3){toast('Up to 3 files at a time.');break}
+ if(!QA_EXT.test(f.name)){toast(f.name+': only .html, .css, .js, .json or .txt files can be tested.');continue}
+ if(f.size>QA_MAX){toast(f.name+' is too big ('+kb(f.size)+'). The limit is '+kb(QA_MAX)+'.');continue}
+ try{have.push({name:f.name,size:f.size,text:await f.text()})}catch{toast('Could not read '+f.name)}}
+ CH.files=have;paintChips()}
 const aiAsked=(pr,b)=>pr==='group'?S.team.filter(t=>isAI(t)&&new RegExp('(^|\\s)@'+String(t.name).trim().split(/\s+/)[0]+'\\b','i').test(b)).map(t=>t.id):(isAIid(pr)?[pr]:[]);
-async function askAI(peer,ids){if(!TOK||!ids||!ids.length)return;CH.typing=peer;paintMsgs(true);
+async function askAI(peer,ids,files){if(!TOK||!ids||!ids.length)return;CH.typing=peer;paintMsgs(true);
  const iv=setInterval(()=>{if(CH.peer===peer&&CH.typing===peer)poll(true)},1200);
  try{for(const id of ids){const v=S.team.find(t=>t.id===id),nm=v?v.name:'They';
-  try{const r=await fetch(AI_FN,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({token:TOK,peer:peer==='group'?null:peer,ai:id})});
+  try{const r=await fetch(aiFn(v),{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({token:TOK,peer:peer==='group'?null:peer,ai:id,files:files&&files.length?files.map(x=>({name:x.name,text:x.text})):undefined})});
    const j=await r.json().catch(()=>null);
    if(r.status===404)throw new Error('ai_not_deployed');
+   if(j&&j.report){S.qaReport={peer,text:j.report,kind:isDS(v)?'design':isFE(v)?'dev':'qa',name:j.reportName||(isDS(v)?'Design-review.md':isFE(v)?'Code-notes.md':'QA-report.md')};paintQA()}
    if(!r.ok||(j&&j.error&&!j.skipped)){const er=new Error((j&&j.error)||'ai_failed');er.detail=j&&j.detail;throw er}}
   catch(e){const adm=!!(me()&&me().admin);toast(e.message==='ai_not_deployed'?(adm?'The vennela-reply function is not deployed yet. Deploy it in Supabase.':nm+' is not available right now. Try again later.'):e.message==='not_signed_in'?'Session expired. Please sign in again.':e.message==='busy'?nm+' is a bit tied up. Try again in a moment.':adm?nm+' could not reply: '+(e.detail||'try again.'):nm+' could not reply right now. Try again in a bit.')}}}
  finally{clearInterval(iv);if(CH.typing===peer)CH.typing=null;if(CH.peer===peer)await poll(true)}}
@@ -889,14 +908,17 @@ function paintShell(){const el=$('#cthread');if(!el)return;
  const t=CH.peer==='group'?null:S.team.find(x=>x.id===CH.peer);
  el.innerHTML=`<div class="chd"><button class="ic cback" id="cb" aria-label="Back to chats">←</button>${t?av(t,40):'<span class="av" style="width:40px;height:40px;background:var(--ink)">#</span>'}<div><b>${t?esc(t.name):'Team chat'}${aiTag(t)}</b><br><small class="mut">${t?esc(t.role):'Everyone in the team'}</small></div><span style="margin-left:auto;display:flex;gap:6px">${t&&isAI(t)?'':t?'<button type="button" class="ic" id="cvo" aria-label="Voice call">📞</button><button type="button" class="ic" id="cvi" aria-label="Video call">🎥</button><button type="button" class="ic" id="cgp" aria-label="Start a group call with '+esc(t.name)+'">'+SV(ADDP,18)+'</button>':'<button type="button" class="ic" id="gvo" aria-label="Start a group voice call">📞</button><button type="button" class="ic" id="gvi" aria-label="Start a group video call">🎥</button>'}</span></div>
  <div class="cm" id="cmsgs" tabindex="0" aria-live="polite" aria-label="Messages"></div>
- <form class="cf" id="cform"><textarea id="ctx" rows="1" maxlength="1000" placeholder="Type a message" aria-label="Message"></textarea><button class="btn sm" type="submit" id="csend">Send</button></form>`;
+ ${canF(t)?'<div class="qarep" id="qarep" hidden></div><div class="cchips" id="cchips" hidden></div>':''}
+ <form class="cf" id="cform">${canF(t)?'<input type="file" id="cfile" multiple accept=".html,.htm,.css,.js,.mjs,.json,.txt" hidden><button type="button" class="ic" id="cattach" aria-label="Attach files for '+(isDS(t)?'Keerthana to review':isFE(t)?'Akash to review':'Pranavi to test')+'" title="Attach files to '+(isDS(t)||isFE(t)?'review':'test')+' (.html .css .js .json)">📎</button>':''}<textarea id="ctx" rows="1" maxlength="1000" placeholder="${isDS(t)?'Paste your GitHub project link…':'Type a message'}" aria-label="Message"></textarea><button class="btn sm" type="submit" id="csend">Send</button></form>`;
  $('#cb').onclick=()=>{CH.peer=null;chat()};if(t&&isAI(t)){}else if(t){$('#cvo').onclick=()=>startCall(t.id,false);$('#cvi').onclick=()=>startCall(t.id,true);$('#cgp').onclick=()=>groupPicker(false,false,[t.id])}else{$('#gvo').onclick=()=>groupPicker(false,true);$('#gvi').onclick=()=>groupPicker(true,true)}
+ if(canF(t)){CH.files=CH.files||[];$('#cattach').onclick=()=>$('#cfile').click();$('#cfile').onchange=async e=>{await addFiles(e.target.files);e.target.value=''};paintChips();paintQA()}
  const tx=$('#ctx');tx.oninput=()=>{tx.style.height='auto';tx.style.height=Math.min(tx.scrollHeight,120)+'px'};
  tx.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('#cform').requestSubmit()}};
- $('#cform').onsubmit=async e=>{e.preventDefault();const b=tx.value.trim(),bt=$('#csend');if(!b)return;bt.disabled=true;
+ $('#cform').onsubmit=async e=>{e.preventDefault();let b=tx.value.trim();const bt=$('#csend'),fl=(canF(t)&&CH.files)?CH.files.slice():[];if(!b&&!fl.length)return;bt.disabled=true;
+  if(fl.length)b=((b||(isDS(t)?'Please review this design':isFE(t)?'Please look at this code':'Please test this')).slice(0,780)+'\n'+fl.map(x=>'📎 '+x.name+' ('+kb(x.size)+')').join('\n')).slice(0,1000);
   const pr=CH.peer;let ask=[];
-  try{await call('chat_send',{p_peer:pr==='group'?null:pr,p_body:b});tx.value='';tx.style.height='';ask=aiAsked(pr,b);await poll(true);const m=$('#cmsgs');if(m)m.scrollTop=m.scrollHeight}
-  catch(x){toast(friendly(x.message))}bt.disabled=false;tx.focus();if(ask.length)askAI(pr,ask)};
+  try{await call('chat_send',{p_peer:pr==='group'?null:pr,p_body:b});tx.value='';tx.style.height='';if(fl.length){CH.files=[];paintChips()}ask=aiAsked(pr,b);await poll(true);const m=$('#cmsgs');if(m)m.scrollTop=m.scrollHeight}
+  catch(x){toast(friendly(x.message))}bt.disabled=false;tx.focus();if(ask.length)askAI(pr,ask,fl)};
  paintMsgs(true);tx.focus()}
 function paintMsgs(stick){const el=$('#cmsgs');if(!el)return;const u=me(),near=el.scrollHeight-el.scrollTop-el.clientHeight<80;let last='';
  el.innerHTML=CH.msgs.map(m=>{const mine=m.sender===u.id,ds=new Date(m.created_at).toDateString(),
